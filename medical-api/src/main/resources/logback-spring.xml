@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 文件路径：logFolder（默认为/data/logs）和 appName（需要填写默认的项目名）由环境变量传递 -->
+    <property name="LOG_FILE" value="${logFolder:-/data/logs}/${appName:-/medical-api}"/>
+
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+    <!-- 控制台输出格式 -->
+    <property name="CONSOLE_LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <!-- 写入文件格式 -->
+    <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39}: %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <!-- 日志级别 -->
+    <property name="DEFAULT_LOG_LEVEL" value="INFO" />
+    <property name="PRO_LOG_LEVEL" value="INFO" />
+    <property name="MAX_LOG_LEVEL" value="ERROR" />
+    <property name="SENTRY_LOG_LEVEL" value="WARN" />
+
+    <!-- 控制台日志 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 文本日志 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <!-- Sentry 日志 -->
+    <appender name="SENTRY" class="com.getsentry.raven.logback.SentryAppender">
+        <dsn>https://b71a9c6cb1f344cc971bf70ec18c3be2:a59c74dadc8941a8a2b9b733b4868089@sentry-log.wezhuiyi.com/30</dsn>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${SENTRY_LOG_LEVEL}</level>
+        </filter>
+    </appender>
+
+    <!-- 本地开发环境 -->
+    <springProfile name="local">
+        <root level="${DEFAULT_LOG_LEVEL}">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </root>
+    </springProfile>
+
+    <!-- 测试环境 -->
+    <springProfile name="dev">
+        <root level="${DEFAULT_LOG_LEVEL}">
+            <appender-ref ref="FILE" />
+            <appender-ref ref="SENTRY" />
+        </root>
+    </springProfile>
+
+    <!-- 生产环境 -->
+    <springProfile name="prod">
+        <root level="${PRO_LOG_LEVEL}">
+            <appender-ref ref="FILE" />
+            <appender-ref ref="SENTRY" />
+        </root>
+    </springProfile>
+
+    <!-- log4jdbc 日志配置 -->
+    <logger name="jdbc.audit" level="ERROR"/>
+    <logger name="jdbc.connection" level="ERROR"/>
+    <logger name="jdbc.resultset" level="ERROR"/>
+    <logger name="jdbc.sqlonly" level="ERROR"/>
+    <logger name="jdbc.sqltiming" level="INFO"/>
+
+    <!-- Hikari 连接池日志 -->
+    <logger name="com.zaxxer.hikari.pool" level="${MAX_LOG_LEVEL}" />
+
+    <!-- Undertow 容器日志 -->
+    <logger name="io.undertow" level="${MAX_LOG_LEVEL}" />
+
+</configuration>
