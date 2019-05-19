@@ -11,7 +11,7 @@ public enum MsgCodeEnum {
     /**
      * 处理成功
      */
-    SUCCESS(0, "success"),
+    SUCCESS(200, "success"),
 
     /**
      * 参数错误
@@ -26,7 +26,16 @@ public enum MsgCodeEnum {
     /**
      * 未知异常
      */
-    UNKNOWN_ERROR(-999, "未知异常");
+    UNKNOWN_ERROR(-999, "未知异常"),
+
+    /********** 用户模块错误码，范围1000~1099 **********/
+
+
+    /********** 健康档案错误码，范围1100~1199 **********/
+    /**
+     * 健康档案已经存在
+     */
+    HEALTH_DOCUMENT_EXIST_ERROR(-1100, "该健康档案已经存在");
 
     private int code;
 

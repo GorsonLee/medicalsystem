@@ -1,6 +1,6 @@
 package com.starter.medicalcommon.exception;
 
-import com.starter.medicalcommon.dto.BaseResponse;
+import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicalcommon.enums.MsgCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

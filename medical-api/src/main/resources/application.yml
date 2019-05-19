@@ -2,7 +2,7 @@ debug: false
 
 server:
   port: 9001
-  context-path: /medical-api
+  context-path: /medicalApi
 
 spring:
   application:

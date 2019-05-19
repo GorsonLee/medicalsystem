@@ -22,8 +22,9 @@ public class DebugController {
 
     @GetMapping("/hello")
     public String hello() {
+        String id = String.valueOf(System.currentTimeMillis());
         User user = new User();
-        user.setId(String.valueOf(System.currentTimeMillis()));
+        user.setId(id);
         user.setPhone("phone");
         user.setPwd("pwd");
         user.setCreateTime(new Date());

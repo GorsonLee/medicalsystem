@@ -1,4 +1,4 @@
-package com.starter.medicalcommon.dto;
+package com.starter.medicalcommon.vo.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.starter.medicalcommon.enums.MsgCodeEnum;
@@ -56,5 +56,14 @@ public class BaseResponse<T> {
      */
     public static BaseResponse successResponse() {
         return new BaseResponse(MsgCodeEnum.SUCCESS);
+    }
+
+    /**
+     * 系统异常错误
+     *
+     * @return 系统异常错误
+     */
+    public static BaseResponse failResponse() {
+        return new BaseResponse(MsgCodeEnum.SYSTEM_ERROR);
     }
 }

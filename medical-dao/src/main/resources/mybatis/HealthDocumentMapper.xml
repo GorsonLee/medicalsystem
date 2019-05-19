@@ -13,16 +13,16 @@
     id, user_id, path, content, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_health_document
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <insert id="insert" parameterType="com.starter.medicaldao.entity.HealthDocument">
-    insert into t_health_document (id, user_id, path, 
+    insert into t_health_document (id, user_id, path,
       content, create_time, modify_time
       )
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
       #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -99,4 +99,43 @@
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <!--自定义-->
+  <select id="selectByUserIdAndPath" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_health_document
+    <where>
+      user_id = #{userId,jdbcType=VARCHAR}
+      and
+      path = #{path,jdbcType=VARCHAR}
+    </where>
+  </select>
+
+  <update id="updateByUserIdAndPathSelective" parameterType="com.starter.medicaldao.entity.HealthDocument">
+    update t_health_document
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <where>
+      user_id = #{userId,jdbcType=VARCHAR}
+      and
+      path = #{path,jdbcType=VARCHAR}
+    </where>
+  </update>
+
 </mapper>
