@@ -28,7 +28,7 @@ public class DebugController {
         user.setPwd("pwd");
         user.setCreateTime(new Date());
         user.setModifyTime(new Date());
-        userMapper.insert(user);
+        userMapper.insertSelective(user);
         return "Hello";
     }
 }

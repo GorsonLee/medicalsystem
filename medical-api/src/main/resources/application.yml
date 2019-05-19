@@ -9,7 +9,7 @@ spring:
     name: medical-api
   datasource:
     driver-class-name: net.sf.log4jdbc.DriverSpy
-    url: jdbc:log4jdbc:mysql://192.168.1.237:3306/medical_system?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    url: jdbc:log4jdbc:mysql://192.168.199.100:3306/medical_system?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
     username: root
     password: 123456
   redis:

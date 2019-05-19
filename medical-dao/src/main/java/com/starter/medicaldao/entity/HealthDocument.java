@@ -7,17 +7,9 @@ public class HealthDocument {
 
     private String userId;
 
-    private String basicSign;
+    private String path;
 
-    private String lifestyle;
-
-    private String organ;
-
-    private String healthHistory;
-
-    private String healthRecord;
-
-    private String healthReport;
+    private String content;
 
     private Date createTime;
 
@@ -39,52 +31,20 @@ public class HealthDocument {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getBasicSign() {
-        return basicSign;
+    public String getPath() {
+        return path;
     }
 
-    public void setBasicSign(String basicSign) {
-        this.basicSign = basicSign == null ? null : basicSign.trim();
+    public void setPath(String path) {
+        this.path = path == null ? null : path.trim();
     }
 
-    public String getLifestyle() {
-        return lifestyle;
+    public String getContent() {
+        return content;
     }
 
-    public void setLifestyle(String lifestyle) {
-        this.lifestyle = lifestyle == null ? null : lifestyle.trim();
-    }
-
-    public String getOrgan() {
-        return organ;
-    }
-
-    public void setOrgan(String organ) {
-        this.organ = organ == null ? null : organ.trim();
-    }
-
-    public String getHealthHistory() {
-        return healthHistory;
-    }
-
-    public void setHealthHistory(String healthHistory) {
-        this.healthHistory = healthHistory == null ? null : healthHistory.trim();
-    }
-
-    public String getHealthRecord() {
-        return healthRecord;
-    }
-
-    public void setHealthRecord(String healthRecord) {
-        this.healthRecord = healthRecord == null ? null : healthRecord.trim();
-    }
-
-    public String getHealthReport() {
-        return healthReport;
-    }
-
-    public void setHealthReport(String healthReport) {
-        this.healthReport = healthReport == null ? null : healthReport.trim();
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public Date getCreateTime() {

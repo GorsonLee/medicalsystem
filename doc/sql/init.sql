@@ -69,12 +69,8 @@ DROP TABLE IF EXISTS `t_health_document`;
 CREATE TABLE `t_health_document` (
                                    `id` varchar(100) NOT NULL COMMENT '主键 ID',
                                    `user_id` varchar(100) NOT NULL COMMENT '主键 ID',
-                                   `basic_sign` varchar(2000) NULL DEFAULT NULL COMMENT '基本体征',
-                                   `lifestyle` varchar(2000) NULL DEFAULT NULL COMMENT '生活方式',
-                                   `organ` varchar(1000) NULL DEFAULT NULL COMMENT '脏器功能',
-                                   `health_history` varchar(1000) NULL DEFAULT NULL COMMENT '健康史',
-                                   `health_record` varchar(1000) NULL DEFAULT NULL COMMENT '健康记录',
-                                   `health_report` varchar(1000) NULL DEFAULT NULL COMMENT '健康评估报告',
+                                   `path` varchar(200) NOT NULL COMMENT '健康档案的路径信息',
+                                   `content` varchar(5000) NOT NULL COMMENT '健康档案的内容',
                                    `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                                    `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                                    PRIMARY KEY (`id`) USING BTREE
