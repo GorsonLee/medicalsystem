@@ -168,7 +168,7 @@ public interface IRedisService {
      * @param key   键
      * @param start 开始区间
      * @param end   结束区间
-     * @return List<ZSetOperations.TypedTuple <  O b ject>> 指定区间的Zset数据
+     * @return List<ZSetOperations.TypedTuple < O b ject>> 指定区间的Zset数据
      */
     List<ZSetOperations.TypedTuple<Object>> findZSetReverseRangeWithScores(String key, long start, long end);
 
