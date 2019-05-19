@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starter.medicaldao.mapper.BodySignMapper">
+  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.BodySign">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="breath_rate" jdbcType="INTEGER" property="breathRate" />
+    <result column="systolic" jdbcType="INTEGER" property="systolic" />
+    <result column="diastolic" jdbcType="INTEGER" property="diastolic" />
+    <result column="heart_rate" jdbcType="INTEGER" property="heartRate" />
+    <result column="spo2" jdbcType="INTEGER" property="spo2" />
+    <result column="sleep_time" jdbcType="INTEGER" property="sleepTime" />
+    <result column="bg" jdbcType="INTEGER" property="bg" />
+    <result column="temperature" jdbcType="INTEGER" property="temperature" />
+    <result column="uric_acid" jdbcType="INTEGER" property="uricAcid" />
+    <result column="blood_fat" jdbcType="INTEGER" property="bloodFat" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="waist" jdbcType="INTEGER" property="waist" />
+    <result column="hip" jdbcType="INTEGER" property="hip" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, breath_rate, systolic, diastolic, heart_rate, spo2, sleep_time, bg, 
+    temperature, uric_acid, blood_fat, weight, waist, hip, description, create_time, 
+    modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_body_sign
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.starter.medicaldao.entity.BodySign">
+    insert into t_body_sign (id, user_id, breath_rate, 
+      systolic, diastolic, heart_rate, 
+      spo2, sleep_time, bg, 
+      temperature, uric_acid, blood_fat, 
+      weight, waist, hip, 
+      description, create_time, modify_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{breathRate,jdbcType=INTEGER}, 
+      #{systolic,jdbcType=INTEGER}, #{diastolic,jdbcType=INTEGER}, #{heartRate,jdbcType=INTEGER}, 
+      #{spo2,jdbcType=INTEGER}, #{sleepTime,jdbcType=INTEGER}, #{bg,jdbcType=INTEGER}, 
+      #{temperature,jdbcType=INTEGER}, #{uricAcid,jdbcType=INTEGER}, #{bloodFat,jdbcType=INTEGER}, 
+      #{weight,jdbcType=INTEGER}, #{waist,jdbcType=INTEGER}, #{hip,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.BodySign">
+    insert into t_body_sign
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="breathRate != null">
+        breath_rate,
+      </if>
+      <if test="systolic != null">
+        systolic,
+      </if>
+      <if test="diastolic != null">
+        diastolic,
+      </if>
+      <if test="heartRate != null">
+        heart_rate,
+      </if>
+      <if test="spo2 != null">
+        spo2,
+      </if>
+      <if test="sleepTime != null">
+        sleep_time,
+      </if>
+      <if test="bg != null">
+        bg,
+      </if>
+      <if test="temperature != null">
+        temperature,
+      </if>
+      <if test="uricAcid != null">
+        uric_acid,
+      </if>
+      <if test="bloodFat != null">
+        blood_fat,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="waist != null">
+        waist,
+      </if>
+      <if test="hip != null">
+        hip,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="breathRate != null">
+        #{breathRate,jdbcType=INTEGER},
+      </if>
+      <if test="systolic != null">
+        #{systolic,jdbcType=INTEGER},
+      </if>
+      <if test="diastolic != null">
+        #{diastolic,jdbcType=INTEGER},
+      </if>
+      <if test="heartRate != null">
+        #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="spo2 != null">
+        #{spo2,jdbcType=INTEGER},
+      </if>
+      <if test="sleepTime != null">
+        #{sleepTime,jdbcType=INTEGER},
+      </if>
+      <if test="bg != null">
+        #{bg,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        #{temperature,jdbcType=INTEGER},
+      </if>
+      <if test="uricAcid != null">
+        #{uricAcid,jdbcType=INTEGER},
+      </if>
+      <if test="bloodFat != null">
+        #{bloodFat,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="waist != null">
+        #{waist,jdbcType=INTEGER},
+      </if>
+      <if test="hip != null">
+        #{hip,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.BodySign">
+    update t_body_sign
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="breathRate != null">
+        breath_rate = #{breathRate,jdbcType=INTEGER},
+      </if>
+      <if test="systolic != null">
+        systolic = #{systolic,jdbcType=INTEGER},
+      </if>
+      <if test="diastolic != null">
+        diastolic = #{diastolic,jdbcType=INTEGER},
+      </if>
+      <if test="heartRate != null">
+        heart_rate = #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="spo2 != null">
+        spo2 = #{spo2,jdbcType=INTEGER},
+      </if>
+      <if test="sleepTime != null">
+        sleep_time = #{sleepTime,jdbcType=INTEGER},
+      </if>
+      <if test="bg != null">
+        bg = #{bg,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        temperature = #{temperature,jdbcType=INTEGER},
+      </if>
+      <if test="uricAcid != null">
+        uric_acid = #{uricAcid,jdbcType=INTEGER},
+      </if>
+      <if test="bloodFat != null">
+        blood_fat = #{bloodFat,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="waist != null">
+        waist = #{waist,jdbcType=INTEGER},
+      </if>
+      <if test="hip != null">
+        hip = #{hip,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.BodySign">
+    update t_body_sign
+    set user_id = #{userId,jdbcType=VARCHAR},
+      breath_rate = #{breathRate,jdbcType=INTEGER},
+      systolic = #{systolic,jdbcType=INTEGER},
+      diastolic = #{diastolic,jdbcType=INTEGER},
+      heart_rate = #{heartRate,jdbcType=INTEGER},
+      spo2 = #{spo2,jdbcType=INTEGER},
+      sleep_time = #{sleepTime,jdbcType=INTEGER},
+      bg = #{bg,jdbcType=INTEGER},
+      temperature = #{temperature,jdbcType=INTEGER},
+      uric_acid = #{uricAcid,jdbcType=INTEGER},
+      blood_fat = #{bloodFat,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      waist = #{waist,jdbcType=INTEGER},
+      hip = #{hip,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.BodySign">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="breath_rate" jdbcType="INTEGER" property="breathRate" />
+    <result column="systolic" jdbcType="INTEGER" property="systolic" />
+    <result column="diastolic" jdbcType="INTEGER" property="diastolic" />
+    <result column="heart_rate" jdbcType="INTEGER" property="heartRate" />
+    <result column="spo2" jdbcType="INTEGER" property="spo2" />
+    <result column="sleep_time" jdbcType="INTEGER" property="sleepTime" />
+    <result column="bg" jdbcType="INTEGER" property="bg" />
+    <result column="temperature" jdbcType="INTEGER" property="temperature" />
+    <result column="uric_acid" jdbcType="INTEGER" property="uricAcid" />
+    <result column="blood_fat" jdbcType="INTEGER" property="bloodFat" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="waist" jdbcType="INTEGER" property="waist" />
+    <result column="hip" jdbcType="INTEGER" property="hip" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, breath_rate, systolic, diastolic, heart_rate, spo2, sleep_time, bg, 
+    temperature, uric_acid, blood_fat, weight, waist, hip, description, create_time, 
+    modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_body_sign
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.starter.medicaldao.entity.BodySign">
+    insert into t_body_sign (id, user_id, breath_rate, 
+      systolic, diastolic, heart_rate, 
+      spo2, sleep_time, bg, 
+      temperature, uric_acid, blood_fat, 
+      weight, waist, hip, 
+      description, create_time, modify_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{breathRate,jdbcType=INTEGER}, 
+      #{systolic,jdbcType=INTEGER}, #{diastolic,jdbcType=INTEGER}, #{heartRate,jdbcType=INTEGER}, 
+      #{spo2,jdbcType=INTEGER}, #{sleepTime,jdbcType=INTEGER}, #{bg,jdbcType=INTEGER}, 
+      #{temperature,jdbcType=INTEGER}, #{uricAcid,jdbcType=INTEGER}, #{bloodFat,jdbcType=INTEGER}, 
+      #{weight,jdbcType=INTEGER}, #{waist,jdbcType=INTEGER}, #{hip,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.BodySign">
+    insert into t_body_sign
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="breathRate != null">
+        breath_rate,
+      </if>
+      <if test="systolic != null">
+        systolic,
+      </if>
+      <if test="diastolic != null">
+        diastolic,
+      </if>
+      <if test="heartRate != null">
+        heart_rate,
+      </if>
+      <if test="spo2 != null">
+        spo2,
+      </if>
+      <if test="sleepTime != null">
+        sleep_time,
+      </if>
+      <if test="bg != null">
+        bg,
+      </if>
+      <if test="temperature != null">
+        temperature,
+      </if>
+      <if test="uricAcid != null">
+        uric_acid,
+      </if>
+      <if test="bloodFat != null">
+        blood_fat,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="waist != null">
+        waist,
+      </if>
+      <if test="hip != null">
+        hip,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="breathRate != null">
+        #{breathRate,jdbcType=INTEGER},
+      </if>
+      <if test="systolic != null">
+        #{systolic,jdbcType=INTEGER},
+      </if>
+      <if test="diastolic != null">
+        #{diastolic,jdbcType=INTEGER},
+      </if>
+      <if test="heartRate != null">
+        #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="spo2 != null">
+        #{spo2,jdbcType=INTEGER},
+      </if>
+      <if test="sleepTime != null">
+        #{sleepTime,jdbcType=INTEGER},
+      </if>
+      <if test="bg != null">
+        #{bg,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        #{temperature,jdbcType=INTEGER},
+      </if>
+      <if test="uricAcid != null">
+        #{uricAcid,jdbcType=INTEGER},
+      </if>
+      <if test="bloodFat != null">
+        #{bloodFat,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="waist != null">
+        #{waist,jdbcType=INTEGER},
+      </if>
+      <if test="hip != null">
+        #{hip,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.BodySign">
+    update t_body_sign
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="breathRate != null">
+        breath_rate = #{breathRate,jdbcType=INTEGER},
+      </if>
+      <if test="systolic != null">
+        systolic = #{systolic,jdbcType=INTEGER},
+      </if>
+      <if test="diastolic != null">
+        diastolic = #{diastolic,jdbcType=INTEGER},
+      </if>
+      <if test="heartRate != null">
+        heart_rate = #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="spo2 != null">
+        spo2 = #{spo2,jdbcType=INTEGER},
+      </if>
+      <if test="sleepTime != null">
+        sleep_time = #{sleepTime,jdbcType=INTEGER},
+      </if>
+      <if test="bg != null">
+        bg = #{bg,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        temperature = #{temperature,jdbcType=INTEGER},
+      </if>
+      <if test="uricAcid != null">
+        uric_acid = #{uricAcid,jdbcType=INTEGER},
+      </if>
+      <if test="bloodFat != null">
+        blood_fat = #{bloodFat,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="waist != null">
+        waist = #{waist,jdbcType=INTEGER},
+      </if>
+      <if test="hip != null">
+        hip = #{hip,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.BodySign">
+    update t_body_sign
+    set user_id = #{userId,jdbcType=VARCHAR},
+      breath_rate = #{breathRate,jdbcType=INTEGER},
+      systolic = #{systolic,jdbcType=INTEGER},
+      diastolic = #{diastolic,jdbcType=INTEGER},
+      heart_rate = #{heartRate,jdbcType=INTEGER},
+      spo2 = #{spo2,jdbcType=INTEGER},
+      sleep_time = #{sleepTime,jdbcType=INTEGER},
+      bg = #{bg,jdbcType=INTEGER},
+      temperature = #{temperature,jdbcType=INTEGER},
+      uric_acid = #{uricAcid,jdbcType=INTEGER},
+      blood_fat = #{bloodFat,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      waist = #{waist,jdbcType=INTEGER},
+      hip = #{hip,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.BodySign">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="breath_rate" jdbcType="INTEGER" property="breathRate" />
+    <result column="systolic" jdbcType="INTEGER" property="systolic" />
+    <result column="diastolic" jdbcType="INTEGER" property="diastolic" />
+    <result column="heart_rate" jdbcType="INTEGER" property="heartRate" />
+    <result column="spo2" jdbcType="INTEGER" property="spo2" />
+    <result column="sleep_time" jdbcType="INTEGER" property="sleepTime" />
+    <result column="bg" jdbcType="INTEGER" property="bg" />
+    <result column="temperature" jdbcType="INTEGER" property="temperature" />
+    <result column="uric_acid" jdbcType="INTEGER" property="uricAcid" />
+    <result column="blood_fat" jdbcType="INTEGER" property="bloodFat" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="waist" jdbcType="INTEGER" property="waist" />
+    <result column="hip" jdbcType="INTEGER" property="hip" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, breath_rate, systolic, diastolic, heart_rate, spo2, sleep_time, bg, 
+    temperature, uric_acid, blood_fat, weight, waist, hip, description, create_time, 
+    modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_body_sign
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.starter.medicaldao.entity.BodySign">
+    insert into t_body_sign (id, user_id, breath_rate, 
+      systolic, diastolic, heart_rate, 
+      spo2, sleep_time, bg, 
+      temperature, uric_acid, blood_fat, 
+      weight, waist, hip, 
+      description, create_time, modify_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{breathRate,jdbcType=INTEGER}, 
+      #{systolic,jdbcType=INTEGER}, #{diastolic,jdbcType=INTEGER}, #{heartRate,jdbcType=INTEGER}, 
+      #{spo2,jdbcType=INTEGER}, #{sleepTime,jdbcType=INTEGER}, #{bg,jdbcType=INTEGER}, 
+      #{temperature,jdbcType=INTEGER}, #{uricAcid,jdbcType=INTEGER}, #{bloodFat,jdbcType=INTEGER}, 
+      #{weight,jdbcType=INTEGER}, #{waist,jdbcType=INTEGER}, #{hip,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.BodySign">
+    insert into t_body_sign
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="breathRate != null">
+        breath_rate,
+      </if>
+      <if test="systolic != null">
+        systolic,
+      </if>
+      <if test="diastolic != null">
+        diastolic,
+      </if>
+      <if test="heartRate != null">
+        heart_rate,
+      </if>
+      <if test="spo2 != null">
+        spo2,
+      </if>
+      <if test="sleepTime != null">
+        sleep_time,
+      </if>
+      <if test="bg != null">
+        bg,
+      </if>
+      <if test="temperature != null">
+        temperature,
+      </if>
+      <if test="uricAcid != null">
+        uric_acid,
+      </if>
+      <if test="bloodFat != null">
+        blood_fat,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="waist != null">
+        waist,
+      </if>
+      <if test="hip != null">
+        hip,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="breathRate != null">
+        #{breathRate,jdbcType=INTEGER},
+      </if>
+      <if test="systolic != null">
+        #{systolic,jdbcType=INTEGER},
+      </if>
+      <if test="diastolic != null">
+        #{diastolic,jdbcType=INTEGER},
+      </if>
+      <if test="heartRate != null">
+        #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="spo2 != null">
+        #{spo2,jdbcType=INTEGER},
+      </if>
+      <if test="sleepTime != null">
+        #{sleepTime,jdbcType=INTEGER},
+      </if>
+      <if test="bg != null">
+        #{bg,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        #{temperature,jdbcType=INTEGER},
+      </if>
+      <if test="uricAcid != null">
+        #{uricAcid,jdbcType=INTEGER},
+      </if>
+      <if test="bloodFat != null">
+        #{bloodFat,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="waist != null">
+        #{waist,jdbcType=INTEGER},
+      </if>
+      <if test="hip != null">
+        #{hip,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.BodySign">
+    update t_body_sign
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="breathRate != null">
+        breath_rate = #{breathRate,jdbcType=INTEGER},
+      </if>
+      <if test="systolic != null">
+        systolic = #{systolic,jdbcType=INTEGER},
+      </if>
+      <if test="diastolic != null">
+        diastolic = #{diastolic,jdbcType=INTEGER},
+      </if>
+      <if test="heartRate != null">
+        heart_rate = #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="spo2 != null">
+        spo2 = #{spo2,jdbcType=INTEGER},
+      </if>
+      <if test="sleepTime != null">
+        sleep_time = #{sleepTime,jdbcType=INTEGER},
+      </if>
+      <if test="bg != null">
+        bg = #{bg,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        temperature = #{temperature,jdbcType=INTEGER},
+      </if>
+      <if test="uricAcid != null">
+        uric_acid = #{uricAcid,jdbcType=INTEGER},
+      </if>
+      <if test="bloodFat != null">
+        blood_fat = #{bloodFat,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="waist != null">
+        waist = #{waist,jdbcType=INTEGER},
+      </if>
+      <if test="hip != null">
+        hip = #{hip,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.BodySign">
+    update t_body_sign
+    set user_id = #{userId,jdbcType=VARCHAR},
+      breath_rate = #{breathRate,jdbcType=INTEGER},
+      systolic = #{systolic,jdbcType=INTEGER},
+      diastolic = #{diastolic,jdbcType=INTEGER},
+      heart_rate = #{heartRate,jdbcType=INTEGER},
+      spo2 = #{spo2,jdbcType=INTEGER},
+      sleep_time = #{sleepTime,jdbcType=INTEGER},
+      bg = #{bg,jdbcType=INTEGER},
+      temperature = #{temperature,jdbcType=INTEGER},
+      uric_acid = #{uricAcid,jdbcType=INTEGER},
+      blood_fat = #{bloodFat,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      waist = #{waist,jdbcType=INTEGER},
+      hip = #{hip,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

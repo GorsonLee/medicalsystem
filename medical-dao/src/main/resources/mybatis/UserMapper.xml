@@ -1,0 +1,1148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starter.medicaldao.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="identity" jdbcType="VARCHAR" property="identity" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="birth" jdbcType="INTEGER" property="birth" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="old_type" jdbcType="INTEGER" property="oldType" />
+    <result column="marital status" jdbcType="INTEGER" property="maritalStatus" />
+    <result column="live_status" jdbcType="INTEGER" property="liveStatus" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="community" jdbcType="VARCHAR" property="community" />
+    <result column="organization" jdbcType="VARCHAR" property="organization" />
+    <result column="emergency_contact" jdbcType="VARCHAR" property="emergencyContact" />
+    <result column="emergency_phone" jdbcType="VARCHAR" property="emergencyPhone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, phone, pwd, identity, name, birth, sex, nation, image, old_type, "marital status", 
+    live_status, address, province, city, country, community, organization, emergency_contact, 
+    emergency_phone, create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.starter.medicaldao.entity.User">
+    insert into t_user (id, phone, pwd, 
+      identity, name, birth, 
+      sex, nation, image, 
+      old_type, "marital status", live_status, 
+      address, province, city, 
+      country, community, organization, 
+      emergency_contact, emergency_phone, create_time, 
+      modify_time)
+    values (#{id,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{birth,jdbcType=INTEGER}, 
+      #{sex,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{oldType,jdbcType=INTEGER}, #{maritalStatus,jdbcType=INTEGER}, #{liveStatus,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{community,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR}, 
+      #{emergencyContact,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="identity != null">
+        identity,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="oldType != null">
+        old_type,
+      </if>
+      <if test="maritalStatus != null">
+        "marital status",
+      </if>
+      <if test="liveStatus != null">
+        live_status,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="community != null">
+        community,
+      </if>
+      <if test="organization != null">
+        organization,
+      </if>
+      <if test="emergencyContact != null">
+        emergency_contact,
+      </if>
+      <if test="emergencyPhone != null">
+        emergency_phone,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="oldType != null">
+        #{oldType,jdbcType=INTEGER},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="liveStatus != null">
+        #{liveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        #{community,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null">
+        #{emergencyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null">
+        #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.User">
+    update t_user
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="oldType != null">
+        old_type = #{oldType,jdbcType=INTEGER},
+      </if>
+      <if test="maritalStatus != null">
+        "marital status" = #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="liveStatus != null">
+        live_status = #{liveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        community = #{community,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null">
+        emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null">
+        emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.User">
+    update t_user
+    set phone = #{phone,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      nation = #{nation,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      old_type = #{oldType,jdbcType=INTEGER},
+      "marital status" = #{maritalStatus,jdbcType=INTEGER},
+      live_status = #{liveStatus,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      community = #{community,jdbcType=VARCHAR},
+      organization = #{organization,jdbcType=VARCHAR},
+      emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
+      emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="identity" jdbcType="VARCHAR" property="identity" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="birth" jdbcType="INTEGER" property="birth" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="old_type" jdbcType="INTEGER" property="oldType" />
+    <result column="marital status" jdbcType="INTEGER" property="maritalStatus" />
+    <result column="live_status" jdbcType="INTEGER" property="liveStatus" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="community" jdbcType="VARCHAR" property="community" />
+    <result column="organization" jdbcType="VARCHAR" property="organization" />
+    <result column="emergency_contact" jdbcType="VARCHAR" property="emergencyContact" />
+    <result column="emergency_phone" jdbcType="VARCHAR" property="emergencyPhone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, phone, pwd, identity, name, birth, sex, nation, image, old_type, "marital status", 
+    live_status, address, province, city, country, community, organization, emergency_contact, 
+    emergency_phone, create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.starter.medicaldao.entity.User">
+    insert into t_user (id, phone, pwd, 
+      identity, name, birth, 
+      sex, nation, image, 
+      old_type, "marital status", live_status, 
+      address, province, city, 
+      country, community, organization, 
+      emergency_contact, emergency_phone, create_time, 
+      modify_time)
+    values (#{id,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{birth,jdbcType=INTEGER}, 
+      #{sex,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{oldType,jdbcType=INTEGER}, #{maritalStatus,jdbcType=INTEGER}, #{liveStatus,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{community,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR}, 
+      #{emergencyContact,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="identity != null">
+        identity,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="oldType != null">
+        old_type,
+      </if>
+      <if test="maritalStatus != null">
+        "marital status",
+      </if>
+      <if test="liveStatus != null">
+        live_status,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="community != null">
+        community,
+      </if>
+      <if test="organization != null">
+        organization,
+      </if>
+      <if test="emergencyContact != null">
+        emergency_contact,
+      </if>
+      <if test="emergencyPhone != null">
+        emergency_phone,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="oldType != null">
+        #{oldType,jdbcType=INTEGER},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="liveStatus != null">
+        #{liveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        #{community,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null">
+        #{emergencyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null">
+        #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.User">
+    update t_user
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="oldType != null">
+        old_type = #{oldType,jdbcType=INTEGER},
+      </if>
+      <if test="maritalStatus != null">
+        "marital status" = #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="liveStatus != null">
+        live_status = #{liveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        community = #{community,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null">
+        emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null">
+        emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.User">
+    update t_user
+    set phone = #{phone,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      nation = #{nation,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      old_type = #{oldType,jdbcType=INTEGER},
+      "marital status" = #{maritalStatus,jdbcType=INTEGER},
+      live_status = #{liveStatus,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      community = #{community,jdbcType=VARCHAR},
+      organization = #{organization,jdbcType=VARCHAR},
+      emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
+      emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="identity" jdbcType="VARCHAR" property="identity" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="birth" jdbcType="INTEGER" property="birth" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="old_type" jdbcType="INTEGER" property="oldType" />
+    <result column="marital status" jdbcType="INTEGER" property="maritalStatus" />
+    <result column="live_status" jdbcType="INTEGER" property="liveStatus" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="community" jdbcType="VARCHAR" property="community" />
+    <result column="organization" jdbcType="VARCHAR" property="organization" />
+    <result column="emergency_contact" jdbcType="VARCHAR" property="emergencyContact" />
+    <result column="emergency_phone" jdbcType="VARCHAR" property="emergencyPhone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, phone, pwd, identity, name, birth, sex, nation, image, old_type, "marital status", 
+    live_status, address, province, city, country, community, organization, emergency_contact, 
+    emergency_phone, create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.starter.medicaldao.entity.User">
+    insert into t_user (id, phone, pwd, 
+      identity, name, birth, 
+      sex, nation, image, 
+      old_type, "marital status", live_status, 
+      address, province, city, 
+      country, community, organization, 
+      emergency_contact, emergency_phone, create_time, 
+      modify_time)
+    values (#{id,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{birth,jdbcType=INTEGER}, 
+      #{sex,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{oldType,jdbcType=INTEGER}, #{maritalStatus,jdbcType=INTEGER}, #{liveStatus,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{community,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR}, 
+      #{emergencyContact,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="identity != null">
+        identity,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="oldType != null">
+        old_type,
+      </if>
+      <if test="maritalStatus != null">
+        "marital status",
+      </if>
+      <if test="liveStatus != null">
+        live_status,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="community != null">
+        community,
+      </if>
+      <if test="organization != null">
+        organization,
+      </if>
+      <if test="emergencyContact != null">
+        emergency_contact,
+      </if>
+      <if test="emergencyPhone != null">
+        emergency_phone,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="oldType != null">
+        #{oldType,jdbcType=INTEGER},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="liveStatus != null">
+        #{liveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        #{community,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null">
+        #{emergencyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null">
+        #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.User">
+    update t_user
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="oldType != null">
+        old_type = #{oldType,jdbcType=INTEGER},
+      </if>
+      <if test="maritalStatus != null">
+        "marital status" = #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="liveStatus != null">
+        live_status = #{liveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        community = #{community,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null">
+        emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null">
+        emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.User">
+    update t_user
+    set phone = #{phone,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      nation = #{nation,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      old_type = #{oldType,jdbcType=INTEGER},
+      "marital status" = #{maritalStatus,jdbcType=INTEGER},
+      live_status = #{liveStatus,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      community = #{community,jdbcType=VARCHAR},
+      organization = #{organization,jdbcType=VARCHAR},
+      emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
+      emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="identity" jdbcType="VARCHAR" property="identity" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="birth" jdbcType="INTEGER" property="birth" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="old_type" jdbcType="INTEGER" property="oldType" />
+    <result column="marital status" jdbcType="INTEGER" property="maritalStatus" />
+    <result column="live_status" jdbcType="INTEGER" property="liveStatus" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="community" jdbcType="VARCHAR" property="community" />
+    <result column="organization" jdbcType="VARCHAR" property="organization" />
+    <result column="emergency_contact" jdbcType="VARCHAR" property="emergencyContact" />
+    <result column="emergency_phone" jdbcType="VARCHAR" property="emergencyPhone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, phone, pwd, identity, name, birth, sex, nation, image, old_type, "marital status", 
+    live_status, address, province, city, country, community, organization, emergency_contact, 
+    emergency_phone, create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.starter.medicaldao.entity.User">
+    insert into t_user (id, phone, pwd, 
+      identity, name, birth, 
+      sex, nation, image, 
+      old_type, "marital status", live_status, 
+      address, province, city, 
+      country, community, organization, 
+      emergency_contact, emergency_phone, create_time, 
+      modify_time)
+    values (#{id,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{birth,jdbcType=INTEGER}, 
+      #{sex,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{oldType,jdbcType=INTEGER}, #{maritalStatus,jdbcType=INTEGER}, #{liveStatus,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{community,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR}, 
+      #{emergencyContact,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="identity != null">
+        identity,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="oldType != null">
+        old_type,
+      </if>
+      <if test="maritalStatus != null">
+        "marital status",
+      </if>
+      <if test="liveStatus != null">
+        live_status,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="community != null">
+        community,
+      </if>
+      <if test="organization != null">
+        organization,
+      </if>
+      <if test="emergencyContact != null">
+        emergency_contact,
+      </if>
+      <if test="emergencyPhone != null">
+        emergency_phone,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="oldType != null">
+        #{oldType,jdbcType=INTEGER},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="liveStatus != null">
+        #{liveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        #{community,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null">
+        #{emergencyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null">
+        #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.User">
+    update t_user
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="oldType != null">
+        old_type = #{oldType,jdbcType=INTEGER},
+      </if>
+      <if test="maritalStatus != null">
+        "marital status" = #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="liveStatus != null">
+        live_status = #{liveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        community = #{community,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null">
+        emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null">
+        emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.User">
+    update t_user
+    set phone = #{phone,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      nation = #{nation,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      old_type = #{oldType,jdbcType=INTEGER},
+      "marital status" = #{maritalStatus,jdbcType=INTEGER},
+      live_status = #{liveStatus,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      community = #{community,jdbcType=VARCHAR},
+      organization = #{organization,jdbcType=VARCHAR},
+      emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
+      emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
