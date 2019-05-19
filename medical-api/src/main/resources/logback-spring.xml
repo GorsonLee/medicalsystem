@@ -41,16 +41,8 @@
         </encoder>
     </appender>
 
-    <!-- Sentry 日志 -->
-    <appender name="SENTRY" class="com.getsentry.raven.logback.SentryAppender">
-        <dsn>https://b71a9c6cb1f344cc971bf70ec18c3be2:a59c74dadc8941a8a2b9b733b4868089@sentry-log.wezhuiyi.com/30</dsn>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>${SENTRY_LOG_LEVEL}</level>
-        </filter>
-    </appender>
-
     <!-- 本地开发环境 -->
-    <springProfile name="local">
+    <springProfile name="default">
         <root level="${DEFAULT_LOG_LEVEL}">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="FILE" />

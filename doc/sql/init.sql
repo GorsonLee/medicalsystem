@@ -1,0 +1,1 @@
+CREATE SCHEMA IF NOT EXISTS medical_system DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci;
