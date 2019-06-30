@@ -19,4 +19,9 @@ public class Constant {
      * 时间转换器
      */
     public static final DateTimeFormatter DATE_PATTERN_FORMAT_FULL = DateTimeFormatter.ofPattern(DATE_PATTERN_FULL);
+
+    /**
+     * 用户密码的盐
+     */
+    public static final String PASSWORD_SALT = "!1@2#3qwe";
 }

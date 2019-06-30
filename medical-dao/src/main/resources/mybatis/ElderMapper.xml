@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.starter.medicaldao.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.User">
+<mapper namespace="com.starter.medicaldao.mapper.ElderMapper">
+  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.Elder">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
@@ -33,11 +33,11 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from t_user
+    from t_elder
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <insert id="insert" parameterType="com.starter.medicaldao.entity.User">
-    insert into t_user (id, phone, pwd, 
+  <insert id="insert" parameterType="com.starter.medicaldao.entity.Elder">
+    insert into t_elder (id, phone, pwd, 
       identity, name, birth, 
       sex, nation, image, 
       old_type, marital_status, live_status, 
@@ -54,8 +54,8 @@
       #{emergencyContact,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.User">
-    insert into t_user
+  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.Elder">
+    insert into t_elder
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -193,8 +193,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.User">
-    update t_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.Elder">
+    update t_elder
     <set>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
@@ -262,8 +262,8 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.User">
-    update t_user
+  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.Elder">
+    update t_elder
     set phone = #{phone,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
       identity = #{identity,jdbcType=VARCHAR},
@@ -287,4 +287,23 @@
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByPhone" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_elder
+    where phone = #{phone}
+  </select>
+
+  <select id="selectByPhoneAndPwd" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_elder
+    <where>
+      phone = #{phone}
+      and
+      pwd = #{pwd}
+    </where>
+  </select>
+
 </mapper>

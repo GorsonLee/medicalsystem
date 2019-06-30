@@ -1,8 +1,24 @@
 CREATE SCHEMA IF NOT EXISTS medical_system DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci;
 
-# 1.用户表
-DROP TABLE IF EXISTS `t_user`;
-CREATE TABLE `t_user` (
+# 1.1 晚辈表
+DROP TABLE IF EXISTS `t_younger`;
+CREATE TABLE `t_younger` (
+                        `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                        `phone` varchar(50) NOT NULL COMMENT '电话号码',
+                        `pwd` varchar(100) NOT NULL COMMENT '登陆密码',
+                        `identity` varchar(50) NULL DEFAULT NULL COMMENT '身份证',
+                        `name` varchar(100) NULL DEFAULT NULL COMMENT '名字',
+                        `birth` int(8) NULL DEFAULT NULL COMMENT '生日',
+                        `sex` int(4) NULL DEFAULT NULL COMMENT '性别',
+                        `image` varchar(500) NULL DEFAULT NULL COMMENT '头像 url',
+                        `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                        `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                        PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 1.2 长辈表
+DROP TABLE IF EXISTS `t_elder`;
+CREATE TABLE `t_elder` (
                         `id` varchar(100) NOT NULL COMMENT '主键 ID',
                         `phone` varchar(50) NOT NULL COMMENT '电话号码',
                         `pwd` varchar(100) NOT NULL COMMENT '登陆密码',
@@ -45,19 +61,8 @@ DROP TABLE IF EXISTS `t_body_sign`;
 CREATE TABLE `t_body_sign` (
                              `id` varchar(100) NOT NULL COMMENT '主键 ID',
                              `user_id` varchar(100) NOT NULL COMMENT '用户 ID',
-                             `breath_rate` int(8) NULL DEFAULT NULL COMMENT '呼吸率',
-                             `systolic` int(8) NULL DEFAULT NULL COMMENT '收缩压，单位mmHg',
-                             `diastolic` int(8) NULL DEFAULT NULL COMMENT '舒张压，单位mmHg',
-                             `heart_rate` int(8) NULL DEFAULT NULL COMMENT '心率，单位次/分',
-                             `spo2` int(8) NULL DEFAULT NULL COMMENT '血氧饱和度，单位SaO2',
-                             `sleep_time` int(8) NULL DEFAULT NULL COMMENT '睡眠时间，单位min',
-                             `bg` int(8) NULL DEFAULT NULL COMMENT '血糖，单位mmol/L，数值放大10倍',
-                             `temperature` int(8) NULL DEFAULT NULL COMMENT '体温，单位°C，数值放大10倍',
-                             `uric_acid` int(8) NULL DEFAULT NULL COMMENT '尿酸，单位umol/L',
-                             `blood_fat` int(8) NULL DEFAULT NULL COMMENT '血脂，单位mmol/L',
-                             `weight` int(8) NULL DEFAULT NULL COMMENT '体重，单位Kg',
-                             `waist` int(8) NULL DEFAULT NULL COMMENT '腰围，单位cm',
-                             `hip` int(8) NULL DEFAULT NULL COMMENT '臀围，单位cm',
+                             `body_sign` varchar(50) NULL DEFAULT NULL COMMENT '体征项，breathRate(呼吸率)；bp(血压，单位mmHg)；heartRate(心率，单位次/分)；spo2(血氧饱和度，单位SaO2)；sleepTime(睡眠时间，单位min)；bg(血糖，单位mmol/L)；temperature(体温，单位°C)；uricAcid(尿酸，单位umol/L)；bloodFat(血脂，单位mmol/L)；weight(体重，单位Kg)；height(身高，单位cm)；waist(腰围，单位cm)；hip(臀围，单位cm)；',
+                             `content` varchar(50) NULL DEFAULT NULL COMMENT '体征值内容',
                              `description` varchar(100) NULL DEFAULT NULL COMMENT '健康描述信息',
                              `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                              `modify_time` datetime(0) NOT NULL COMMENT '修改时间',

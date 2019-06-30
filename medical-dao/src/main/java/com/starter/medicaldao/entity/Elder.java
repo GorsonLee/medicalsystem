@@ -2,7 +2,7 @@ package com.starter.medicaldao.entity;
 
 import java.util.Date;
 
-public class User {
+public class Elder {
     private String id;
 
     private String phone;

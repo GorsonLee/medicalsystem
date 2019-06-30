@@ -7,31 +7,9 @@ public class BodySign {
 
     private String userId;
 
-    private Integer breathRate;
+    private String bodySign;
 
-    private Integer systolic;
-
-    private Integer diastolic;
-
-    private Integer heartRate;
-
-    private Integer spo2;
-
-    private Integer sleepTime;
-
-    private Integer bg;
-
-    private Integer temperature;
-
-    private Integer uricAcid;
-
-    private Integer bloodFat;
-
-    private Integer weight;
-
-    private Integer waist;
-
-    private Integer hip;
+    private String content;
 
     private String description;
 
@@ -55,108 +33,20 @@ public class BodySign {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public Integer getBreathRate() {
-        return breathRate;
+    public String getBodySign() {
+        return bodySign;
     }
 
-    public void setBreathRate(Integer breathRate) {
-        this.breathRate = breathRate;
+    public void setBodySign(String bodySign) {
+        this.bodySign = bodySign == null ? null : bodySign.trim();
     }
 
-    public Integer getSystolic() {
-        return systolic;
+    public String getContent() {
+        return content;
     }
 
-    public void setSystolic(Integer systolic) {
-        this.systolic = systolic;
-    }
-
-    public Integer getDiastolic() {
-        return diastolic;
-    }
-
-    public void setDiastolic(Integer diastolic) {
-        this.diastolic = diastolic;
-    }
-
-    public Integer getHeartRate() {
-        return heartRate;
-    }
-
-    public void setHeartRate(Integer heartRate) {
-        this.heartRate = heartRate;
-    }
-
-    public Integer getSpo2() {
-        return spo2;
-    }
-
-    public void setSpo2(Integer spo2) {
-        this.spo2 = spo2;
-    }
-
-    public Integer getSleepTime() {
-        return sleepTime;
-    }
-
-    public void setSleepTime(Integer sleepTime) {
-        this.sleepTime = sleepTime;
-    }
-
-    public Integer getBg() {
-        return bg;
-    }
-
-    public void setBg(Integer bg) {
-        this.bg = bg;
-    }
-
-    public Integer getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(Integer temperature) {
-        this.temperature = temperature;
-    }
-
-    public Integer getUricAcid() {
-        return uricAcid;
-    }
-
-    public void setUricAcid(Integer uricAcid) {
-        this.uricAcid = uricAcid;
-    }
-
-    public Integer getBloodFat() {
-        return bloodFat;
-    }
-
-    public void setBloodFat(Integer bloodFat) {
-        this.bloodFat = bloodFat;
-    }
-
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
-
-    public Integer getWaist() {
-        return waist;
-    }
-
-    public void setWaist(Integer waist) {
-        this.waist = waist;
-    }
-
-    public Integer getHip() {
-        return hip;
-    }
-
-    public void setHip(Integer hip) {
-        this.hip = hip;
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public String getDescription() {
