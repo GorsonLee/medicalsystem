@@ -17,12 +17,6 @@
     <dependencies>
         <dependency>
             <groupId>com.starter</groupId>
-            <artifactId>medical-common</artifactId>
-            <version>${medical.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.starter</groupId>
             <artifactId>medical-dao</artifactId>
             <version>${medical.version}</version>
         </dependency>

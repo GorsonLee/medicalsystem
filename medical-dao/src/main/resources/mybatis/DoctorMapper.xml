@@ -223,4 +223,21 @@
       pwd = #{pwd}
     </where>
   </select>
+
+  <select id="queryDoctors"  parameterType="com.starter.medicaldao.entity.Doctor" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_doctor
+    <where>
+      <if test="hospital != null">
+        and hospital = #{hospital}
+      </if>
+      <if test="department != null">
+        and department = #{department}
+      </if>
+      <if test="secondDepartment != null">
+        and second_department = #{secondDepartment}
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 import static com.starter.medicalcommon.constant.Constant.PASSWORD_SALT;
 
@@ -61,6 +62,13 @@ public class DoctorService {
         return BaseResponse.successResponse();
     }
 
+    public BaseResponse<Doctor> query(String doctorId) {
+        Doctor doctor = doctorMapper.selectByPrimaryKey(doctorId);
+        BaseResponse<Doctor> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(doctor);
+        return response;
+    }
+
     public BaseResponse update(DoctorRequest request) {
         Doctor doctor = new Doctor();
 
@@ -74,4 +82,18 @@ public class DoctorService {
         int result = doctorMapper.updateByPrimaryKeySelective(doctor);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
     }
+
+    /**
+     * 查询医生信息
+     *
+     * @param request
+     * @return
+     */
+    public BaseResponse<List<Doctor>> queryDoctors(DoctorRequest request) {
+        List<Doctor> doctorList = doctorMapper.queryDoctors(request);
+        BaseResponse<List<Doctor>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(doctorList);
+        return response;
+    }
+
 }
