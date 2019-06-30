@@ -28,12 +28,6 @@ public class ElderService {
     @Resource
     private ElderMapper elderMapper;
 
-    /**
-     * 老人注册用户
-     *
-     * @param request 用户注册信息
-     * @return
-     */
     public BaseResponse register(UserRegisterRequest request) {
         Elder oldOne = elderMapper.selectByPhone(request.getPhone());
 
@@ -53,16 +47,9 @@ public class ElderService {
         elder.setCreateTime(now);
         elder.setModifyTime(now);
         int result = elderMapper.insertSelective(elder);
-        return result > 0 ? BaseResponse.successResponse() : BaseResponse.failResponse();
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
     }
 
-
-    /**
-     * 用户登录
-     *
-     * @param request 用户登录信息
-     * @return
-     */
     public BaseResponse login(UserRegisterRequest request) {
         Elder one = elderMapper.selectByPhoneAndPwd(request.getPhone(),
                 DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));

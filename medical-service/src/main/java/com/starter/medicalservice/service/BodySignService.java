@@ -23,6 +23,7 @@ import java.util.*;
 @Slf4j
 public class BodySignService {
 
+    // 生命体征的预览项目
     private static final List<String> BODY_SIGN_LIST = Arrays.asList(
             //呼吸率
             "breathRate",
@@ -72,7 +73,7 @@ public class BodySignService {
         bodySign.setCreateTime(now);
         bodySign.setModifyTime(now);
         int result = bodySignMapper.insertSelective(bodySign);
-        return result > 0 ? BaseResponse.successResponse() : BaseResponse.failResponse();
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
     }
 
     /**

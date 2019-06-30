@@ -1,6 +1,9 @@
 package com.starter.medicaldao.mapper;
 
 import com.starter.medicaldao.entity.Device;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DeviceMapper {
     int insert(Device record);
@@ -12,4 +15,9 @@ public interface DeviceMapper {
     int updateByPrimaryKeySelective(Device record);
 
     int updateByPrimaryKey(Device record);
+
+    Device selectByUserIdAndDeviceId(@Param("userId") String userId,
+                                     @Param("deviceId") String deviceId);
+
+    List<Device> selectByUserId(@Param("userId") String userId);
 }

@@ -1,6 +1,7 @@
 package com.starter.medicaldao.mapper;
 
 import com.starter.medicaldao.entity.Doctor;
+import org.apache.ibatis.annotations.Param;
 
 public interface DoctorMapper {
     int insert(Doctor record);
@@ -12,4 +13,9 @@ public interface DoctorMapper {
     int updateByPrimaryKeySelective(Doctor record);
 
     int updateByPrimaryKey(Doctor record);
+
+    Doctor selectByPhone(@Param("phone") String phone);
+
+    Doctor selectByPhoneAndPwd(@Param("phone") String phone,
+                               @Param("pwd") String pwd);
 }

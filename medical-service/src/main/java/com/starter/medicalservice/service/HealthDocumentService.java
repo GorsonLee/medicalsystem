@@ -35,7 +35,7 @@ public class HealthDocumentService {
         HealthDocument oldOne = healthDocumentMapper.selectByUserIdAndPath(request.getUserId(), request.getPath());
 
         if (oldOne != null) {
-            return new BaseResponse<>(MsgCodeEnum.HEALTH_DOCUMENT_EXIST_ERROR);
+            return new BaseResponse<>(MsgCodeEnum.RESOURCE_EXIST_ERROR);
         }
 
         Date now = new Date();
@@ -47,7 +47,7 @@ public class HealthDocumentService {
         healthDocument.setCreateTime(now);
         healthDocument.setModifyTime(now);
         int result = healthDocumentMapper.insertSelective(healthDocument);
-        return result > 0 ? BaseResponse.successResponse() : BaseResponse.failResponse();
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
     }
 
     /**
@@ -57,7 +57,7 @@ public class HealthDocumentService {
      * @param path   健康档案路径
      * @return 用户健康档案信息
      */
-    public BaseResponse<HealthDocument> selectByUserIdAndPath(String userId, String path) {
+    public BaseResponse<HealthDocument> queryByUserIdAndPath(String userId, String path) {
         HealthDocument healthDocument = healthDocumentMapper.selectByUserIdAndPath(userId, path);
         BaseResponse<HealthDocument> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         response.setData(healthDocument);
@@ -72,11 +72,10 @@ public class HealthDocumentService {
      */
     public BaseResponse updateByUserIdAndPathSelective(HealthDocumentRequest request) {
         HealthDocument healthDocument = new HealthDocument();
-        healthDocument.setUserId(request.getUserId());
-        healthDocument.setPath(request.getPath());
+        healthDocument.setId(request.getId());
         healthDocument.setContent(request.getContent());
         healthDocument.setModifyTime(new Date());
         int result = healthDocumentMapper.updateByUserIdAndPathSelective(healthDocument);
-        return result > 0 ? BaseResponse.successResponse() : BaseResponse.failResponse();
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
     }
 }

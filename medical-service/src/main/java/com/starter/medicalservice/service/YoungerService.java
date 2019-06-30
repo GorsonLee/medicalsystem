@@ -4,7 +4,6 @@ import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
-import com.starter.medicaldao.entity.Elder;
 import com.starter.medicaldao.entity.Younger;
 import com.starter.medicaldao.mapper.YoungerMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +46,7 @@ public class YoungerService {
         younger.setCreateTime(now);
         younger.setModifyTime(now);
         int result = youngerMapper.insertSelective(younger);
-        return result > 0 ? BaseResponse.successResponse() : BaseResponse.failResponse();
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
     }
 
     public BaseResponse login(UserRegisterRequest request) {

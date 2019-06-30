@@ -33,9 +33,9 @@ public class HealthDocumentController {
      * @param path   健康档案路径
      * @return 用户健康档案信息
      */
-    @GetMapping("/selectByUserIdAndPath")
-    public BaseResponse selectByUserIdAndPath(@NotNull String userId, @NotNull String path) {
-        return healthDocumentService.selectByUserIdAndPath(userId, path);
+    @GetMapping("/queryByUserIdAndPath")
+    public BaseResponse queryByUserIdAndPath(@NotNull String userId, @NotNull String path) {
+        return healthDocumentService.queryByUserIdAndPath(userId, path);
     }
 
     /**

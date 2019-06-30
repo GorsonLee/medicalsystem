@@ -121,4 +121,21 @@
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByUserIdAndDeviceId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_device
+    where user_id = #{userId}
+    and device_id = #{deviceId}
+  </select>
+
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_device
+    where user_id = #{userId}
+    order by create_time desc
+  </select>
+
 </mapper>

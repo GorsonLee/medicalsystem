@@ -9,9 +9,11 @@ import lombok.Data;
  * @date 2019-05-19 20:45
  **/
 @Data
-public class HealthDocumentRequest {
+public class DeviceRequest {
     private String id;
     private String userId;
-    private String path;
-    private String content;
+    private String deviceId;
+    private String category;
+    private String type;
+    private Integer state;
 }

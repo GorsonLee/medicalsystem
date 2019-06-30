@@ -205,4 +205,22 @@
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByPhone" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_doctor
+    where phone = #{phone}
+  </select>
+
+  <select id="selectByPhoneAndPwd" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_doctor
+    <where>
+      phone = #{phone}
+      and
+      pwd = #{pwd}
+    </where>
+  </select>
 </mapper>

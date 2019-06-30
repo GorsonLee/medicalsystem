@@ -63,7 +63,7 @@ public class BaseResponse<T> {
      *
      * @return 系统异常错误
      */
-    public static BaseResponse failResponse() {
+    public static BaseResponse systemErrorResponse() {
         return new BaseResponse(MsgCodeEnum.SYSTEM_ERROR);
     }
 }

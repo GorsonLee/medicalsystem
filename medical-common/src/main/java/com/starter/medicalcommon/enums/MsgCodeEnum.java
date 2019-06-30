@@ -13,10 +13,10 @@ public enum MsgCodeEnum {
      */
     SUCCESS(200, "success"),
 
-    /**
-     * 参数错误
-     */
     PARAM_INVALID(-400, "参数错误"),
+
+    OPERATION_FAIL_ERROR(-410, "操作失败"),
+    RESOURCE_EXIST_ERROR(-411, "资源重复"),
 
     /**
      * 服务异常
@@ -31,13 +31,13 @@ public enum MsgCodeEnum {
     /********** 用户模块错误码，范围1000~1099 **********/
     USER_EXIST_ERROR(-1000, "用户已经存在"),
     USER_PASSWORD_ERROR(-1001, "密码错误"),
+    USER_REGISTER_ERROR(-1002, "用户注册失败");
 
 
     /********** 健康档案错误码，范围1100~1199 **********/
     /**
      * 健康档案已经存在
      */
-    HEALTH_DOCUMENT_EXIST_ERROR(-1100, "该健康档案已经存在");
 
     private int code;
 
