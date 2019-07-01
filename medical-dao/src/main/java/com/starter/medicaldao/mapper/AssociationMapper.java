@@ -18,4 +18,6 @@ public interface AssociationMapper {
 
     List<Association> selectByUserId(@Param("userId") String userId);
 
+    List<Association> selectByAssociateUserId(@Param("associateUserId") String associateUserId);
+
 }

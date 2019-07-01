@@ -21,14 +21,37 @@ public class AssociationController {
     @Resource
     private AssociationService associationService;
 
+    /**
+     * 关联用户
+     *
+     * @param request
+     * @return
+     */
     @PostMapping("/associate")
     public BaseResponse associate(@RequestBody AssociationRequest request) {
         return associationService.associate(request);
     }
 
-    @GetMapping("/listAssociateElder")
-    public BaseResponse listAssociateElder(String userId) {
-        return associationService.queryAssociateElder(userId);
+    /**
+     * 我关联的人
+     *
+     * @param userId
+     * @return
+     */
+    @GetMapping("/listMyAssociateElder")
+    public BaseResponse listMyAssociateElder(String userId) {
+        return associationService.queryMyAssociateElder(userId);
+    }
+
+    /**
+     * 关联我的人
+     *
+     * @param userId
+     * @return
+     */
+    @GetMapping("/listAssociateMeUser")
+    public BaseResponse listAssociateMeUser(String userId) {
+        return associationService.queryAssociateMeUser(userId);
     }
 
     @PostMapping("/update")

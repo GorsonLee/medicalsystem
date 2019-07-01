@@ -107,4 +107,12 @@
     where user_id = #{userId}
     order by create_time desc
   </select>
+
+  <select id="selectByAssociateUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_association
+    where associate_user_id = #{associateUserId}
+    order by create_time desc
+  </select>
 </mapper>

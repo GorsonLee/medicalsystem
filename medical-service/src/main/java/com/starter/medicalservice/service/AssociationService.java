@@ -1,18 +1,16 @@
 package com.starter.medicalservice.service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
 import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.request.AssociationRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Association;
 import com.starter.medicaldao.entity.Elder;
-import com.starter.medicaldao.entity.Remind;
+import com.starter.medicaldao.entity.Younger;
 import com.starter.medicaldao.mapper.AssociationMapper;
 import com.starter.medicaldao.mapper.ElderMapper;
+import com.starter.medicaldao.mapper.YoungerMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +18,6 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 此类的描述是：
@@ -36,14 +33,13 @@ public class AssociationService {
     private AssociationMapper associationMapper;
     @Resource
     private ElderMapper elderMapper;
+    @Resource
+    private YoungerMapper youngerMapper;
 
     /**
      * 关联老人
      *
-     * @param
-     * @param
-     * @param
-     * @param
+     * @param associationRequest
      * @return
      */
     public BaseResponse associate(AssociationRequest associationRequest) {
@@ -68,12 +64,12 @@ public class AssociationService {
     }
 
     /**
-     * 查询关联的老人
+     * 查询我关联的老人
      *
      * @param userId 用户ID
      * @return
      */
-    public BaseResponse<List<JSONObject>> queryAssociateElder(String userId) {
+    public BaseResponse<List<JSONObject>> queryMyAssociateElder(String userId) {
         List<Association> associationList = associationMapper.selectByUserId(userId);
         List<JSONObject> elderList = new ArrayList<>();
 
@@ -93,6 +89,47 @@ public class AssociationService {
         response.setData(elderList);
         return response;
     }
+
+
+    /**
+     * 查询关联我的人
+     *
+     * @param userId
+     * @return
+     */
+    public BaseResponse<List<JSONObject>> queryAssociateMeUser(String userId) {
+        List<Association> associationList = associationMapper.selectByAssociateUserId(userId);
+        List<JSONObject> userList = new ArrayList<>();
+
+        associationList.forEach(item -> {
+            //先从老人表中查找关注我的人
+            Elder elder = elderMapper.selectByPrimaryKey(item.getUserId());
+
+            if (elder != null) {
+                JSONObject elderJson = new JSONObject();
+                elderJson.put("id", elder.getId());
+                elderJson.put("name", elder.getName());
+                elderJson.put("state", item.getState());
+                userList.add(elderJson);
+            } else {
+                //再从年轻人表中查找关注我的人
+                Younger younger = youngerMapper.selectByPrimaryKey(item.getUserId());
+
+                if (younger != null) {
+                    JSONObject youngerJson = new JSONObject();
+                    youngerJson.put("id", elder.getId());
+                    youngerJson.put("name", elder.getName());
+                    youngerJson.put("state", item.getState());
+                    userList.add(youngerJson);
+                }
+            }
+        });
+
+        BaseResponse<List<JSONObject>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(userList);
+        return response;
+    }
+
 
     public BaseResponse update(Association association) {
         association.setModifyTime(new Date());
