@@ -31,8 +31,6 @@ public class YoungerController {
         return youngerService.login(request);
     }
 
-    //todo 查询用户信息，修改用户信息
-
     @GetMapping("/getUserInfo")
     public BaseResponse getUserInfo(String phone) {
         return youngerService.queryByPhone(phone);

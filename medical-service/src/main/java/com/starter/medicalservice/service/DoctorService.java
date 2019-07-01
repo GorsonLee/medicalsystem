@@ -1,7 +1,6 @@
 package com.starter.medicalservice.service;
 
 import com.starter.medicalcommon.enums.MsgCodeEnum;
-import com.starter.medicalcommon.util.BeanUtil;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Doctor;

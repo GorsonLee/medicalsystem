@@ -19,4 +19,7 @@ public interface ElderMapper {
     Elder selectByPhoneAndPwd(@Param("phone") String phone,
                               @Param("pwd") String pwd);
 
+    Elder selectByPhoneAndNameAndIdentity(@Param("phone") String phone,
+                                          @Param("name") String name,
+                                          @Param("identity") String identity);
 }

@@ -1,6 +1,9 @@
 package com.starter.medicaldao.mapper;
 
 import com.starter.medicaldao.entity.Association;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface AssociationMapper {
     int insert(Association record);
@@ -12,4 +15,7 @@ public interface AssociationMapper {
     int updateByPrimaryKeySelective(Association record);
 
     int updateByPrimaryKey(Association record);
+
+    List<Association> selectByUserId(@Param("userId") String userId);
+
 }

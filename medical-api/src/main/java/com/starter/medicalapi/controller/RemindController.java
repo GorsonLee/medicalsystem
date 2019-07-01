@@ -2,7 +2,9 @@ package com.starter.medicalapi.controller;
 
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Device;
+import com.starter.medicaldao.entity.Remind;
 import com.starter.medicalservice.service.DeviceService;
+import com.starter.medicalservice.service.RemindService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,24 +16,24 @@ import javax.annotation.Resource;
  * @date 2019-05-19 17:03
  **/
 @RestController
-@RequestMapping("/device")
-public class DeviceController {
+@RequestMapping("/remind")
+public class RemindController {
 
     @Resource
-    private DeviceService deviceService;
+    private RemindService remindService;
 
     @PostMapping("/insert")
-    public BaseResponse insert(@RequestBody Device request) {
-        return deviceService.insert(request);
+    public BaseResponse insert(@RequestBody Remind remind) {
+        return remindService.insert(remind);
     }
 
     @GetMapping("/list")
     public BaseResponse list(String userId) {
-        return deviceService.queryByUserId(userId);
+        return remindService.queryByUserId(userId);
     }
 
     @PostMapping("/update")
-    public BaseResponse update(@RequestBody Device device) {
-        return deviceService.update(device);
+    public BaseResponse update(@RequestBody Remind remind) {
+        return remindService.update(remind);
     }
 }

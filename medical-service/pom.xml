@@ -22,6 +22,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.starter</groupId>
+            <artifactId>medical-common</artifactId>
+            <version>${medical.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>

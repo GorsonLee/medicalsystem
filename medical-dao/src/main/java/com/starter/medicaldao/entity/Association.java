@@ -7,13 +7,7 @@ public class Association {
 
     private String userId;
 
-    private String associateId;
-
-    private String name;
-
-    private String account;
-
-    private String identity;
+    private String associateUserId;
 
     private Integer state;
 
@@ -37,36 +31,12 @@ public class Association {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getAssociateId() {
-        return associateId;
+    public String getAssociateUserId() {
+        return associateUserId;
     }
 
-    public void setAssociateId(String associateId) {
-        this.associateId = associateId == null ? null : associateId.trim();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
-    }
-
-    public String getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(String identity) {
-        this.identity = identity == null ? null : identity.trim();
+    public void setAssociateUserId(String associateUserId) {
+        this.associateUserId = associateUserId == null ? null : associateUserId.trim();
     }
 
     public Integer getState() {

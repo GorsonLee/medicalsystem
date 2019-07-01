@@ -4,16 +4,13 @@
   <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.Association">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="associate_id" jdbcType="VARCHAR" property="associateId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="account" jdbcType="VARCHAR" property="account" />
-    <result column="identity" jdbcType="VARCHAR" property="identity" />
+    <result column="associate_user_id" jdbcType="VARCHAR" property="associateUserId" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, associate_id, name, account, identity, state, create_time, modify_time
+    id, user_id, associate_user_id, state, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -22,12 +19,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Association">
-    insert into t_association (id, user_id, associate_id, 
-      name, account, identity, 
+    insert into t_association (id, user_id, associate_user_id, 
       state, create_time, modify_time
       )
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{associateId,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{associateUserId,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -40,17 +35,8 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="associateId != null">
-        associate_id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="account != null">
-        account,
-      </if>
-      <if test="identity != null">
-        identity,
+      <if test="associateUserId != null">
+        associate_user_id,
       </if>
       <if test="state != null">
         state,
@@ -69,17 +55,8 @@
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="associateId != null">
-        #{associateId,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="account != null">
-        #{account,jdbcType=VARCHAR},
-      </if>
-      <if test="identity != null">
-        #{identity,jdbcType=VARCHAR},
+      <if test="associateUserId != null">
+        #{associateUserId,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
@@ -98,17 +75,8 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="associateId != null">
-        associate_id = #{associateId,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="account != null">
-        account = #{account,jdbcType=VARCHAR},
-      </if>
-      <if test="identity != null">
-        identity = #{identity,jdbcType=VARCHAR},
+      <if test="associateUserId != null">
+        associate_user_id = #{associateUserId,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
@@ -125,13 +93,18 @@
   <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.Association">
     update t_association
     set user_id = #{userId,jdbcType=VARCHAR},
-      associate_id = #{associateId,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      account = #{account,jdbcType=VARCHAR},
-      identity = #{identity,jdbcType=VARCHAR},
+      associate_user_id = #{associateUserId,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_association
+    where user_id = #{userId}
+    order by create_time desc
+  </select>
 </mapper>

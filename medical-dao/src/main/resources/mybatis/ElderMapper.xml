@@ -306,4 +306,17 @@
     </where>
   </select>
 
+  <select id="selectByPhoneAndNameAndIdentity" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_elder
+    <where>
+      phone = #{phone}
+      and
+      `name` = #{name}
+      and
+      `identity` = #{identity}
+    </where>
+  </select>
+
 </mapper>

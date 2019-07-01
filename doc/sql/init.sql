@@ -199,10 +199,7 @@ DROP TABLE IF EXISTS `t_association`;
 CREATE TABLE `t_association` (
                                `id` varchar(100) NOT NULL COMMENT '主键 ID',
                                `user_id` varchar(100) NOT NULL COMMENT '用户 ID',
-                               `associate_id` varchar(100) NOT NULL COMMENT '被关联的老人ID',
-                               `name` varchar(100) NULL DEFAULT NULL COMMENT '被关联的老人姓名',
-                               `account` varchar(100) NULL DEFAULT NULL COMMENT '被关联的老人账号',
-                               `identity` varchar(50) NULL DEFAULT NULL COMMENT '被关联的老人身份证',
+                               `associate_user_id` varchar(100) NOT NULL COMMENT '被关联的老人ID',
                                `state` int(4) NULL DEFAULT NULL COMMENT '关联状态',
                                `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                                `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
