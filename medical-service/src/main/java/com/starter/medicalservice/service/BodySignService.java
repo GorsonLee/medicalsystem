@@ -2,7 +2,6 @@ package com.starter.medicalservice.service;
 
 import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
-import com.starter.medicalcommon.vo.request.BodySignInsertRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.BodySign;
 import com.starter.medicaldao.mapper.BodySignMapper;
@@ -59,17 +58,12 @@ public class BodySignService {
     /**
      * 插入体征数据
      *
-     * @param request
+     * @param bodySign
      * @return
      */
-    public BaseResponse insertSelective(BodySignInsertRequest request) {
+    public BaseResponse insert(BodySign bodySign) {
         Date now = new Date();
-        BodySign bodySign = new BodySign();
         bodySign.setId(UUIDUtil.getUUID());
-        bodySign.setUserId(request.getUserId());
-        bodySign.setBodySign(request.getBodySign());
-        bodySign.setContent(request.getContent());
-        bodySign.setDescription(request.getDescription());
         bodySign.setCreateTime(now);
         bodySign.setModifyTime(now);
         int result = bodySignMapper.insertSelective(bodySign);

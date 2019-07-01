@@ -1,7 +1,7 @@
 package com.starter.medicalapi.controller;
 
-import com.starter.medicalcommon.vo.request.BodySignInsertRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
+import com.starter.medicaldao.entity.BodySign;
 import com.starter.medicalservice.service.BodySignService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +22,8 @@ public class BodySignController {
     private BodySignService bodySignService;
 
     @PostMapping("/insert")
-    public BaseResponse insert(@RequestBody BodySignInsertRequest request) {
-        return bodySignService.insertSelective(request);
+    public BaseResponse insert(@RequestBody BodySign bodySign) {
+        return bodySignService.insert(bodySign);
     }
 
     @GetMapping("/history")

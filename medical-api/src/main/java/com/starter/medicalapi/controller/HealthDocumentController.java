@@ -1,7 +1,7 @@
 package com.starter.medicalapi.controller;
 
-import com.starter.medicalcommon.vo.request.HealthDocumentRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
+import com.starter.medicaldao.entity.HealthDocument;
 import com.starter.medicalservice.service.HealthDocumentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +22,8 @@ public class HealthDocumentController {
     private HealthDocumentService healthDocumentService;
 
     @PostMapping("/insert")
-    public BaseResponse insert(@RequestBody HealthDocumentRequest request) {
-        return healthDocumentService.insertSelective(request);
+    public BaseResponse insert(@RequestBody HealthDocument healthDocument) {
+        return healthDocumentService.insert(healthDocument);
     }
 
     /**
@@ -41,11 +41,11 @@ public class HealthDocumentController {
     /**
      * 根据用户ID和档案路径更新健康档案
      *
-     * @param request 档案内容
+     * @param healthDocument 档案内容
      * @return true更新成功，false更新异常
      */
     @PostMapping("/updateByUserIdAndPath")
-    public BaseResponse updateByUserIdAndPath(@RequestBody HealthDocumentRequest request) {
-        return healthDocumentService.updateByUserIdAndPathSelective(request);
+    public BaseResponse updateByUserIdAndPath(@RequestBody HealthDocument healthDocument) {
+        return healthDocumentService.updateByUserIdAndPathSelective(healthDocument);
     }
 }

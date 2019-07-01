@@ -2,11 +2,9 @@ package com.starter.medicalapi.controller;
 
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
+import com.starter.medicaldao.entity.Elder;
 import com.starter.medicalservice.service.ElderService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -33,5 +31,14 @@ public class ElderController {
         return elderService.login(request);
     }
 
-    //todo 查询用户信息，修改用户信息
+    @GetMapping("/getUserInfo")
+    public BaseResponse getUserInfo(String phone) {
+        return elderService.queryByPhone(phone);
+    }
+
+    @PostMapping("/update")
+    public BaseResponse update(@RequestBody Elder elder) {
+        return elderService.update(elder);
+    }
+
 }

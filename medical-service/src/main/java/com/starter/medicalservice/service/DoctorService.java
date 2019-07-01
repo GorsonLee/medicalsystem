@@ -3,7 +3,6 @@ package com.starter.medicalservice.service;
 import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.BeanUtil;
 import com.starter.medicalcommon.util.UUIDUtil;
-import com.starter.medicalcommon.vo.request.DoctorRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Doctor;
 import com.starter.medicaldao.mapper.DoctorMapper;
@@ -30,8 +29,8 @@ public class DoctorService {
     @Resource
     private DoctorMapper doctorMapper;
 
-    public BaseResponse register(DoctorRequest request) {
-        Doctor oldOne = doctorMapper.selectByPhone(request.getPhone());
+    public BaseResponse register(Doctor doctor) {
+        Doctor oldOne = doctorMapper.selectByPhone(doctor.getPhone());
 
         if (oldOne != null) {
             return new BaseResponse<>(MsgCodeEnum.USER_EXIST_ERROR);
@@ -40,20 +39,17 @@ public class DoctorService {
         //TODO 校验手机验证码
 
         Date now = new Date();
-        Doctor doctor = new Doctor();
         doctor.setId(UUIDUtil.getUUID());
-        doctor.setPhone(request.getPhone());
-        doctor.setPwd(DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
-        doctor.setName(request.getName());
+        doctor.setPwd(DigestUtils.md5Hex(doctor.getPwd() + PASSWORD_SALT));
         doctor.setCreateTime(now);
         doctor.setModifyTime(now);
         int result = doctorMapper.insertSelective(doctor);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
     }
 
-    public BaseResponse login(DoctorRequest request) {
-        Doctor one = doctorMapper.selectByPhoneAndPwd(request.getPhone(),
-                DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
+    public BaseResponse login(Doctor doctor) {
+        Doctor one = doctorMapper.selectByPhoneAndPwd(doctor.getPhone(),
+                DigestUtils.md5Hex(doctor.getPwd() + PASSWORD_SALT));
 
         if (one != null) {
             return new BaseResponse<>(MsgCodeEnum.USER_PASSWORD_ERROR);
@@ -69,15 +65,7 @@ public class DoctorService {
         return response;
     }
 
-    public BaseResponse update(DoctorRequest request) {
-        Doctor doctor = new Doctor();
-
-        try {
-            BeanUtil.copyAllPropertiesByGetterAndSetter(request, doctor);
-        } catch (Exception e) {
-            return BaseResponse.systemErrorResponse();
-        }
-
+    public BaseResponse update(Doctor doctor) {
         doctor.setModifyTime(new Date());
         int result = doctorMapper.updateByPrimaryKeySelective(doctor);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
@@ -86,14 +74,25 @@ public class DoctorService {
     /**
      * 查询医生信息
      *
-     * @param request
+     * @param doctor
      * @return
      */
-    public BaseResponse<List<Doctor>> queryDoctors(DoctorRequest request) {
-        List<Doctor> doctorList = doctorMapper.queryDoctors(request);
+    public BaseResponse<List<Doctor>> queryDoctors(Doctor doctor) {
+        List<Doctor> doctorList = doctorMapper.queryDoctors(doctor);
         BaseResponse<List<Doctor>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         response.setData(doctorList);
         return response;
     }
 
+    public BaseResponse queryByPhone(String phone) {
+        Doctor doctor = doctorMapper.selectByPhone(phone);
+
+        if (doctor != null) {
+            doctor.setPwd("");
+        }
+
+        BaseResponse<Doctor> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(doctor);
+        return response;
+    }
 }

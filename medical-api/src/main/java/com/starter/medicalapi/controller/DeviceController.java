@@ -1,7 +1,7 @@
 package com.starter.medicalapi.controller;
 
-import com.starter.medicalcommon.vo.request.DeviceRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
+import com.starter.medicaldao.entity.Device;
 import com.starter.medicalservice.service.DeviceService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +21,8 @@ public class DeviceController {
     private DeviceService deviceService;
 
     @PostMapping("/insert")
-    public BaseResponse insert(@RequestBody DeviceRequest request) {
-        return deviceService.insertSelective(request);
+    public BaseResponse insert(@RequestBody Device request) {
+        return deviceService.insert(request);
     }
 
     @GetMapping("/list")
@@ -31,7 +31,7 @@ public class DeviceController {
     }
 
     @PostMapping("/update")
-    public BaseResponse updateByDeviceId(@RequestBody DeviceRequest request) {
-        return deviceService.update(request);
+    public BaseResponse updateByDeviceId(@RequestBody Device device) {
+        return deviceService.update(device);
     }
 }

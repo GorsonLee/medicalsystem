@@ -1,6 +1,5 @@
 package com.starter.medicaldao.mapper;
 
-import com.starter.medicalcommon.vo.request.DoctorRequest;
 import com.starter.medicaldao.entity.Doctor;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,5 +21,5 @@ public interface DoctorMapper {
     Doctor selectByPhoneAndPwd(@Param("phone") String phone,
                                @Param("pwd") String pwd);
 
-    List<Doctor> queryDoctors(DoctorRequest request);
+    List<Doctor> queryDoctors(Doctor doctor);
 }

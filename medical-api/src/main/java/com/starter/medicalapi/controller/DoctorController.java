@@ -1,7 +1,7 @@
 package com.starter.medicalapi.controller;
 
-import com.starter.medicalcommon.vo.request.DoctorRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
+import com.starter.medicaldao.entity.Doctor;
 import com.starter.medicalservice.service.DoctorService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +21,13 @@ public class DoctorController {
     private DoctorService doctorService;
 
     @PostMapping("/register")
-    public BaseResponse register(@RequestBody DoctorRequest request) {
-        return doctorService.register(request);
+    public BaseResponse register(@RequestBody Doctor doctor) {
+        return doctorService.register(doctor);
     }
 
     @PostMapping("/login")
-    public BaseResponse login(@RequestBody DoctorRequest request) {
-        return doctorService.login(request);
+    public BaseResponse login(@RequestBody Doctor doctor) {
+        return doctorService.login(doctor);
     }
 
     @GetMapping("/query")
@@ -36,19 +36,18 @@ public class DoctorController {
     }
 
     @PostMapping("/update")
-    public BaseResponse update(@RequestBody DoctorRequest request) {
-        return doctorService.update(request);
+    public BaseResponse update(@RequestBody Doctor doctor) {
+        return doctorService.update(doctor);
     }
 
-    /**
-     * 查询医生信息
-     *
-     * @param request
-     * @return
-     */
     @PostMapping("/queryDoctors")
-    public BaseResponse queryDoctors(@RequestBody DoctorRequest request) {
-        return doctorService.queryDoctors(request);
+    public BaseResponse queryDoctors(@RequestBody Doctor doctor) {
+        return doctorService.queryDoctors(doctor);
+    }
+
+    @GetMapping("/getUserInfo")
+    public BaseResponse getUserInfo(String phone) {
+        return doctorService.queryByPhone(phone);
     }
 
 }

@@ -60,4 +60,21 @@ public class ElderService {
 
         return BaseResponse.successResponse();
     }
+
+    public BaseResponse queryByPhone(String phone) {
+        Elder elder = elderMapper.selectByPhone(phone);
+
+        if (elder != null) {
+            elder.setPwd("");
+        }
+
+        BaseResponse<Elder> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(elder);
+        return response;
+    }
+
+    public BaseResponse update(Elder elder) {
+        int result = elderMapper.updateByPrimaryKeySelective(elder);
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
+    }
 }

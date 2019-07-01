@@ -16,5 +16,4 @@ public interface HealthDocumentMapper {
 
     HealthDocument selectByUserIdAndPath(@Param("userId") String userId, @Param("path") String path);
 
-    int updateByUserIdAndPathSelective(HealthDocument record);
 }

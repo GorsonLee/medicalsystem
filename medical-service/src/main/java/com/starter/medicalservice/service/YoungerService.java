@@ -59,4 +59,21 @@ public class YoungerService {
 
         return BaseResponse.successResponse();
     }
+
+    public BaseResponse queryByPhone(String phone) {
+        Younger younger = youngerMapper.selectByPhone(phone);
+
+        if (younger != null) {
+            younger.setPwd("");
+        }
+
+        BaseResponse<Younger> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(younger);
+        return response;
+    }
+
+    public BaseResponse update(Younger younger) {
+        int result = youngerMapper.updateByPrimaryKeySelective(younger);
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
+    }
 }
