@@ -108,6 +108,7 @@ CREATE TABLE `t_contract` (
                             `id` varchar(100) NOT NULL COMMENT '主键 ID',
                             `user_id` varchar(100) NOT NULL COMMENT '用户 ID',
                             `doctor_id` varchar(100) NOT NULL COMMENT '医生 ID',
+                            `state` int(4) NULL DEFAULT NULL COMMENT '状态，0表示审核中，1表示已签约',
                             `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                             `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                             PRIMARY KEY (`id`) USING BTREE

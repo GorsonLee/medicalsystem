@@ -1,7 +1,9 @@
 package com.starter.medicalapi.controller;
 
 import com.starter.medicalcommon.vo.response.BaseResponse;
+import com.starter.medicaldao.entity.Contract;
 import com.starter.medicaldao.entity.Doctor;
+import com.starter.medicalservice.service.ContractService;
 import com.starter.medicalservice.service.DoctorService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,8 @@ public class DoctorController {
 
     @Resource
     private DoctorService doctorService;
+    @Resource
+    private ContractService contractService;
 
     @PostMapping("/register")
     public BaseResponse register(@RequestBody Doctor doctor) {
@@ -50,4 +54,25 @@ public class DoctorController {
         return doctorService.queryByPhone(phone);
     }
 
+    /**
+     * 和医生签约
+     *
+     * @param contract
+     * @return
+     */
+    @PostMapping("/contract")
+    public BaseResponse contract(@RequestBody Contract contract) {
+        return contractService.insert(contract);
+    }
+
+    /**
+     * 签约医生列表
+     *
+     * @param userId
+     * @return
+     */
+    @GetMapping("/getContractDoctors")
+    public BaseResponse getContractDoctors(String userId) {
+        return contractService.queryContractDoctors(userId);
+    }
 }

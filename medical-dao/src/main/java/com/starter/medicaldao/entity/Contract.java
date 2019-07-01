@@ -9,6 +9,8 @@ public class Contract {
 
     private String doctorId;
 
+    private Integer state;
+
     private Date createTime;
 
     private Date modifyTime;
@@ -35,6 +37,14 @@ public class Contract {
 
     public void setDoctorId(String doctorId) {
         this.doctorId = doctorId == null ? null : doctorId.trim();
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public Date getCreateTime() {
