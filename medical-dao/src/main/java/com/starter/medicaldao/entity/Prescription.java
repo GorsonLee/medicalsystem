@@ -9,6 +9,10 @@ public class Prescription {
 
     private String doctorId;
 
+    private String title;
+
+    private String content;
+
     private Date createTime;
 
     private Date modifyTime;
@@ -35,6 +39,22 @@ public class Prescription {
 
     public void setDoctorId(String doctorId) {
         this.doctorId = doctorId == null ? null : doctorId.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public Date getCreateTime() {

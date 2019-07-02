@@ -17,4 +17,7 @@ public interface ContractMapper {
     int updateByPrimaryKey(Contract record);
 
     List<Contract> selectByUserId(@Param("userId") String userId);
+
+    List<Contract> selectByDoctorId(@Param("doctorId") String doctorId);
+
 }

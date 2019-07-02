@@ -5,7 +5,6 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="doctor_id" jdbcType="VARCHAR" property="doctorId" />
-    <result column="department" jdbcType="VARCHAR" property="department" />
     <result column="instructions" jdbcType="VARCHAR" property="instructions" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="reserve_time" jdbcType="TIMESTAMP" property="reserveTime" />
@@ -13,8 +12,7 @@
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, doctor_id, department, instructions, state, reserve_time, create_time, 
-    modify_time
+    id, user_id, doctor_id, instructions, state, reserve_time, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -24,13 +22,11 @@
   </select>
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Reservation">
     insert into t_reservation (id, user_id, doctor_id, 
-      department, instructions, state, 
-      reserve_time, create_time, modify_time
-      )
+      instructions, state, reserve_time, 
+      create_time, modify_time)
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{doctorId,jdbcType=VARCHAR}, 
-      #{department,jdbcType=VARCHAR}, #{instructions,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
-      #{reserveTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
-      )
+      #{instructions,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{reserveTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.Reservation">
     insert into t_reservation
@@ -43,9 +39,6 @@
       </if>
       <if test="doctorId != null">
         doctor_id,
-      </if>
-      <if test="department != null">
-        department,
       </if>
       <if test="instructions != null">
         instructions,
@@ -73,9 +66,6 @@
       <if test="doctorId != null">
         #{doctorId,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        #{department,jdbcType=VARCHAR},
-      </if>
       <if test="instructions != null">
         #{instructions,jdbcType=VARCHAR},
       </if>
@@ -102,9 +92,6 @@
       <if test="doctorId != null">
         doctor_id = #{doctorId,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        department = #{department,jdbcType=VARCHAR},
-      </if>
       <if test="instructions != null">
         instructions = #{instructions,jdbcType=VARCHAR},
       </if>
@@ -127,7 +114,6 @@
     update t_reservation
     set user_id = #{userId,jdbcType=VARCHAR},
       doctor_id = #{doctorId,jdbcType=VARCHAR},
-      department = #{department,jdbcType=VARCHAR},
       instructions = #{instructions,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       reserve_time = #{reserveTime,jdbcType=TIMESTAMP},
@@ -135,4 +121,21 @@
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_reservation
+    where user_id = #{userId}
+    order by create_time desc
+  </select>
+
+  <select id="selectByDoctorId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_reservation
+    where doctor_id = #{doctorId}
+    order by create_time desc
+  </select>
+
 </mapper>

@@ -49,8 +49,8 @@ public class DoctorController {
         return doctorService.queryDoctors(doctor);
     }
 
-    @GetMapping("/getUserInfo")
-    public BaseResponse getUserInfo(String phone) {
+    @GetMapping("/getDoctorInfo")
+    public BaseResponse getDoctorInfo(String phone) {
         return doctorService.queryByPhone(phone);
     }
 

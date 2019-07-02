@@ -57,10 +57,10 @@
                <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
                <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
         <!--</table>-->
-        <table tableName="t_contract" domainObjectName="Contract"
-               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">
-        </table>
+        <!--<table tableName="t_contract" domainObjectName="Contract"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
+        <!--</table>-->
         <!--<table tableName="t_consult" domainObjectName="Consult"-->
                <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
                <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
@@ -69,10 +69,10 @@
                <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
                <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
         <!--</table>-->
-        <!--<table tableName="t_prescription" domainObjectName="Prescription"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
-               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
-        <!--</table>-->
+        <table tableName="t_prescription" domainObjectName="Prescription"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">
+        </table>
         <!--<table tableName="t_device" domainObjectName="Device"-->
                <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
                <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->

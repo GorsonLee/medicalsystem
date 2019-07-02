@@ -108,4 +108,12 @@
     order by create_time desc
   </select>
 
+  <select id="selectByDoctorId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_contract
+    where doctor_id = #{doctorId}
+    order by create_time desc
+  </select>
+
 </mapper>

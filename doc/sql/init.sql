@@ -137,7 +137,6 @@ CREATE TABLE `t_reservation` (
                                `id` varchar(100) NOT NULL COMMENT '主键 ID',
                                `user_id` varchar(100) NOT NULL COMMENT '用户 ID',
                                `doctor_id` varchar(100) NOT NULL COMMENT '医生 ID',
-                               `department` varchar(100) NULL DEFAULT NULL COMMENT '预约科室',
                                `instructions` varchar(1000) NULL DEFAULT NULL COMMENT '就诊说明',
                                `state` int(4) NULL DEFAULT NULL COMMENT '预约状态，1表示预约中，2表示预约成功，3表示预约失败',
                                `reserve_time` datetime(0) NULL DEFAULT NULL COMMENT '预约时间',
@@ -152,6 +151,8 @@ CREATE TABLE `t_prescription` (
                                 `id` varchar(100) NOT NULL COMMENT '主键 ID',
                                 `user_id` varchar(100) NOT NULL COMMENT '用户 ID',
                                 `doctor_id` varchar(100) NOT NULL COMMENT '医生 ID',
+                                `title` varchar(100) NOT NULL COMMENT '处方标题',
+                                `content` varchar(1000) NOT NULL COMMENT '处方内容',
                                 `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                                 `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                                 PRIMARY KEY (`id`) USING BTREE

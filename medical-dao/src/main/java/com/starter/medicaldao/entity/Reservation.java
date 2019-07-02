@@ -9,8 +9,6 @@ public class Reservation {
 
     private String doctorId;
 
-    private String department;
-
     private String instructions;
 
     private Integer state;
@@ -43,14 +41,6 @@ public class Reservation {
 
     public void setDoctorId(String doctorId) {
         this.doctorId = doctorId == null ? null : doctorId.trim();
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department == null ? null : department.trim();
     }
 
     public String getInstructions() {

@@ -1,6 +1,9 @@
 package com.starter.medicaldao.mapper;
 
 import com.starter.medicaldao.entity.Prescription;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PrescriptionMapper {
     int insert(Prescription record);
@@ -12,4 +15,7 @@ public interface PrescriptionMapper {
     int updateByPrimaryKeySelective(Prescription record);
 
     int updateByPrimaryKey(Prescription record);
+
+    List<Prescription> selectByUserId(@Param("userId") String userId);
+
 }

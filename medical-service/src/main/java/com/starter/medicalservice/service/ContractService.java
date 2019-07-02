@@ -50,4 +50,14 @@ public class ContractService {
                 .collect(Collectors.toList()));
         return response;
     }
+
+    public BaseResponse queryContractPatients(String doctorId) {
+        List<Contract> contractList = contractMapper.selectByUserId(doctorId);
+        BaseResponse<List<Doctor>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(contractList.stream()
+                .map(item -> doctorMapper.selectByPrimaryKey(item.getDoctorId()))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList()));
+        return response;
+    }
 }
