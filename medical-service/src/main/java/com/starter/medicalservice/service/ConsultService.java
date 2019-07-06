@@ -59,9 +59,14 @@ public class ConsultService {
             if (doctor != null) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("id", item.getId());
+                jsonObject.put("doctorId", doctor.getId());
                 jsonObject.put("doctorName", doctor.getName());
                 jsonObject.put("symptoms", item.getSymptoms());
+                jsonObject.put("description", item.getDescription());
+                jsonObject.put("recordUrls", item.getRecordUrls());
+                jsonObject.put("doctorReply", item.getDoctorReply());
                 jsonObject.put("state", item.getState());
+                jsonObject.put("replyTime", item.getReplyTime());
                 return jsonObject;
             }
 
