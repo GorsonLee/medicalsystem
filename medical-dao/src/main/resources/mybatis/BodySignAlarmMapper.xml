@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starter.medicaldao.mapper.BodySignAlarmMapper">
+  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.BodySignAlarm">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="doctor_id" jdbcType="VARCHAR" property="doctorId" />
+    <result column="breath_rate_max" jdbcType="INTEGER" property="breathRateMax" />
+    <result column="breath_rate_min" jdbcType="INTEGER" property="breathRateMin" />
+    <result column="systolic_max" jdbcType="INTEGER" property="systolicMax" />
+    <result column="systolic_min" jdbcType="INTEGER" property="systolicMin" />
+    <result column="diastolic_max" jdbcType="INTEGER" property="diastolicMax" />
+    <result column="diastolic_min" jdbcType="INTEGER" property="diastolicMin" />
+    <result column="heart_rate_max" jdbcType="INTEGER" property="heartRateMax" />
+    <result column="heart_rate_min" jdbcType="INTEGER" property="heartRateMin" />
+    <result column="spo2_max" jdbcType="INTEGER" property="spo2Max" />
+    <result column="spo2_min" jdbcType="INTEGER" property="spo2Min" />
+    <result column="sleep_time_max" jdbcType="INTEGER" property="sleepTimeMax" />
+    <result column="sleep_time_min" jdbcType="INTEGER" property="sleepTimeMin" />
+    <result column="bg_max" jdbcType="INTEGER" property="bgMax" />
+    <result column="bg_min" jdbcType="INTEGER" property="bgMin" />
+    <result column="temperature_max" jdbcType="INTEGER" property="temperatureMax" />
+    <result column="temperature_min" jdbcType="INTEGER" property="temperatureMin" />
+    <result column="uric_acid_max" jdbcType="INTEGER" property="uricAcidMax" />
+    <result column="uric_acid_min" jdbcType="INTEGER" property="uricAcidMin" />
+    <result column="blood_fat_max" jdbcType="INTEGER" property="bloodFatMax" />
+    <result column="blood_fat_min" jdbcType="INTEGER" property="bloodFatMin" />
+    <result column="weight_max" jdbcType="INTEGER" property="weightMax" />
+    <result column="weight_min" jdbcType="INTEGER" property="weightMin" />
+    <result column="waist_max" jdbcType="INTEGER" property="waistMax" />
+    <result column="waist_min" jdbcType="INTEGER" property="waistMin" />
+    <result column="hip_max" jdbcType="INTEGER" property="hipMax" />
+    <result column="hip_min" jdbcType="INTEGER" property="hipMin" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, doctor_id, breath_rate_max, breath_rate_min, systolic_max, systolic_min, diastolic_max, 
+    diastolic_min, heart_rate_max, heart_rate_min, spo2_max, spo2_min, sleep_time_max, 
+    sleep_time_min, bg_max, bg_min, temperature_max, temperature_min, uric_acid_max, 
+    uric_acid_min, blood_fat_max, blood_fat_min, weight_max, weight_min, waist_max, waist_min, 
+    hip_max, hip_min, create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_body_sign_alarm
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.starter.medicaldao.entity.BodySignAlarm">
+    insert into t_body_sign_alarm (id, doctor_id, breath_rate_max, 
+      breath_rate_min, systolic_max, systolic_min, 
+      diastolic_max, diastolic_min, heart_rate_max, 
+      heart_rate_min, spo2_max, spo2_min, 
+      sleep_time_max, sleep_time_min, bg_max, 
+      bg_min, temperature_max, temperature_min, 
+      uric_acid_max, uric_acid_min, blood_fat_max, 
+      blood_fat_min, weight_max, weight_min, 
+      waist_max, waist_min, hip_max, 
+      hip_min, create_time, modify_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{doctorId,jdbcType=VARCHAR}, #{breathRateMax,jdbcType=INTEGER}, 
+      #{breathRateMin,jdbcType=INTEGER}, #{systolicMax,jdbcType=INTEGER}, #{systolicMin,jdbcType=INTEGER}, 
+      #{diastolicMax,jdbcType=INTEGER}, #{diastolicMin,jdbcType=INTEGER}, #{heartRateMax,jdbcType=INTEGER}, 
+      #{heartRateMin,jdbcType=INTEGER}, #{spo2Max,jdbcType=INTEGER}, #{spo2Min,jdbcType=INTEGER}, 
+      #{sleepTimeMax,jdbcType=INTEGER}, #{sleepTimeMin,jdbcType=INTEGER}, #{bgMax,jdbcType=INTEGER}, 
+      #{bgMin,jdbcType=INTEGER}, #{temperatureMax,jdbcType=INTEGER}, #{temperatureMin,jdbcType=INTEGER}, 
+      #{uricAcidMax,jdbcType=INTEGER}, #{uricAcidMin,jdbcType=INTEGER}, #{bloodFatMax,jdbcType=INTEGER}, 
+      #{bloodFatMin,jdbcType=INTEGER}, #{weightMax,jdbcType=INTEGER}, #{weightMin,jdbcType=INTEGER}, 
+      #{waistMax,jdbcType=INTEGER}, #{waistMin,jdbcType=INTEGER}, #{hipMax,jdbcType=INTEGER}, 
+      #{hipMin,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.BodySignAlarm">
+    insert into t_body_sign_alarm
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="doctorId != null">
+        doctor_id,
+      </if>
+      <if test="breathRateMax != null">
+        breath_rate_max,
+      </if>
+      <if test="breathRateMin != null">
+        breath_rate_min,
+      </if>
+      <if test="systolicMax != null">
+        systolic_max,
+      </if>
+      <if test="systolicMin != null">
+        systolic_min,
+      </if>
+      <if test="diastolicMax != null">
+        diastolic_max,
+      </if>
+      <if test="diastolicMin != null">
+        diastolic_min,
+      </if>
+      <if test="heartRateMax != null">
+        heart_rate_max,
+      </if>
+      <if test="heartRateMin != null">
+        heart_rate_min,
+      </if>
+      <if test="spo2Max != null">
+        spo2_max,
+      </if>
+      <if test="spo2Min != null">
+        spo2_min,
+      </if>
+      <if test="sleepTimeMax != null">
+        sleep_time_max,
+      </if>
+      <if test="sleepTimeMin != null">
+        sleep_time_min,
+      </if>
+      <if test="bgMax != null">
+        bg_max,
+      </if>
+      <if test="bgMin != null">
+        bg_min,
+      </if>
+      <if test="temperatureMax != null">
+        temperature_max,
+      </if>
+      <if test="temperatureMin != null">
+        temperature_min,
+      </if>
+      <if test="uricAcidMax != null">
+        uric_acid_max,
+      </if>
+      <if test="uricAcidMin != null">
+        uric_acid_min,
+      </if>
+      <if test="bloodFatMax != null">
+        blood_fat_max,
+      </if>
+      <if test="bloodFatMin != null">
+        blood_fat_min,
+      </if>
+      <if test="weightMax != null">
+        weight_max,
+      </if>
+      <if test="weightMin != null">
+        weight_min,
+      </if>
+      <if test="waistMax != null">
+        waist_max,
+      </if>
+      <if test="waistMin != null">
+        waist_min,
+      </if>
+      <if test="hipMax != null">
+        hip_max,
+      </if>
+      <if test="hipMin != null">
+        hip_min,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="breathRateMax != null">
+        #{breathRateMax,jdbcType=INTEGER},
+      </if>
+      <if test="breathRateMin != null">
+        #{breathRateMin,jdbcType=INTEGER},
+      </if>
+      <if test="systolicMax != null">
+        #{systolicMax,jdbcType=INTEGER},
+      </if>
+      <if test="systolicMin != null">
+        #{systolicMin,jdbcType=INTEGER},
+      </if>
+      <if test="diastolicMax != null">
+        #{diastolicMax,jdbcType=INTEGER},
+      </if>
+      <if test="diastolicMin != null">
+        #{diastolicMin,jdbcType=INTEGER},
+      </if>
+      <if test="heartRateMax != null">
+        #{heartRateMax,jdbcType=INTEGER},
+      </if>
+      <if test="heartRateMin != null">
+        #{heartRateMin,jdbcType=INTEGER},
+      </if>
+      <if test="spo2Max != null">
+        #{spo2Max,jdbcType=INTEGER},
+      </if>
+      <if test="spo2Min != null">
+        #{spo2Min,jdbcType=INTEGER},
+      </if>
+      <if test="sleepTimeMax != null">
+        #{sleepTimeMax,jdbcType=INTEGER},
+      </if>
+      <if test="sleepTimeMin != null">
+        #{sleepTimeMin,jdbcType=INTEGER},
+      </if>
+      <if test="bgMax != null">
+        #{bgMax,jdbcType=INTEGER},
+      </if>
+      <if test="bgMin != null">
+        #{bgMin,jdbcType=INTEGER},
+      </if>
+      <if test="temperatureMax != null">
+        #{temperatureMax,jdbcType=INTEGER},
+      </if>
+      <if test="temperatureMin != null">
+        #{temperatureMin,jdbcType=INTEGER},
+      </if>
+      <if test="uricAcidMax != null">
+        #{uricAcidMax,jdbcType=INTEGER},
+      </if>
+      <if test="uricAcidMin != null">
+        #{uricAcidMin,jdbcType=INTEGER},
+      </if>
+      <if test="bloodFatMax != null">
+        #{bloodFatMax,jdbcType=INTEGER},
+      </if>
+      <if test="bloodFatMin != null">
+        #{bloodFatMin,jdbcType=INTEGER},
+      </if>
+      <if test="weightMax != null">
+        #{weightMax,jdbcType=INTEGER},
+      </if>
+      <if test="weightMin != null">
+        #{weightMin,jdbcType=INTEGER},
+      </if>
+      <if test="waistMax != null">
+        #{waistMax,jdbcType=INTEGER},
+      </if>
+      <if test="waistMin != null">
+        #{waistMin,jdbcType=INTEGER},
+      </if>
+      <if test="hipMax != null">
+        #{hipMax,jdbcType=INTEGER},
+      </if>
+      <if test="hipMin != null">
+        #{hipMin,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.BodySignAlarm">
+    update t_body_sign_alarm
+    <set>
+      <if test="doctorId != null">
+        doctor_id = #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="breathRateMax != null">
+        breath_rate_max = #{breathRateMax,jdbcType=INTEGER},
+      </if>
+      <if test="breathRateMin != null">
+        breath_rate_min = #{breathRateMin,jdbcType=INTEGER},
+      </if>
+      <if test="systolicMax != null">
+        systolic_max = #{systolicMax,jdbcType=INTEGER},
+      </if>
+      <if test="systolicMin != null">
+        systolic_min = #{systolicMin,jdbcType=INTEGER},
+      </if>
+      <if test="diastolicMax != null">
+        diastolic_max = #{diastolicMax,jdbcType=INTEGER},
+      </if>
+      <if test="diastolicMin != null">
+        diastolic_min = #{diastolicMin,jdbcType=INTEGER},
+      </if>
+      <if test="heartRateMax != null">
+        heart_rate_max = #{heartRateMax,jdbcType=INTEGER},
+      </if>
+      <if test="heartRateMin != null">
+        heart_rate_min = #{heartRateMin,jdbcType=INTEGER},
+      </if>
+      <if test="spo2Max != null">
+        spo2_max = #{spo2Max,jdbcType=INTEGER},
+      </if>
+      <if test="spo2Min != null">
+        spo2_min = #{spo2Min,jdbcType=INTEGER},
+      </if>
+      <if test="sleepTimeMax != null">
+        sleep_time_max = #{sleepTimeMax,jdbcType=INTEGER},
+      </if>
+      <if test="sleepTimeMin != null">
+        sleep_time_min = #{sleepTimeMin,jdbcType=INTEGER},
+      </if>
+      <if test="bgMax != null">
+        bg_max = #{bgMax,jdbcType=INTEGER},
+      </if>
+      <if test="bgMin != null">
+        bg_min = #{bgMin,jdbcType=INTEGER},
+      </if>
+      <if test="temperatureMax != null">
+        temperature_max = #{temperatureMax,jdbcType=INTEGER},
+      </if>
+      <if test="temperatureMin != null">
+        temperature_min = #{temperatureMin,jdbcType=INTEGER},
+      </if>
+      <if test="uricAcidMax != null">
+        uric_acid_max = #{uricAcidMax,jdbcType=INTEGER},
+      </if>
+      <if test="uricAcidMin != null">
+        uric_acid_min = #{uricAcidMin,jdbcType=INTEGER},
+      </if>
+      <if test="bloodFatMax != null">
+        blood_fat_max = #{bloodFatMax,jdbcType=INTEGER},
+      </if>
+      <if test="bloodFatMin != null">
+        blood_fat_min = #{bloodFatMin,jdbcType=INTEGER},
+      </if>
+      <if test="weightMax != null">
+        weight_max = #{weightMax,jdbcType=INTEGER},
+      </if>
+      <if test="weightMin != null">
+        weight_min = #{weightMin,jdbcType=INTEGER},
+      </if>
+      <if test="waistMax != null">
+        waist_max = #{waistMax,jdbcType=INTEGER},
+      </if>
+      <if test="waistMin != null">
+        waist_min = #{waistMin,jdbcType=INTEGER},
+      </if>
+      <if test="hipMax != null">
+        hip_max = #{hipMax,jdbcType=INTEGER},
+      </if>
+      <if test="hipMin != null">
+        hip_min = #{hipMin,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.BodySignAlarm">
+    update t_body_sign_alarm
+    set doctor_id = #{doctorId,jdbcType=VARCHAR},
+      breath_rate_max = #{breathRateMax,jdbcType=INTEGER},
+      breath_rate_min = #{breathRateMin,jdbcType=INTEGER},
+      systolic_max = #{systolicMax,jdbcType=INTEGER},
+      systolic_min = #{systolicMin,jdbcType=INTEGER},
+      diastolic_max = #{diastolicMax,jdbcType=INTEGER},
+      diastolic_min = #{diastolicMin,jdbcType=INTEGER},
+      heart_rate_max = #{heartRateMax,jdbcType=INTEGER},
+      heart_rate_min = #{heartRateMin,jdbcType=INTEGER},
+      spo2_max = #{spo2Max,jdbcType=INTEGER},
+      spo2_min = #{spo2Min,jdbcType=INTEGER},
+      sleep_time_max = #{sleepTimeMax,jdbcType=INTEGER},
+      sleep_time_min = #{sleepTimeMin,jdbcType=INTEGER},
+      bg_max = #{bgMax,jdbcType=INTEGER},
+      bg_min = #{bgMin,jdbcType=INTEGER},
+      temperature_max = #{temperatureMax,jdbcType=INTEGER},
+      temperature_min = #{temperatureMin,jdbcType=INTEGER},
+      uric_acid_max = #{uricAcidMax,jdbcType=INTEGER},
+      uric_acid_min = #{uricAcidMin,jdbcType=INTEGER},
+      blood_fat_max = #{bloodFatMax,jdbcType=INTEGER},
+      blood_fat_min = #{bloodFatMin,jdbcType=INTEGER},
+      weight_max = #{weightMax,jdbcType=INTEGER},
+      weight_min = #{weightMin,jdbcType=INTEGER},
+      waist_max = #{waistMax,jdbcType=INTEGER},
+      waist_min = #{waistMin,jdbcType=INTEGER},
+      hip_max = #{hipMax,jdbcType=INTEGER},
+      hip_min = #{hipMin,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByDoctorId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_body_sign_alarm
+    where doctor_id = #{doctorId}
+    order by create_time desc
+  </select>
+
+</mapper>

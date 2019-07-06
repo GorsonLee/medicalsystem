@@ -35,7 +35,6 @@ public class ConsultController {
         return consultService.queryByDoctorId(doctorId);
     }
 
-
     @PostMapping("/update")
     public BaseResponse update(@RequestBody Consult consult) {
         return consultService.update(consult);

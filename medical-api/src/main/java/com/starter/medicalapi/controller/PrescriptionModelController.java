@@ -31,7 +31,7 @@ public class PrescriptionModelController {
     }
 
     @GetMapping("/list")
-    public BaseResponse update(String doctorId) {
+    public BaseResponse list(String doctorId) {
         return prescriptionModelService.list(doctorId);
     }
 }

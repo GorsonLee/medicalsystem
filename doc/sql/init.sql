@@ -69,6 +69,42 @@ CREATE TABLE `t_body_sign` (
                              PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
+# 体征告警设置表
+DROP TABLE IF EXISTS `t_body_sign_alarm`;
+CREATE TABLE `t_body_sign_alarm` (
+                                   `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                                   `doctor_id` varchar(100) NOT NULL COMMENT '用户 ID',
+                                   `breath_rate_max` int(8) NULL DEFAULT NULL COMMENT '呼吸率',
+                                   `breath_rate_min` int(8) NULL DEFAULT NULL COMMENT '呼吸率',
+                                   `systolic_max` int(8) NULL DEFAULT NULL COMMENT '收缩压，单位mmHg',
+                                   `systolic_min` int(8) NULL DEFAULT NULL COMMENT '收缩压，单位mmHg',
+                                   `diastolic_max` int(8) NULL DEFAULT NULL COMMENT '舒张压，单位mmHg',
+                                   `diastolic_min` int(8) NULL DEFAULT NULL COMMENT '舒张压，单位mmHg',
+                                   `heart_rate_max` int(8) NULL DEFAULT NULL COMMENT '心率，单位次/分',
+                                   `heart_rate_min` int(8) NULL DEFAULT NULL COMMENT '心率，单位次/分',
+                                   `spo2_max` int(8) NULL DEFAULT NULL COMMENT '血氧饱和度，单位SaO2',
+                                   `spo2_min` int(8) NULL DEFAULT NULL COMMENT '血氧饱和度，单位SaO2',
+                                   `sleep_time_max` int(8) NULL DEFAULT NULL COMMENT '睡眠时间，单位min',
+                                   `sleep_time_min` int(8) NULL DEFAULT NULL COMMENT '睡眠时间，单位min',
+                                   `bg_max` int(8) NULL DEFAULT NULL COMMENT '血糖，单位mmol/L',
+                                   `bg_min` int(8) NULL DEFAULT NULL COMMENT '血糖，单位mmol/L',
+                                   `temperature_max` int(8) NULL DEFAULT NULL COMMENT '体温，单位°C',
+                                   `temperature_min` int(8) NULL DEFAULT NULL COMMENT '体温，单位°C',
+                                   `uric_acid_max` int(8) NULL DEFAULT NULL COMMENT '尿酸，单位umol/L',
+                                   `uric_acid_min` int(8) NULL DEFAULT NULL COMMENT '尿酸，单位umol/L',
+                                   `blood_fat_max` int(8) NULL DEFAULT NULL COMMENT '血脂，单位mmol/L',
+                                   `blood_fat_min` int(8) NULL DEFAULT NULL COMMENT '血脂，单位mmol/L',
+                                   `weight_max` int(8) NULL DEFAULT NULL COMMENT '体重，单位Kg',
+                                   `weight_min` int(8) NULL DEFAULT NULL COMMENT '体重，单位Kg',
+                                   `waist_max` int(8) NULL DEFAULT NULL COMMENT '腰围，单位cm',
+                                   `waist_min` int(8) NULL DEFAULT NULL COMMENT '腰围，单位cm',
+                                   `hip_max` int(8) NULL DEFAULT NULL COMMENT '臀围，单位cm',
+                                   `hip_min` int(8) NULL DEFAULT NULL COMMENT '臀围，单位cm',
+                                   `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                                   `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                                   PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
 # 健康档案表
 DROP TABLE IF EXISTS `t_health_document`;
 CREATE TABLE `t_health_document` (
@@ -198,7 +234,7 @@ CREATE TABLE `t_device` (
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 贴心服务，商城和资讯（表数据未确定）
+# 贴心服务
 DROP TABLE IF EXISTS `t_service_center`;
 CREATE TABLE `t_service_center` (
                                   `id` varchar(100) NOT NULL COMMENT '主键 ID',
