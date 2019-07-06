@@ -1,9 +1,7 @@
 package com.starter.medicalapi.controller;
 
 import com.starter.medicalcommon.vo.response.BaseResponse;
-import com.starter.medicaldao.entity.Consult;
 import com.starter.medicaldao.entity.Prescription;
-import com.starter.medicalservice.service.ConsultService;
 import com.starter.medicalservice.service.PrescriptionService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +25,14 @@ public class PrescriptionController {
         return prescriptionService.insert(prescription);
     }
 
-    @GetMapping("/list")
-    public BaseResponse list(String userId) {
+    @GetMapping("/listByPatient")
+    public BaseResponse listByPatient(String userId) {
         return prescriptionService.queryByUserId(userId);
+    }
+
+    @GetMapping("/listByDoctor")
+    public BaseResponse listByDoctor(String doctorId) {
+        return prescriptionService.queryByDoctorId(doctorId);
     }
 
     @PostMapping("/update")

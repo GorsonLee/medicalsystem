@@ -1,9 +1,7 @@
 package com.starter.medicalapi.controller;
 
 import com.starter.medicalcommon.vo.response.BaseResponse;
-import com.starter.medicaldao.entity.Consult;
 import com.starter.medicaldao.entity.Reservation;
-import com.starter.medicalservice.service.ConsultService;
 import com.starter.medicalservice.service.ReservationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +31,8 @@ public class ReservationController {
     }
 
     @GetMapping("/listByDoctor")
-    public BaseResponse listByDoctor(String doctor) {
-        return reservationService.queryByDoctorId(doctor);
+    public BaseResponse listByDoctor(String doctorId) {
+        return reservationService.queryByDoctorId(doctorId);
     }
 
     @PostMapping("/update")

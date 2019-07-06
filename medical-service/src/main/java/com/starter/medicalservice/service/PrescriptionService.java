@@ -49,6 +49,15 @@ public class PrescriptionService {
 
     public BaseResponse<List<JSONObject>> queryByUserId(String userId) {
         List<Prescription> prescriptionList = prescriptionMapper.selectByUserId(userId);
+        return query(prescriptionList);
+    }
+
+    public BaseResponse<List<JSONObject>> queryByDoctorId(String doctorId) {
+        List<Prescription> prescriptionList = prescriptionMapper.selectByDoctorId(doctorId);
+        return query(prescriptionList);
+    }
+
+    public BaseResponse<List<JSONObject>> query(List<Prescription> prescriptionList) {
         BaseResponse<List<JSONObject>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
 
         List<JSONObject> resultList = prescriptionList.stream().map(item -> {

@@ -1,6 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS medical_system DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci;
 
-# 1.1 晚辈表
+# 晚辈表
 DROP TABLE IF EXISTS `t_younger`;
 CREATE TABLE `t_younger` (
                         `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -16,7 +16,7 @@ CREATE TABLE `t_younger` (
                         PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 1.2 长辈表
+# 长辈表
 DROP TABLE IF EXISTS `t_elder`;
 CREATE TABLE `t_elder` (
                         `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -44,7 +44,7 @@ CREATE TABLE `t_elder` (
                         PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 2.家庭关系表
+# 家庭关系表
 DROP TABLE IF EXISTS `t_relationship`;
 CREATE TABLE `t_relationship` (
                                 `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -56,7 +56,7 @@ CREATE TABLE `t_relationship` (
                                 PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 3.体征测量表
+# 体征测量表
 DROP TABLE IF EXISTS `t_body_sign`;
 CREATE TABLE `t_body_sign` (
                              `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -69,7 +69,7 @@ CREATE TABLE `t_body_sign` (
                              PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 4.健康档案表
+# 健康档案表
 DROP TABLE IF EXISTS `t_health_document`;
 CREATE TABLE `t_health_document` (
                                    `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -81,7 +81,7 @@ CREATE TABLE `t_health_document` (
                                    PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 5.医生表
+# 医生表
 DROP TABLE IF EXISTS `t_doctor`;
 CREATE TABLE `t_doctor` (
                           `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -102,7 +102,7 @@ CREATE TABLE `t_doctor` (
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 6.签约表
+# 签约表
 DROP TABLE IF EXISTS `t_contract`;
 CREATE TABLE `t_contract` (
                             `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -114,7 +114,7 @@ CREATE TABLE `t_contract` (
                             PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 7.用户咨询表
+# 用户咨询表
 DROP TABLE IF EXISTS `t_consult`;
 CREATE TABLE `t_consult` (
                            `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -131,7 +131,7 @@ CREATE TABLE `t_consult` (
                            PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 8.医生预约表
+# 医生预约表
 DROP TABLE IF EXISTS `t_reservation`;
 CREATE TABLE `t_reservation` (
                                `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -145,7 +145,7 @@ CREATE TABLE `t_reservation` (
                                PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 9.处方表
+# 处方表
 DROP TABLE IF EXISTS `t_prescription`;
 CREATE TABLE `t_prescription` (
                                 `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -158,7 +158,33 @@ CREATE TABLE `t_prescription` (
                                 PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 10.设备表
+# 处方模板表
+DROP TABLE IF EXISTS `t_prescription_model`;
+CREATE TABLE `t_prescription_model` (
+                                `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                                `doctor_id` varchar(100) NOT NULL COMMENT '医生 ID',
+                                `title` varchar(100) NOT NULL COMMENT '处方标题',
+                                `content` varchar(1000) NOT NULL COMMENT '处方内容',
+                                `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                                `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                                PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 医生回访表
+DROP TABLE IF EXISTS `t_revisit`;
+CREATE TABLE `t_revisit` (
+                           `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                           `user_id` varchar(100) NOT NULL COMMENT '被回访老年人 ID',
+                           `doctor_id` varchar(100) NOT NULL COMMENT '医生ID',
+                           `method` varchar(100) NULL DEFAULT NULL COMMENT '回访方式',
+                           `content` varchar(500) NULL DEFAULT NULL COMMENT '回访内容',
+                           `visit_time` datetime(0) NOT NULL COMMENT '回访时间',
+                           `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                           `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                           PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 设备表
 DROP TABLE IF EXISTS `t_device`;
 CREATE TABLE `t_device` (
                           `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -172,7 +198,7 @@ CREATE TABLE `t_device` (
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 11.贴心服务，商城和资讯（表数据未确定）
+# 贴心服务，商城和资讯（表数据未确定）
 DROP TABLE IF EXISTS `t_service_center`;
 CREATE TABLE `t_service_center` (
                                   `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -181,7 +207,7 @@ CREATE TABLE `t_service_center` (
                                   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 12.提醒管理表
+# 提醒管理表
 DROP TABLE IF EXISTS `t_remind`;
 CREATE TABLE `t_remind` (
                           `id` varchar(100) NOT NULL COMMENT '主键 ID',
@@ -196,7 +222,7 @@ CREATE TABLE `t_remind` (
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 13.关联老人表
+# 关联老人表
 DROP TABLE IF EXISTS `t_association`;
 CREATE TABLE `t_association` (
                                `id` varchar(100) NOT NULL COMMENT '主键 ID',

@@ -6,8 +6,11 @@ import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Consult;
 import com.starter.medicaldao.entity.Doctor;
+import com.starter.medicaldao.entity.Elder;
+import com.starter.medicaldao.entity.Prescription;
 import com.starter.medicaldao.mapper.ConsultMapper;
 import com.starter.medicaldao.mapper.DoctorMapper;
+import com.starter.medicaldao.mapper.ElderMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +34,8 @@ public class ConsultService {
     private ConsultMapper consultMapper;
     @Resource
     private DoctorMapper doctorMapper;
+    @Resource
+    private ElderMapper elderMapper;
 
     public BaseResponse insert(Consult consult) {
         Date now = new Date();
@@ -76,4 +81,33 @@ public class ConsultService {
         response.setData(consultJsonList);
         return response;
     }
+
+    public BaseResponse<List<JSONObject>> queryByDoctorId(String doctorId) {
+        List<Consult> consultList = consultMapper.selectByDoctorId(doctorId);
+        BaseResponse<List<JSONObject>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+
+        List<JSONObject> consultJsonList = consultList.stream().map(item -> {
+            Elder elder = elderMapper.selectByPrimaryKey(item.getDoctorId());
+
+            if (elder != null) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", item.getId());
+                jsonObject.put("userId", elder.getId());
+                jsonObject.put("userName", elder.getName());
+                jsonObject.put("symptoms", item.getSymptoms());
+                jsonObject.put("description", item.getDescription());
+                jsonObject.put("recordUrls", item.getRecordUrls());
+                jsonObject.put("doctorReply", item.getDoctorReply());
+                jsonObject.put("state", item.getState());
+                jsonObject.put("replyTime", item.getReplyTime());
+                return jsonObject;
+            }
+
+            return null;
+        }).filter(Objects::nonNull).collect(Collectors.toList());
+
+        response.setData(consultJsonList);
+        return response;
+    }
 }
+

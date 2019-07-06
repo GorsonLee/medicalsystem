@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.starter.medicaldao.mapper.PrescriptionMapper">
-  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.Prescription">
+<mapper namespace="com.starter.medicaldao.mapper.PrescriptionModelMapper">
+  <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.PrescriptionModel">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="doctor_id" jdbcType="VARCHAR" property="doctorId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="content" jdbcType="VARCHAR" property="content" />
@@ -11,30 +10,27 @@
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, doctor_id, title, content, create_time, modify_time
+    id, doctor_id, title, content, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from t_prescription
+    from t_prescription_model
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <insert id="insert" parameterType="com.starter.medicaldao.entity.Prescription">
-    insert into t_prescription (id, user_id, doctor_id, 
-      title, content, create_time, 
-      modify_time)
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{doctorId,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{modifyTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.starter.medicaldao.entity.PrescriptionModel">
+    insert into t_prescription_model (id, doctor_id, title, 
+      content, create_time, modify_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{doctorId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.Prescription">
-    insert into t_prescription
+  <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.PrescriptionModel">
+    insert into t_prescription_model
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
-      </if>
-      <if test="userId != null">
-        user_id,
       </if>
       <if test="doctorId != null">
         doctor_id,
@@ -56,9 +52,6 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
       <if test="doctorId != null">
         #{doctorId,jdbcType=VARCHAR},
       </if>
@@ -76,12 +69,9 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.Prescription">
-    update t_prescription
+  <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.PrescriptionModel">
+    update t_prescription_model
     <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
       <if test="doctorId != null">
         doctor_id = #{doctorId,jdbcType=VARCHAR},
       </if>
@@ -100,10 +90,9 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.Prescription">
-    update t_prescription
-    set user_id = #{userId,jdbcType=VARCHAR},
-      doctor_id = #{doctorId,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.PrescriptionModel">
+    update t_prescription_model
+    set doctor_id = #{doctorId,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -111,18 +100,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <select id="selectByUserId" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from t_prescription
-    where user_id = #{userId}
-    order by create_time desc
-  </select>
-
   <select id="selectByDoctorId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from t_prescription
+    from t_prescription_model
     where doctor_id = #{doctorId}
     order by create_time desc
   </select>

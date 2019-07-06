@@ -36,6 +36,11 @@ public class YoungerController {
         return youngerService.queryByPhone(phone);
     }
 
+    @GetMapping("/query")
+    public BaseResponse query(String userId) {
+        return youngerService.query(userId);
+    }
+
     @PostMapping("/update")
     public BaseResponse update(@RequestBody Younger younger) {
         return youngerService.update(younger);

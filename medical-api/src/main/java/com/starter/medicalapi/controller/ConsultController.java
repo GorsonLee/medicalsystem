@@ -25,10 +25,16 @@ public class ConsultController {
         return consultService.insert(consult);
     }
 
-    @GetMapping("/list")
-    public BaseResponse list(String userId) {
+    @GetMapping("/listByPatient")
+    public BaseResponse listByPatient(String userId) {
         return consultService.queryByUserId(userId);
     }
+
+    @GetMapping("/listByDoctor")
+    public BaseResponse listByDoctor(String doctorId) {
+        return consultService.queryByDoctorId(doctorId);
+    }
+
 
     @PostMapping("/update")
     public BaseResponse update(@RequestBody Consult consult) {

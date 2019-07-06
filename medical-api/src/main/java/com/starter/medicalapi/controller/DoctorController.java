@@ -75,4 +75,15 @@ public class DoctorController {
     public BaseResponse getContractDoctors(String userId) {
         return contractService.queryContractDoctors(userId);
     }
+
+    /**
+     * 签约病人列表
+     *
+     * @param doctorId
+     * @return
+     */
+    @GetMapping("/getContractPatients")
+    public BaseResponse getContractPatients(String doctorId) {
+        return contractService.queryContractPatients(doctorId);
+    }
 }

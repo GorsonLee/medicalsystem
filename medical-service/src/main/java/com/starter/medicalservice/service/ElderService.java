@@ -5,6 +5,7 @@ import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Elder;
+import com.starter.medicaldao.entity.Younger;
 import com.starter.medicaldao.mapper.ElderMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -68,6 +69,13 @@ public class ElderService {
             elder.setPwd("");
         }
 
+        BaseResponse<Elder> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(elder);
+        return response;
+    }
+
+    public BaseResponse<Elder> query(String userId) {
+        Elder elder = elderMapper.selectByPrimaryKey(userId);
         BaseResponse<Elder> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         response.setData(elder);
         return response;

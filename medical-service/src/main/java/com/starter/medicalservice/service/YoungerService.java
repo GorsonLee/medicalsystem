@@ -4,6 +4,7 @@ import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
+import com.starter.medicaldao.entity.Doctor;
 import com.starter.medicaldao.entity.Younger;
 import com.starter.medicaldao.mapper.YoungerMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -67,6 +68,13 @@ public class YoungerService {
             younger.setPwd("");
         }
 
+        BaseResponse<Younger> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(younger);
+        return response;
+    }
+
+    public BaseResponse<Younger> query(String userId) {
+        Younger younger = youngerMapper.selectByPrimaryKey(userId);
         BaseResponse<Younger> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         response.setData(younger);
         return response;

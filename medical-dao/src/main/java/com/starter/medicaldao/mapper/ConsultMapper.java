@@ -17,4 +17,6 @@ public interface ConsultMapper {
     int updateByPrimaryKey(Consult record);
 
     List<Consult> selectByUserId(@Param("userId") String userId);
+
+    List<Consult> selectByDoctorId(@Param("doctorId") String doctorId);
 }

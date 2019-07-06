@@ -36,6 +36,11 @@ public class ElderController {
         return elderService.queryByPhone(phone);
     }
 
+    @GetMapping("/query")
+    public BaseResponse query(String userId) {
+        return elderService.query(userId);
+    }
+
     @PostMapping("/update")
     public BaseResponse update(@RequestBody Elder elder) {
         return elderService.update(elder);

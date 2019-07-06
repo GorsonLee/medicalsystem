@@ -18,4 +18,6 @@ public interface PrescriptionMapper {
 
     List<Prescription> selectByUserId(@Param("userId") String userId);
 
+    List<Prescription> selectByDoctorId(@Param("doctorId") String doctorId);
+
 }

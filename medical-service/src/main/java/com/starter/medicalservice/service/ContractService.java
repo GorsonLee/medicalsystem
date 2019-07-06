@@ -1,12 +1,15 @@
 package com.starter.medicalservice.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Contract;
 import com.starter.medicaldao.entity.Doctor;
+import com.starter.medicaldao.entity.Elder;
 import com.starter.medicaldao.mapper.ContractMapper;
 import com.starter.medicaldao.mapper.DoctorMapper;
+import com.starter.medicaldao.mapper.ElderMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +33,8 @@ public class ContractService {
     private ContractMapper contractMapper;
     @Resource
     private DoctorMapper doctorMapper;
+    @Resource
+    private ElderMapper elderMapper;
 
     public BaseResponse insert(Contract contract) {
         Date now = new Date();
@@ -53,9 +58,22 @@ public class ContractService {
 
     public BaseResponse queryContractPatients(String doctorId) {
         List<Contract> contractList = contractMapper.selectByUserId(doctorId);
-        BaseResponse<List<Doctor>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        BaseResponse<List<JSONObject>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         response.setData(contractList.stream()
-                .map(item -> doctorMapper.selectByPrimaryKey(item.getDoctorId()))
+                .map(item -> {
+                    Elder elder = elderMapper.selectByPrimaryKey(item.getUserId());
+                    JSONObject result = new JSONObject();
+                    result.put("id", item.getId());
+                    result.put("userId", item.getUserId());
+                    result.put("doctorId", item.getDoctorId());
+                    result.put("phone", elder.getPhone());
+                    result.put("name", elder.getName());
+                    result.put("image", elder.getImage());
+                    result.put("sex", elder.getSex());
+                    result.put("createTime", elder.getCreateTime());
+                    result.put("state", item.getState());
+                    return result;
+                })
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
         return response;
