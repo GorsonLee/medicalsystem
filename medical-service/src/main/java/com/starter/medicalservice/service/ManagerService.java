@@ -4,8 +4,9 @@ import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
-import com.starter.medicaldao.entity.Doctor;
+import com.starter.medicaldao.entity.Manager;
 import com.starter.medicaldao.entity.Younger;
+import com.starter.medicaldao.mapper.ManagerMapper;
 import com.starter.medicaldao.mapper.YoungerMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -24,13 +25,13 @@ import static com.starter.medicalcommon.constant.Constant.PASSWORD_SALT;
  **/
 @Service
 @Slf4j
-public class YoungerService {
+public class ManagerService {
 
     @Resource
-    private YoungerMapper youngerMapper;
+    private ManagerMapper managerMapper;
 
     public BaseResponse register(UserRegisterRequest request) {
-        Younger oldOne = youngerMapper.selectByPhone(request.getPhone());
+        Manager oldOne = managerMapper.selectByPhone(request.getPhone());
 
         if (oldOne != null) {
             return new BaseResponse<>(MsgCodeEnum.USER_EXIST_ERROR);
@@ -39,19 +40,19 @@ public class YoungerService {
         //TODO 校验手机验证码
 
         Date now = new Date();
-        Younger younger = new Younger();
-        younger.setId(UUIDUtil.getUUID());
-        younger.setPhone(request.getPhone());
-        younger.setPwd(DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
-        younger.setName(request.getName());
-        younger.setCreateTime(now);
-        younger.setModifyTime(now);
-        int result = youngerMapper.insertSelective(younger);
+        Manager manager = new Manager();
+        manager.setId(UUIDUtil.getUUID());
+        manager.setPhone(request.getPhone());
+        manager.setPwd(DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
+        manager.setName(request.getName());
+        manager.setCreateTime(now);
+        manager.setModifyTime(now);
+        int result = managerMapper.insertSelective(manager);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
     }
 
     public BaseResponse login(UserRegisterRequest request) {
-        Younger one = youngerMapper.selectByPhoneAndPwd(request.getPhone(),
+        Manager one = managerMapper.selectByPhoneAndPwd(request.getPhone(),
                 DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
 
         if (one != null) {
@@ -62,27 +63,27 @@ public class YoungerService {
     }
 
     public BaseResponse queryByPhone(String phone) {
-        Younger younger = youngerMapper.selectByPhone(phone);
+        Manager manager = managerMapper.selectByPhone(phone);
 
-        if (younger != null) {
-            younger.setPwd("");
+        if (manager != null) {
+            manager.setPwd("");
         }
 
-        BaseResponse<Younger> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
-        response.setData(younger);
+        BaseResponse<Manager> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(manager);
         return response;
     }
 
-    public BaseResponse<Younger> query(String userId) {
-        Younger younger = youngerMapper.selectByPrimaryKey(userId);
-        BaseResponse<Younger> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
-        response.setData(younger);
+    public BaseResponse<Manager> query(String userId) {
+        Manager manager = managerMapper.selectByPrimaryKey(userId);
+        BaseResponse<Manager> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(manager);
         return response;
     }
 
-    public BaseResponse update(Younger younger) {
-        younger.setModifyTime(new Date());
-        int result = youngerMapper.updateByPrimaryKeySelective(younger);
+    public BaseResponse update(Manager manager) {
+        manager.setModifyTime(new Date());
+        int result = managerMapper.updateByPrimaryKeySelective(manager);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
     }
 }

@@ -234,15 +234,6 @@ CREATE TABLE `t_device` (
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
-# 贴心服务
-DROP TABLE IF EXISTS `t_service_center`;
-CREATE TABLE `t_service_center` (
-                                  `id` varchar(100) NOT NULL COMMENT '主键 ID',
-                                  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
-                                  `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
-                                  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
-
 # 提醒管理表
 DROP TABLE IF EXISTS `t_remind`;
 CREATE TABLE `t_remind` (
@@ -268,4 +259,29 @@ CREATE TABLE `t_association` (
                                `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                                `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                                PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 服务管家
+DROP TABLE IF EXISTS `t_manager`;
+CREATE TABLE `t_manager` (
+                           `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                           `phone` varchar(50) NOT NULL COMMENT '电话号码',
+                           `pwd` varchar(100) NOT NULL COMMENT '登陆密码',
+                           `identity` varchar(50) NULL DEFAULT NULL COMMENT '身份证',
+                           `name` varchar(100) NULL DEFAULT NULL COMMENT '名字',
+                           `birth` int(8) NULL DEFAULT NULL COMMENT '生日',
+                           `sex` int(4) NULL DEFAULT NULL COMMENT '性别',
+                           `image` varchar(500) NULL DEFAULT NULL COMMENT '头像 url',
+                           `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                           `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                           PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 贴心服务
+DROP TABLE IF EXISTS `t_service_center`;
+CREATE TABLE `t_service_center` (
+                                  `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                                  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                                  `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                                  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;

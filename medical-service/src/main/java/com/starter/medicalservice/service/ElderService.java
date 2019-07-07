@@ -82,6 +82,7 @@ public class ElderService {
     }
 
     public BaseResponse update(Elder elder) {
+        elder.setModifyTime(new Date());
         int result = elderMapper.updateByPrimaryKeySelective(elder);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
     }
