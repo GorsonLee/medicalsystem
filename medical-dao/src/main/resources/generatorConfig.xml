@@ -97,14 +97,14 @@
                <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
                <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
         <!--</table>-->
-        <table tableName="t_manager" domainObjectName="Manager"
-               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">
-        </table>
-        <!--<table tableName="t_service_center" domainObjectName="ServiceCenter"-->
+        <!--<table tableName="t_manager" domainObjectName="Manager"-->
                <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
                <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
         <!--</table>-->
+        <table tableName="t_service_center" domainObjectName="ServiceCenter"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">
+        </table>
 
     </context>
 </generatorConfiguration>

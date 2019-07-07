@@ -1,6 +1,9 @@
 package com.starter.medicaldao.mapper;
 
 import com.starter.medicaldao.entity.ServiceCenter;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ServiceCenterMapper {
     int insert(ServiceCenter record);
@@ -12,4 +15,12 @@ public interface ServiceCenterMapper {
     int updateByPrimaryKeySelective(ServiceCenter record);
 
     int updateByPrimaryKey(ServiceCenter record);
+
+    List<ServiceCenter> selectBydState(@Param("state") Integer state);
+
+    List<ServiceCenter> selectByUserIdAndState(@Param("userId") String userId,
+                                               @Param("state") Integer state);
+
+    List<ServiceCenter> selectByManagerIdAndState(@Param("managerId") String managerId,
+                                                  @Param("state") Integer state);
 }

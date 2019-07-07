@@ -281,6 +281,19 @@ CREATE TABLE `t_manager` (
 DROP TABLE IF EXISTS `t_service_center`;
 CREATE TABLE `t_service_center` (
                                   `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                                  `user_id` varchar(100) NOT NULL COMMENT '用户 ID',
+                                  `type` varchar(100) NOT NULL COMMENT '服务类型',
+                                  `state` int(4) NULL DEFAULT NULL COMMENT '状态，0表示待接收，1表示进行中，2表示已完成，3表示已取消',
+                                  `requirement` varchar(500) NOT NULL COMMENT '服务要求',
+                                  `price` varchar(50) NOT NULL COMMENT '服务报酬价格',
+                                  `service_time` datetime(0) NOT NULL COMMENT '服务时间',
+                                  `manager_id` varchar(100) NOT NULL COMMENT '服务管家 ID',
+                                  `service_star` int(4) NULL DEFAULT NULL COMMENT '服务星级',
+                                  `finish_time` datetime(0) NOT NULL COMMENT '服务完成时间',
+                                  `recordUrls` varchar(500) NOT NULL COMMENT '服务记录Url列表',
+                                  `evaluate_star` int(4) NULL DEFAULT NULL COMMENT '评分星级',
+                                  `evaluate_content` varchar(100) NOT NULL COMMENT '服务类型',
+                                  `evaluate_time` datetime(0) NOT NULL COMMENT '评论时间',
                                   `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                                   `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                                   PRIMARY KEY (`id`) USING BTREE

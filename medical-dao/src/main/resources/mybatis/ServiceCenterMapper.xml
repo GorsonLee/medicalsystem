@@ -3,11 +3,24 @@
 <mapper namespace="com.starter.medicaldao.mapper.ServiceCenterMapper">
   <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.ServiceCenter">
     <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="requirement" jdbcType="VARCHAR" property="requirement" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="service_time" jdbcType="TIMESTAMP" property="serviceTime" />
+    <result column="manager_id" jdbcType="VARCHAR" property="managerId" />
+    <result column="service_star" jdbcType="INTEGER" property="serviceStar" />
+    <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="evaluate_star" jdbcType="INTEGER" property="evaluateStar" />
+    <result column="evaluate_content" jdbcType="VARCHAR" property="evaluateContent" />
+    <result column="evaluate_time" jdbcType="TIMESTAMP" property="evaluateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, create_time, modify_time
+    id, user_id, type, state, requirement, price, service_time, manager_id, service_star, 
+    finish_time, evaluate_star, evaluate_content, evaluate_time, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -16,9 +29,17 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <insert id="insert" parameterType="com.starter.medicaldao.entity.ServiceCenter">
-    insert into t_service_center (id, create_time, modify_time
+    insert into t_service_center (id, user_id, type, 
+      state, requirement, price, 
+      service_time, manager_id, service_star, 
+      finish_time, evaluate_star, evaluate_content, 
+      evaluate_time, create_time, modify_time
       )
-    values (#{id,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{requirement,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{serviceTime,jdbcType=TIMESTAMP}, #{managerId,jdbcType=VARCHAR}, #{serviceStar,jdbcType=INTEGER}, 
+      #{finishTime,jdbcType=TIMESTAMP}, #{evaluateStar,jdbcType=INTEGER}, #{evaluateContent,jdbcType=VARCHAR}, 
+      #{evaluateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.ServiceCenter">
@@ -26,6 +47,42 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="requirement != null">
+        requirement,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="serviceTime != null">
+        service_time,
+      </if>
+      <if test="managerId != null">
+        manager_id,
+      </if>
+      <if test="serviceStar != null">
+        service_star,
+      </if>
+      <if test="finishTime != null">
+        finish_time,
+      </if>
+      <if test="evaluateStar != null">
+        evaluate_star,
+      </if>
+      <if test="evaluateContent != null">
+        evaluate_content,
+      </if>
+      <if test="evaluateTime != null">
+        evaluate_time,
       </if>
       <if test="createTime != null">
         create_time,
@@ -38,6 +95,42 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="requirement != null">
+        #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceTime != null">
+        #{serviceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceStar != null">
+        #{serviceStar,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null">
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaluateStar != null">
+        #{evaluateStar,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateContent != null">
+        #{evaluateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTime != null">
+        #{evaluateTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -49,6 +142,42 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.starter.medicaldao.entity.ServiceCenter">
     update t_service_center
     <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="requirement != null">
+        requirement = #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceTime != null">
+        service_time = #{serviceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managerId != null">
+        manager_id = #{managerId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceStar != null">
+        service_star = #{serviceStar,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null">
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaluateStar != null">
+        evaluate_star = #{evaluateStar,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateContent != null">
+        evaluate_content = #{evaluateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTime != null">
+        evaluate_time = #{evaluateTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -60,8 +189,55 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.ServiceCenter">
     update t_service_center
-    set create_time = #{createTime,jdbcType=TIMESTAMP},
+    set user_id = #{userId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      requirement = #{requirement,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      service_time = #{serviceTime,jdbcType=TIMESTAMP},
+      manager_id = #{managerId,jdbcType=VARCHAR},
+      service_star = #{serviceStar,jdbcType=INTEGER},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      evaluate_star = #{evaluateStar,jdbcType=INTEGER},
+      evaluate_content = #{evaluateContent,jdbcType=VARCHAR},
+      evaluate_time = #{evaluateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectBydState" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_service_center
+    <where>
+      `state` = #{state}
+    </where>
+    order by create_time desc
+  </select>
+
+  <select id="selectByUserIdAndState" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_service_center
+    <where>
+      user_id = #{userId}
+      and
+      `state` = #{state}
+    </where>
+    order by create_time desc
+  </select>
+
+  <select id="selectByManagerIdAndState" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_service_center
+    <where>
+      manager_id = #{managerId}
+      and
+      `state` = #{state}
+    </where>
+    order by create_time desc
+  </select>
+
 </mapper>
