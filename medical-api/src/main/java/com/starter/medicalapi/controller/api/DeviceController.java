@@ -1,10 +1,8 @@
-package com.starter.medicalapi.controller;
+package com.starter.medicalapi.controller.api;
 
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Device;
-import com.starter.medicaldao.entity.Remind;
 import com.starter.medicalservice.service.DeviceService;
-import com.starter.medicalservice.service.RemindService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -18,28 +16,28 @@ import javax.annotation.Resource;
  * @date 2019-05-19 17:03
  **/
 @RestController
-@RequestMapping("/remind")
-@Api(tags = "提醒信息")
-public class RemindController {
+@RequestMapping("/device")
+@Api(tags = "设备管理")
+public class DeviceController {
 
     @Resource
-    private RemindService remindService;
+    private DeviceService deviceService;
 
     @PostMapping("/insert")
     @ApiOperation("新增")
-    public BaseResponse insert(@RequestBody Remind remind) {
-        return remindService.insert(remind);
+    public BaseResponse insert(@RequestBody Device request) {
+        return deviceService.insert(request);
     }
 
     @PostMapping("/update")
     @ApiOperation("更新")
-    public BaseResponse update(@RequestBody Remind remind) {
-        return remindService.update(remind);
+    public BaseResponse update(@RequestBody Device device) {
+        return deviceService.update(device);
     }
 
     @GetMapping("/list")
-    @ApiOperation("用户查看提醒信息")
+    @ApiOperation("设备列表")
     public BaseResponse list(String userId) {
-        return remindService.queryByUserId(userId);
+        return deviceService.queryByUserId(userId);
     }
 }

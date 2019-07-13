@@ -1,4 +1,4 @@
-package com.starter.medicalapi.controller;
+package com.starter.medicalapi.controller.api;
 
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.BodySignAlarm;

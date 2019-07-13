@@ -1,11 +1,11 @@
-package com.starter.medicalapi.controller;
+package com.starter.medicalapi.controller.api;
 
 import com.starter.medicalcommon.vo.request.UserLoginRequest;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
 import com.starter.medicalcommon.vo.request.UserUpdatePwdRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
-import com.starter.medicaldao.entity.Younger;
-import com.starter.medicalservice.service.YoungerService;
+import com.starter.medicaldao.entity.Manager;
+import com.starter.medicalservice.service.ManagerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -19,47 +19,47 @@ import javax.annotation.Resource;
  * @date 2019-05-19 17:03
  **/
 @RestController
-@RequestMapping("/younger")
-@Api(tags = "晚辈")
-public class YoungerController {
+@RequestMapping("/manager")
+@Api(tags = "服务管家")
+public class ManagerController {
 
     @Resource
-    private YoungerService youngerService;
+    private ManagerService managerService;
 
     @PostMapping("/register")
     @ApiOperation("注册用户")
     public BaseResponse register(@RequestBody UserRegisterRequest request) {
-        return youngerService.register(request);
+        return managerService.register(request);
     }
 
     @PostMapping("/login")
     @ApiOperation("登陆")
     public BaseResponse login(@RequestBody UserLoginRequest request) {
-        return youngerService.login(request);
+        return managerService.login(request);
     }
 
     @GetMapping("/queryByPhone")
     @ApiOperation("根据手机号获取用户信息")
     public BaseResponse queryByPhone(String phone) {
-        return youngerService.queryByPhone(phone);
+        return managerService.queryByPhone(phone);
     }
 
     @GetMapping("/query")
     @ApiOperation("根据用户ID获取用户信息")
     public BaseResponse query(String userId) {
-        return youngerService.query(userId);
+        return managerService.query(userId);
     }
 
     @PostMapping("/update")
     @ApiOperation("更新")
-    public BaseResponse update(@RequestBody Younger younger) {
-        return youngerService.update(younger);
+    public BaseResponse update(@RequestBody Manager manager) {
+        return managerService.update(manager);
     }
 
     @PostMapping("/updatePwd")
     @ApiOperation("更新密码")
     public BaseResponse update(@RequestBody UserUpdatePwdRequest request) {
-        return youngerService.updatePwd(request);
+        return managerService.updatePwd(request);
     }
 
 }

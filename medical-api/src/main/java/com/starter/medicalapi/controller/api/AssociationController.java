@@ -1,4 +1,4 @@
-package com.starter.medicalapi.controller;
+package com.starter.medicalapi.controller.api;
 
 import com.starter.medicalcommon.vo.request.AssociationRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
