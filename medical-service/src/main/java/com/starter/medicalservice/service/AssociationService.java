@@ -48,7 +48,7 @@ public class AssociationService {
                 associationRequest.getAssociateIdentity());
 
         if (elder == null) {
-            return new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
+            return new BaseResponse(MsgCodeEnum.USER_NOT_FOUND_ERROR);
         }
 
         Date now = new Date();

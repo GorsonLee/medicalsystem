@@ -17,32 +17,38 @@ import javax.annotation.Resource;
  **/
 @RestController
 @RequestMapping("/serviceCenter")
+@Api(tags = "服务中心")
 public class ServiceCenterController {
 
     @Resource
     private ServiceCenterService serviceCenterService;
 
     @PostMapping("/insert")
+    @ApiOperation("新增")
     public BaseResponse insert(@RequestBody ServiceCenter serviceCenter) {
         return serviceCenterService.insert(serviceCenter);
     }
 
     @PostMapping("/update")
+    @ApiOperation("更新")
     public BaseResponse update(@RequestBody ServiceCenter serviceCenter) {
         return serviceCenterService.update(serviceCenter);
     }
 
     @GetMapping("/listByState")
+    @ApiOperation("根据状态列举服务")
     public BaseResponse listByState(Integer state) {
         return serviceCenterService.queryByState(state);
     }
 
     @GetMapping("/listByUserIdAndState")
+    @ApiOperation("用户列举服务")
     public BaseResponse listByUserIdAndState(String userId, Integer state) {
         return serviceCenterService.queryByUserIdAndState(userId, state);
     }
 
     @GetMapping("/listByManagerIdAndState")
+    @ApiOperation("管家列举服务")
     public BaseResponse listByManagerIdAndState(String managerId, Integer state) {
         return serviceCenterService.queryByManagerIdAndState(managerId, state);
     }

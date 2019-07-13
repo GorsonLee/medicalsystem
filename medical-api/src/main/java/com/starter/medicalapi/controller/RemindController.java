@@ -5,6 +5,8 @@ import com.starter.medicaldao.entity.Device;
 import com.starter.medicaldao.entity.Remind;
 import com.starter.medicalservice.service.DeviceService;
 import com.starter.medicalservice.service.RemindService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -17,23 +19,27 @@ import javax.annotation.Resource;
  **/
 @RestController
 @RequestMapping("/remind")
+@Api(tags = "提醒信息")
 public class RemindController {
 
     @Resource
     private RemindService remindService;
 
     @PostMapping("/insert")
+    @ApiOperation("新增")
     public BaseResponse insert(@RequestBody Remind remind) {
         return remindService.insert(remind);
     }
 
-    @GetMapping("/list")
-    public BaseResponse list(String userId) {
-        return remindService.queryByUserId(userId);
-    }
-
     @PostMapping("/update")
+    @ApiOperation("更新")
     public BaseResponse update(@RequestBody Remind remind) {
         return remindService.update(remind);
+    }
+
+    @GetMapping("/list")
+    @ApiOperation("用户查看提醒信息")
+    public BaseResponse list(String userId) {
+        return remindService.queryByUserId(userId);
     }
 }

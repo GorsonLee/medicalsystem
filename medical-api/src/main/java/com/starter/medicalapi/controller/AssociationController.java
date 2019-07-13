@@ -4,6 +4,8 @@ import com.starter.medicalcommon.vo.request.AssociationRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Association;
 import com.starter.medicalservice.service.AssociationService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -16,6 +18,7 @@ import javax.annotation.Resource;
  **/
 @RestController
 @RequestMapping("/association")
+@Api(tags = "关联老人")
 public class AssociationController {
 
     @Resource
@@ -28,8 +31,15 @@ public class AssociationController {
      * @return
      */
     @PostMapping("/associate")
+    @ApiOperation("关联老人")
     public BaseResponse associate(@RequestBody AssociationRequest request) {
         return associationService.associate(request);
+    }
+
+    @PostMapping("/update")
+    @ApiOperation("更新关联的老人")
+    public BaseResponse update(@RequestBody Association association) {
+        return associationService.update(association);
     }
 
     /**
@@ -39,6 +49,7 @@ public class AssociationController {
      * @return
      */
     @GetMapping("/listMyAssociateElder")
+    @ApiOperation("我关联的老人")
     public BaseResponse listMyAssociateElder(String userId) {
         return associationService.queryMyAssociateElder(userId);
     }
@@ -50,12 +61,8 @@ public class AssociationController {
      * @return
      */
     @GetMapping("/listAssociateMeUser")
+    @ApiOperation("关联我的人")
     public BaseResponse listAssociateMeUser(String userId) {
         return associationService.queryAssociateMeUser(userId);
-    }
-
-    @PostMapping("/update")
-    public BaseResponse update(@RequestBody Association association) {
-        return associationService.update(association);
     }
 }

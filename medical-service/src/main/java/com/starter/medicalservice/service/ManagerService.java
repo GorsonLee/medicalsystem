@@ -2,6 +2,7 @@ package com.starter.medicalservice.service;
 
 import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
+import com.starter.medicalcommon.vo.request.UserLoginRequest;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Manager;
@@ -51,11 +52,11 @@ public class ManagerService {
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
     }
 
-    public BaseResponse login(UserRegisterRequest request) {
+    public BaseResponse login(UserLoginRequest request) {
         Manager one = managerMapper.selectByPhoneAndPwd(request.getPhone(),
                 DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
 
-        if (one != null) {
+        if (one == null) {
             return new BaseResponse<>(MsgCodeEnum.USER_PASSWORD_ERROR);
         }
 

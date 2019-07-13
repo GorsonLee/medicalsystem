@@ -2,8 +2,11 @@ package com.starter.medicalservice.service;
 
 import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
+import com.starter.medicalcommon.vo.request.UserLoginRequest;
+import com.starter.medicalcommon.vo.request.UserRegisterRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Doctor;
+import com.starter.medicaldao.entity.Manager;
 import com.starter.medicaldao.mapper.DoctorMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -28,8 +31,8 @@ public class DoctorService {
     @Resource
     private DoctorMapper doctorMapper;
 
-    public BaseResponse register(Doctor doctor) {
-        Doctor oldOne = doctorMapper.selectByPhone(doctor.getPhone());
+    public BaseResponse register(UserRegisterRequest request) {
+        Doctor oldOne = doctorMapper.selectByPhone(request.getPhone());
 
         if (oldOne != null) {
             return new BaseResponse<>(MsgCodeEnum.USER_EXIST_ERROR);
@@ -38,19 +41,22 @@ public class DoctorService {
         //TODO 校验手机验证码
 
         Date now = new Date();
+        Doctor doctor = new Doctor();
         doctor.setId(UUIDUtil.getUUID());
-        doctor.setPwd(DigestUtils.md5Hex(doctor.getPwd() + PASSWORD_SALT));
+        doctor.setPhone(request.getPhone());
+        doctor.setPwd(DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
+        doctor.setName(request.getName());
         doctor.setCreateTime(now);
         doctor.setModifyTime(now);
         int result = doctorMapper.insertSelective(doctor);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
     }
 
-    public BaseResponse login(Doctor doctor) {
-        Doctor one = doctorMapper.selectByPhoneAndPwd(doctor.getPhone(),
-                DigestUtils.md5Hex(doctor.getPwd() + PASSWORD_SALT));
+    public BaseResponse login(UserLoginRequest request) {
+        Doctor one = doctorMapper.selectByPhoneAndPwd(request.getPhone(),
+                DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
 
-        if (one != null) {
+        if (one == null) {
             return new BaseResponse<>(MsgCodeEnum.USER_PASSWORD_ERROR);
         }
 
