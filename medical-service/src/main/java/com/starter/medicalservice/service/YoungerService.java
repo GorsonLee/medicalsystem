@@ -4,8 +4,8 @@ import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.request.UserLoginRequest;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
+import com.starter.medicalcommon.vo.request.UserUpdatePwdRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
-import com.starter.medicaldao.entity.Doctor;
 import com.starter.medicaldao.entity.Younger;
 import com.starter.medicaldao.mapper.YoungerMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -59,7 +59,9 @@ public class YoungerService {
             return new BaseResponse<>(MsgCodeEnum.USER_PASSWORD_ERROR);
         }
 
-        return BaseResponse.successResponse();
+        BaseResponse<Younger> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(one);
+        return response;
     }
 
     public BaseResponse queryByPhone(String phone) {
@@ -83,7 +85,17 @@ public class YoungerService {
 
     public BaseResponse update(Younger younger) {
         younger.setModifyTime(new Date());
+        younger.setPwd(null);
         int result = youngerMapper.updateByPrimaryKeySelective(younger);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
+    }
+
+    public BaseResponse updatePwd(UserUpdatePwdRequest request) {
+        Younger younger = new Younger();
+        younger.setId(request.getUserId());
+        younger.setPwd(DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
+        younger.setModifyTime(new Date());
+        int result = youngerMapper.updateByPrimaryKeySelective(younger);
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
     }
 }

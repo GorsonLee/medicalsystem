@@ -4,11 +4,10 @@ import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.request.UserLoginRequest;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
+import com.starter.medicalcommon.vo.request.UserUpdatePwdRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Manager;
-import com.starter.medicaldao.entity.Younger;
 import com.starter.medicaldao.mapper.ManagerMapper;
-import com.starter.medicaldao.mapper.YoungerMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
@@ -60,7 +59,9 @@ public class ManagerService {
             return new BaseResponse<>(MsgCodeEnum.USER_PASSWORD_ERROR);
         }
 
-        return BaseResponse.successResponse();
+        BaseResponse<Manager> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(one);
+        return response;
     }
 
     public BaseResponse queryByPhone(String phone) {
@@ -84,7 +85,17 @@ public class ManagerService {
 
     public BaseResponse update(Manager manager) {
         manager.setModifyTime(new Date());
+        manager.setPwd(null);
         int result = managerMapper.updateByPrimaryKeySelective(manager);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
+    }
+
+    public BaseResponse updatePwd(UserUpdatePwdRequest request) {
+        Manager manager = new Manager();
+        manager.setId(request.getUserId());
+        manager.setPwd(DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
+        manager.setModifyTime(new Date());
+        int result = managerMapper.updateByPrimaryKeySelective(manager);
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
     }
 }

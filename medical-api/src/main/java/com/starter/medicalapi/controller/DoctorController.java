@@ -1,7 +1,9 @@
 package com.starter.medicalapi.controller;
 
+import com.starter.medicalcommon.vo.request.DoctorQueryRequest;
 import com.starter.medicalcommon.vo.request.UserLoginRequest;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
+import com.starter.medicalcommon.vo.request.UserUpdatePwdRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Contract;
 import com.starter.medicaldao.entity.Doctor;
@@ -48,15 +50,21 @@ public class DoctorController {
     }
 
     @PostMapping("/update")
-    @ApiOperation("更新医生信息")
+    @ApiOperation("更新")
     public BaseResponse update(@RequestBody Doctor doctor) {
         return doctorService.update(doctor);
     }
 
+    @PostMapping("/updatePwd")
+    @ApiOperation("更新密码")
+    public BaseResponse update(@RequestBody UserUpdatePwdRequest request) {
+        return doctorService.updatePwd(request);
+    }
+
     @PostMapping("/queryDoctors")
     @ApiOperation("按条件查询医生")
-    public BaseResponse queryDoctors(@RequestBody Doctor doctor) {
-        return doctorService.queryDoctors(doctor);
+    public BaseResponse queryDoctors(@RequestBody DoctorQueryRequest request) {
+        return doctorService.queryDoctors(request);
     }
 
     @GetMapping("/getDoctorInfo")

@@ -2,6 +2,7 @@ package com.starter.medicalapi.controller;
 
 import com.starter.medicalcommon.vo.request.UserLoginRequest;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
+import com.starter.medicalcommon.vo.request.UserUpdatePwdRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Elder;
 import com.starter.medicalservice.service.ElderService;
@@ -37,9 +38,9 @@ public class ElderController {
         return elderService.login(request);
     }
 
-    @GetMapping("/getUserInfo")
+    @GetMapping("/queryByPhone")
     @ApiOperation("根据手机号获取用户信息")
-    public BaseResponse getUserInfo(String phone) {
+    public BaseResponse queryByPhone(String phone) {
         return elderService.queryByPhone(phone);
     }
 
@@ -53,6 +54,12 @@ public class ElderController {
     @ApiOperation("更新")
     public BaseResponse update(@RequestBody Elder elder) {
         return elderService.update(elder);
+    }
+
+    @PostMapping("/updatePwd")
+    @ApiOperation("更新密码")
+    public BaseResponse update(@RequestBody UserUpdatePwdRequest request) {
+        return elderService.updatePwd(request);
     }
 
 }

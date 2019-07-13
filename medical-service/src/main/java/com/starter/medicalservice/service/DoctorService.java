@@ -2,11 +2,12 @@ package com.starter.medicalservice.service;
 
 import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
+import com.starter.medicalcommon.vo.request.DoctorQueryRequest;
 import com.starter.medicalcommon.vo.request.UserLoginRequest;
 import com.starter.medicalcommon.vo.request.UserRegisterRequest;
+import com.starter.medicalcommon.vo.request.UserUpdatePwdRequest;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Doctor;
-import com.starter.medicaldao.entity.Manager;
 import com.starter.medicaldao.mapper.DoctorMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -60,7 +61,9 @@ public class DoctorService {
             return new BaseResponse<>(MsgCodeEnum.USER_PASSWORD_ERROR);
         }
 
-        return BaseResponse.successResponse();
+        BaseResponse<Doctor> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(one);
+        return response;
     }
 
     public BaseResponse<Doctor> query(String doctorId) {
@@ -72,6 +75,16 @@ public class DoctorService {
 
     public BaseResponse update(Doctor doctor) {
         doctor.setModifyTime(new Date());
+        doctor.setPwd(null);
+        int result = doctorMapper.updateByPrimaryKeySelective(doctor);
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
+    }
+
+    public BaseResponse updatePwd(UserUpdatePwdRequest request) {
+        Doctor doctor = new Doctor();
+        doctor.setId(request.getUserId());
+        doctor.setPwd(DigestUtils.md5Hex(request.getPwd() + PASSWORD_SALT));
+        doctor.setModifyTime(new Date());
         int result = doctorMapper.updateByPrimaryKeySelective(doctor);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.USER_REGISTER_ERROR);
     }
@@ -79,10 +92,14 @@ public class DoctorService {
     /**
      * 查询医生信息
      *
-     * @param doctor
+     * @param request
      * @return
      */
-    public BaseResponse<List<Doctor>> queryDoctors(Doctor doctor) {
+    public BaseResponse<List<Doctor>> queryDoctors(DoctorQueryRequest request) {
+        Doctor doctor = new Doctor();
+        doctor.setHospital(request.getHospital());
+        doctor.setDepartment(request.getDepartment());
+        doctor.setSecondDepartment(request.getSecondDepartment());
         List<Doctor> doctorList = doctorMapper.queryDoctors(doctor);
         BaseResponse<List<Doctor>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         response.setData(doctorList);
