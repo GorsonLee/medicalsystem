@@ -22,4 +22,6 @@ public interface ElderMapper {
     Elder selectByPhoneAndNameAndIdentity(@Param("phone") String phone,
                                           @Param("name") String name,
                                           @Param("identity") String identity);
+
+    int countByOrganizationId(@Param("organizationId") String organizationId);
 }

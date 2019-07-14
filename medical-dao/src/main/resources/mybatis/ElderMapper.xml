@@ -330,4 +330,10 @@
     </where>
   </select>
 
+  <select id="countByOrganizationId" resultType="int">
+    select count(1)
+    from t_elder
+    where organization_id = #{organizationId}
+  </select>
+
 </mapper>

@@ -1,17 +1,22 @@
 package com.starter.medicalapi.controller.manage.basic;
 
+import com.alibaba.fastjson.JSON;
 import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Agency;
+import com.starter.medicaldao.entity.Elder;
 import com.starter.medicaldao.mapper.AgencyMapper;
+import com.starter.medicaldao.mapper.ElderMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import net.minidev.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 此类的描述是：
@@ -26,6 +31,8 @@ public class AgencyController {
 
     @Resource
     private AgencyMapper agencyMapper;
+    @Resource
+    private ElderMapper elderMapper;
 
     @PostMapping("/insert")
     @ApiOperation("新增")
@@ -55,10 +62,12 @@ public class AgencyController {
                              Integer offset,
                              Integer pageSize) {
         List<Agency> agencyList = agencyMapper.selectByParams(province, city, name, offset, pageSize);
-
-        //TODO 统计机构的服务人数
-        BaseResponse<List<Agency>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
-        response.setData(agencyList);
+        BaseResponse<List<JSONObject>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(agencyList.stream().map(item -> {
+            JSONObject json = (JSONObject) JSON.toJSON(item);
+            json.put("elderCount", elderMapper.countByOrganizationId(item.getId()));
+            return json;
+        }).collect(Collectors.toList()));
         return response;
     }
 }
