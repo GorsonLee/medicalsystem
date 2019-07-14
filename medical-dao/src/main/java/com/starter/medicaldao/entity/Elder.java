@@ -35,9 +35,11 @@ public class Elder {
 
     private String country;
 
+    private String town;
+
     private String community;
 
-    private String organization;
+    private String organizationId;
 
     private String emergencyContact;
 
@@ -175,6 +177,14 @@ public class Elder {
         this.country = country == null ? null : country.trim();
     }
 
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town == null ? null : town.trim();
+    }
+
     public String getCommunity() {
         return community;
     }
@@ -183,12 +193,12 @@ public class Elder {
         this.community = community == null ? null : community.trim();
     }
 
-    public String getOrganization() {
-        return organization;
+    public String getOrganizationId() {
+        return organizationId;
     }
 
-    public void setOrganization(String organization) {
-        this.organization = organization == null ? null : organization.trim();
+    public void setOrganizationId(String organizationId) {
+        this.organizationId = organizationId == null ? null : organizationId.trim();
     }
 
     public String getEmergencyContact() {

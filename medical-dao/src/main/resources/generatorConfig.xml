@@ -12,7 +12,7 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.0.106:3306/medical_system" userId="root" password="123456">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/medical_system" userId="root" password="123456">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -101,10 +101,37 @@
                <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
                <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
         <!--</table>-->
-        <table tableName="t_service_center" domainObjectName="ServiceCenter"
-               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">
-        </table>
-
+        <!--<table tableName="t_service_center" domainObjectName="ServiceCenter"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_agency" domainObjectName="Agency"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_hospital" domainObjectName="Hospital"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_event" domainObjectName="Event"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_complaint" domainObjectName="Complaint"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_care" domainObjectName="Care"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_notify" domainObjectName="Notify"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_new" domainObjectName="New"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

@@ -34,9 +34,10 @@ CREATE TABLE `t_elder` (
                         `address` varchar(500) NULL DEFAULT NULL COMMENT '家庭地址',
                         `province` varchar(50) NULL DEFAULT NULL COMMENT '省份',
                         `city` varchar(50) NULL DEFAULT NULL COMMENT '城市',
-                        `country` varchar(50) NULL DEFAULT NULL COMMENT '乡县',
+                        `country` varchar(50) NULL DEFAULT NULL COMMENT '县',
+                        `town` varchar(50) NULL DEFAULT NULL COMMENT '乡',
                         `community` varchar(50) NULL DEFAULT NULL COMMENT '社区',
-                        `organization` varchar(50) NULL DEFAULT NULL COMMENT '机构组织',
+                        `organization_id` varchar(50) NULL DEFAULT NULL COMMENT '机构组织ID',
                         `emergency_contact` varchar(100) NULL DEFAULT NULL COMMENT '紧急联系人',
                         `emergency_phone` varchar(50) NULL DEFAULT NULL COMMENT '紧急联系电话',
                         `create_time` datetime(0) NOT NULL COMMENT '创建时间',
@@ -297,4 +298,97 @@ CREATE TABLE `t_service_center` (
                                   `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                                   `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                                   PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 机构
+DROP TABLE IF EXISTS `t_agency`;
+CREATE TABLE `t_agency` (
+                          `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                          `name` varchar(100) NULL DEFAULT NULL COMMENT '名字',
+                          `type` varchar(100) NULL DEFAULT NULL COMMENT '类型',
+                          `address` varchar(500) NULL DEFAULT NULL COMMENT '地址',
+                          `province` varchar(50) NULL DEFAULT NULL COMMENT '省份',
+                          `city` varchar(50) NULL DEFAULT NULL COMMENT '城市',
+                          `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                          `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                          PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 医院
+DROP TABLE IF EXISTS `t_hospital`;
+CREATE TABLE `t_hospital` (
+                            `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                            `name` varchar(100) NULL DEFAULT NULL COMMENT '名字',
+                            `type` varchar(100) NULL DEFAULT NULL COMMENT '类型',
+                            `address` varchar(500) NULL DEFAULT NULL COMMENT '地址',
+                            `province` varchar(50) NULL DEFAULT NULL COMMENT '省份',
+                            `city` varchar(50) NULL DEFAULT NULL COMMENT '城市',
+                            `country` varchar(50) NULL DEFAULT NULL COMMENT '县',
+                            `town` varchar(50) NULL DEFAULT NULL COMMENT '乡',
+                            `community` varchar(50) NULL DEFAULT NULL COMMENT '社区',
+                            `introduction` varchar(1000) NULL DEFAULT NULL COMMENT '介绍',
+                            `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                            `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                            PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 事件处理日志
+DROP TABLE IF EXISTS `t_event`;
+CREATE TABLE `t_event` (
+                         `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                         `operator` varchar(100) NULL DEFAULT NULL COMMENT '操作人',
+                         `role` varchar(50) NULL DEFAULT NULL COMMENT '角色',
+                         `content` varchar(500) NULL DEFAULT NULL COMMENT '内容',
+                         `state` varchar(50) NULL DEFAULT NULL COMMENT '状态',
+                         `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                         `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 投诉管理
+DROP TABLE IF EXISTS `t_complaint`;
+CREATE TABLE `t_complaint` (
+                             `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                             `complainant` varchar(100) NULL DEFAULT NULL COMMENT '投诉人',
+                             `content` varchar(500) NULL DEFAULT NULL COMMENT '内容',
+                             `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                             `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                             PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 关怀
+DROP TABLE IF EXISTS `t_care`;
+CREATE TABLE `t_care` (
+                        `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                        `title` varchar(100) NULL DEFAULT NULL COMMENT '标题',
+                        `content` varchar(500) NULL DEFAULT NULL COMMENT '内容',
+                        `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                        `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                        PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 通知公告
+DROP TABLE IF EXISTS `t_notify`;
+CREATE TABLE `t_notify` (
+                          `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                          `content` varchar(500) NULL DEFAULT NULL COMMENT '内容',
+                          `area` varchar(100) NULL DEFAULT NULL COMMENT '推送区域',
+                          `state` varchar(50) NULL DEFAULT NULL COMMENT '状态',
+                          `notify_time` datetime(0) NOT NULL COMMENT '推送时间',
+                          `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                          `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                          PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+# 咨询
+DROP TABLE IF EXISTS `t_new`;
+CREATE TABLE `t_new` (
+                       `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                       `title` varchar(100) NULL DEFAULT NULL COMMENT '标题',
+                       `content` varchar(5000) NULL DEFAULT NULL COMMENT '内容',
+                       `type` varchar(50) NULL DEFAULT NULL COMMENT '类型',
+                       `notify_time` datetime(0) NOT NULL COMMENT '推送时间',
+                       `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                       `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                       PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;

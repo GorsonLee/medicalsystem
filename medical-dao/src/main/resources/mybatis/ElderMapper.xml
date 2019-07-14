@@ -18,8 +18,9 @@
     <result column="province" jdbcType="VARCHAR" property="province" />
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="town" jdbcType="VARCHAR" property="town" />
     <result column="community" jdbcType="VARCHAR" property="community" />
-    <result column="organization" jdbcType="VARCHAR" property="organization" />
+    <result column="organization_id" jdbcType="VARCHAR" property="organizationId" />
     <result column="emergency_contact" jdbcType="VARCHAR" property="emergencyContact" />
     <result column="emergency_phone" jdbcType="VARCHAR" property="emergencyPhone" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -27,8 +28,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, phone, pwd, identity, name, birth, sex, nation, image, old_type, marital_status, 
-    live_status, address, province, city, country, community, organization, emergency_contact, 
-    emergency_phone, create_time, modify_time
+    live_status, address, province, city, country, town, community, organization_id, 
+    emergency_contact, emergency_phone, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -42,17 +43,17 @@
       sex, nation, image, 
       old_type, marital_status, live_status, 
       address, province, city, 
-      country, community, organization, 
-      emergency_contact, emergency_phone, create_time, 
-      modify_time)
+      country, town, community, 
+      organization_id, emergency_contact, emergency_phone, 
+      create_time, modify_time)
     values (#{id,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
       #{identity,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{birth,jdbcType=INTEGER}, 
       #{sex,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
       #{oldType,jdbcType=INTEGER}, #{maritalStatus,jdbcType=INTEGER}, #{liveStatus,jdbcType=INTEGER}, 
       #{address,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
-      #{country,jdbcType=VARCHAR}, #{community,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR}, 
-      #{emergencyContact,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{modifyTime,jdbcType=TIMESTAMP})
+      #{country,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, #{community,jdbcType=VARCHAR}, 
+      #{organizationId,jdbcType=VARCHAR}, #{emergencyContact,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.Elder">
     insert into t_elder
@@ -105,11 +106,14 @@
       <if test="country != null">
         country,
       </if>
+      <if test="town != null">
+        town,
+      </if>
       <if test="community != null">
         community,
       </if>
-      <if test="organization != null">
-        organization,
+      <if test="organizationId != null">
+        organization_id,
       </if>
       <if test="emergencyContact != null">
         emergency_contact,
@@ -173,11 +177,14 @@
       <if test="country != null">
         #{country,jdbcType=VARCHAR},
       </if>
+      <if test="town != null">
+        #{town,jdbcType=VARCHAR},
+      </if>
       <if test="community != null">
         #{community,jdbcType=VARCHAR},
       </if>
-      <if test="organization != null">
-        #{organization,jdbcType=VARCHAR},
+      <if test="organizationId != null">
+        #{organizationId,jdbcType=VARCHAR},
       </if>
       <if test="emergencyContact != null">
         #{emergencyContact,jdbcType=VARCHAR},
@@ -241,11 +248,14 @@
       <if test="country != null">
         country = #{country,jdbcType=VARCHAR},
       </if>
+      <if test="town != null">
+        town = #{town,jdbcType=VARCHAR},
+      </if>
       <if test="community != null">
         community = #{community,jdbcType=VARCHAR},
       </if>
-      <if test="organization != null">
-        organization = #{organization,jdbcType=VARCHAR},
+      <if test="organizationId != null">
+        organization_id = #{organizationId,jdbcType=VARCHAR},
       </if>
       <if test="emergencyContact != null">
         emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
@@ -279,8 +289,9 @@
       province = #{province,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
       country = #{country,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
       community = #{community,jdbcType=VARCHAR},
-      organization = #{organization,jdbcType=VARCHAR},
+      organization_id = #{organizationId,jdbcType=VARCHAR},
       emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
       emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
