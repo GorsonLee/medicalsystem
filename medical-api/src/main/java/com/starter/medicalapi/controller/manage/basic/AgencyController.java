@@ -5,7 +5,6 @@ import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.Agency;
-import com.starter.medicaldao.entity.Elder;
 import com.starter.medicaldao.mapper.AgencyMapper;
 import com.starter.medicaldao.mapper.ElderMapper;
 import io.swagger.annotations.Api;

@@ -1,4 +1,4 @@
-package com.starter.medicalapi.controller.manage.statistics;
+package com.starter.medicalapi.controller.manage.security;
 
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019-05-19 17:03
  **/
 @RestController
-@RequestMapping("/manage/elder")
-@Api(tags = "老人统计")
-public class ElderController {
-
+@RequestMapping("/manage/device")
+@Api(tags = "设备管理")
+public class DeviceManageController {
 }
