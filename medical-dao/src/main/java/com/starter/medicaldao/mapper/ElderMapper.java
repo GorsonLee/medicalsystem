@@ -3,6 +3,8 @@ package com.starter.medicaldao.mapper;
 import com.starter.medicaldao.entity.Elder;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface ElderMapper {
     int insert(Elder record);
 
@@ -24,4 +26,22 @@ public interface ElderMapper {
                                           @Param("identity") String identity);
 
     int countByOrganizationId(@Param("organizationId") String organizationId);
+
+    /**
+     * 管理后台查询老人的信信
+     *
+     * @param provideState   养老状态
+     * @param organizationId 机构ID
+     * @param birth          生日
+     * @param verifyState    审核状态
+     * @param offset
+     * @param pageSize
+     * @return 老人列表
+     */
+    List<Elder> listElder(@Param("provideState") Integer provideState,
+                          @Param("organizationId") String organizationId,
+                          @Param("birth") Integer birth,
+                          @Param("verifyState") Integer verifyState,
+                          @Param("offset") Integer offset,
+                          @Param("pageSize") Integer pageSize);
 }

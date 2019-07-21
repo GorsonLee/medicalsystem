@@ -37,10 +37,10 @@
                <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
                <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
         <!--</table>-->
-        <!--<table tableName="t_elder" domainObjectName="Elder"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
-               <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->
-        <!--</table>-->
+        <table tableName="t_elder" domainObjectName="Elder"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">
+        </table>
         <!--<table tableName="t_relationship" domainObjectName="RelationShip"-->
                <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
                <!--enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false">-->

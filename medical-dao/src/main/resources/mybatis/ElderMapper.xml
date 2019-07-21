@@ -23,13 +23,15 @@
     <result column="organization_id" jdbcType="VARCHAR" property="organizationId" />
     <result column="emergency_contact" jdbcType="VARCHAR" property="emergencyContact" />
     <result column="emergency_phone" jdbcType="VARCHAR" property="emergencyPhone" />
+    <result column="provide_state" jdbcType="INTEGER" property="provideState" />
+    <result column="verify_state" jdbcType="INTEGER" property="verifyState" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
   <sql id="Base_Column_List">
     id, phone, pwd, identity, name, birth, sex, nation, image, old_type, marital_status, 
     live_status, address, province, city, country, town, community, organization_id, 
-    emergency_contact, emergency_phone, create_time, modify_time
+    emergency_contact, emergency_phone, provide_state, verify_state, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -45,7 +47,8 @@
       address, province, city, 
       country, town, community, 
       organization_id, emergency_contact, emergency_phone, 
-      create_time, modify_time)
+      provide_state, verify_state, create_time, 
+      modify_time)
     values (#{id,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
       #{identity,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{birth,jdbcType=INTEGER}, 
       #{sex,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
@@ -53,7 +56,8 @@
       #{address,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{country,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, #{community,jdbcType=VARCHAR}, 
       #{organizationId,jdbcType=VARCHAR}, #{emergencyContact,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+      #{provideState,jdbcType=INTEGER}, #{verifyState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.starter.medicaldao.entity.Elder">
     insert into t_elder
@@ -120,6 +124,12 @@
       </if>
       <if test="emergencyPhone != null">
         emergency_phone,
+      </if>
+      <if test="provideState != null">
+        provide_state,
+      </if>
+      <if test="verifyState != null">
+        verify_state,
       </if>
       <if test="createTime != null">
         create_time,
@@ -192,6 +202,12 @@
       <if test="emergencyPhone != null">
         #{emergencyPhone,jdbcType=VARCHAR},
       </if>
+      <if test="provideState != null">
+        #{provideState,jdbcType=INTEGER},
+      </if>
+      <if test="verifyState != null">
+        #{verifyState,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -263,6 +279,12 @@
       <if test="emergencyPhone != null">
         emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
       </if>
+      <if test="provideState != null">
+        provide_state = #{provideState,jdbcType=INTEGER},
+      </if>
+      <if test="verifyState != null">
+        verify_state = #{verifyState,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -294,6 +316,8 @@
       organization_id = #{organizationId,jdbcType=VARCHAR},
       emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
       emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      provide_state = #{provideState,jdbcType=INTEGER},
+      verify_state = #{verifyState,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
@@ -334,6 +358,28 @@
     select count(1)
     from t_elder
     where organization_id = #{organizationId}
+  </select>
+
+  <select id="listElder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_elder
+    <where>
+      <if test="provideState != null">
+        and provide_state = #{provideState}
+      </if>
+      <if test="organizationId != null">
+        and organization_id = #{organizationId}
+      </if>
+      <if test="birth != null">
+        and `birth` = #{birth}
+      </if>
+      <if test="verifyState != null">
+        and `verify_state` = #{verifyState}
+      </if>
+    </where>
+    order by create_time desc
+    limit #{offset}, #{pageSize}
   </select>
 
 </mapper>

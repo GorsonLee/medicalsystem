@@ -45,6 +45,10 @@ public class Elder {
 
     private String emergencyPhone;
 
+    private Integer provideState;
+
+    private Integer verifyState;
+
     private Date createTime;
 
     private Date modifyTime;
@@ -215,6 +219,22 @@ public class Elder {
 
     public void setEmergencyPhone(String emergencyPhone) {
         this.emergencyPhone = emergencyPhone == null ? null : emergencyPhone.trim();
+    }
+
+    public Integer getProvideState() {
+        return provideState;
+    }
+
+    public void setProvideState(Integer provideState) {
+        this.provideState = provideState;
+    }
+
+    public Integer getVerifyState() {
+        return verifyState;
+    }
+
+    public void setVerifyState(Integer verifyState) {
+        this.verifyState = verifyState;
     }
 
     public Date getCreateTime() {
