@@ -20,6 +20,16 @@
     from t_reservation
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByState" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_reservation
+    where  state= #{state,jdbcType=VARCHAR}
+    order by reserve_time desc
+    limit #{offset}, #{pageSize}
+  </select>
+
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Reservation">
     insert into t_reservation (id, user_id, doctor_id, 
       instructions, state, reserve_time, 

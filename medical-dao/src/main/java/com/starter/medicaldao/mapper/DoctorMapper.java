@@ -1,6 +1,8 @@
 package com.starter.medicaldao.mapper;
 
 import com.starter.medicaldao.entity.Doctor;
+import com.starter.medicaldao.entity.dto.DoctorDto;
+import com.starter.medicaldao.entity.filter.DoctorFilter;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,4 +24,8 @@ public interface DoctorMapper {
                                @Param("pwd") String pwd);
 
     List<Doctor> queryDoctors(Doctor doctor);
+
+    List<Doctor> selectByHospital(@Param("hospital") String hospital);
+
+    List<Doctor> selectByFilter(@Param("filter") DoctorFilter filter);
 }

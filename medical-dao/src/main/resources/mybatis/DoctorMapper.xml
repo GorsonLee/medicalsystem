@@ -213,6 +213,13 @@
     where phone = #{phone}
   </select>
 
+  <select id="selectByHospital" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_doctor
+    where hospital = #{hospital}
+  </select>
+
   <select id="selectByPhoneAndPwd" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -239,5 +246,41 @@
         and second_department = #{secondDepartment}
       </if>
     </where>
+  </select>
+
+  <select id="selectByFilter"  parameterType="com.starter.medicaldao.entity.filter.DoctorFilter" resultMap="BaseResultMap">
+    select
+    a.id as id , a.phone as phone, a.pwd as pwd, a.identity as identity, a.name as name,
+    a.sex as sex, a.birth as birth, a.hospital as hospital, a.department as department, a.second_department as secondDepartment,
+    a.job_title as jobTitle, a.introduction as introduction, a.skill as skill, a.create_time as createTime, a.modify_time as modifyTime
+    from t_doctor as a left join t_hospital as b on a.hospital=b.id
+    <where>
+      <if test="filter.province != null">
+        and b.province = #{filter.province}
+      </if>
+      <if test="filter.city != null">
+        and b.city = #{filter.city}
+      </if>
+      <if test="filter.country != null">
+        and b.country = #{filter.country}
+      </if>
+      <if test="filter.town != null">
+        and b.town = #{filter.town}
+      </if>
+      <if test="filter.community != null">
+        and b.community = #{filter.community}
+      </if>
+      <if test="filter.hospitalName != null">
+        and b.name = #{filter.hospitalName}
+      </if>
+      <if test="filter.department != null">
+        and a.department = #{filter.department}
+      </if>
+      <if test="filter.secondDepartment != null">
+        and a.second_department = #{filter.secondDepartment}
+      </if>
+    </where>
+    order by a.modify_time desc
+    limit #{offset}, #{pageSize}
   </select>
 </mapper>

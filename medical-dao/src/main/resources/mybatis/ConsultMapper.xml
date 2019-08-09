@@ -174,4 +174,12 @@
     order by create_time desc
   </select>
 
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_consult
+    order by create_time desc
+    limit #{offset}, #{pageSize}
+  </select>
+
 </mapper>

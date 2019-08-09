@@ -20,4 +20,7 @@ public interface ReservationMapper {
 
     List<Reservation> selectByDoctorId(@Param("doctorId") String doctorId);
 
+    List<Reservation>  selectByState(@Param("state") Integer state, @Param("offset") Integer offset,
+                                     @Param("pageSize") Integer pageSize);
+
 }

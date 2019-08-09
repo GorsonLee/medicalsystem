@@ -170,4 +170,30 @@
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="queryList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_hospital
+    <where>
+      <if test="province != null">
+        and province = #{province}
+      </if>
+      <if test="city != null">
+        and city = #{city}
+      </if>
+      <if test="country != null">
+        and country = #{country}
+      </if>
+      <if test="town != null">
+        and town = #{town}
+      </if>
+      <if test="community != null">
+        and community = #{community}
+      </if>
+    </where>
+    order by modify_time desc
+    limit #{offset}, #{pageSize}
+  </select>
 </mapper>

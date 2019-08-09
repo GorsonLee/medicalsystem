@@ -20,4 +20,6 @@ public interface ContractMapper {
 
     List<Contract> selectByDoctorId(@Param("doctorId") String doctorId);
 
+    Integer selectCountByDoctorIdList(@Param("doctorIdList") List<String> idList);
+
 }
