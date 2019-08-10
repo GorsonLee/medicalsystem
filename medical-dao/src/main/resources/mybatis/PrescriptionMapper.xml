@@ -19,6 +19,15 @@
     from t_prescription
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_prescription
+    order by create_time desc
+    limit #{offset}, #{pageSize}
+  </select>
+
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Prescription">
     insert into t_prescription (id, user_id, doctor_id, 
       title, content, create_time, 

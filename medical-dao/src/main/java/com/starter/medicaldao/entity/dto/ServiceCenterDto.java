@@ -1,16 +1,18 @@
-package com.starter.medicaldao.entity;
+package com.starter.medicaldao.entity.dto;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class ServiceCenter {
+public class ServiceCenterDto {
     private String id;
 
     private Integer helpType;
 
     private String userId;
+
+    private String userPhone;
+
+    private String userName;
 
     private String type;
 
@@ -20,13 +22,17 @@ public class ServiceCenter {
 
     private String price;
 
-    private Date serviceTime;
+    private String serviceTimeStr;
 
     private String managerId;
 
+    private String managerPhone;
+
+    private String managerName;
+
     private Integer serviceStar;
 
-    private Date finishTime;
+    private String finishTimeStr;
 
     private String recordUrl;
 
@@ -34,10 +40,8 @@ public class ServiceCenter {
 
     private String evaluateContent;
 
-    private Date evaluateTime;
+    private String evaluateTimeStr;
 
-    private Date createTime;
-
-    private Date modifyTime;
+    private String createTimeStr;
 
 }

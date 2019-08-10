@@ -3,6 +3,8 @@ package com.starter.medicaldao.mapper;
 import com.starter.medicaldao.entity.Manager;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface ManagerMapper {
     int insert(Manager record);
 
@@ -18,4 +20,7 @@ public interface ManagerMapper {
 
     Manager selectByPhoneAndPwd(@Param("phone") String phone,
                                 @Param("pwd") String pwd);
+
+    List<Manager> selectByFilter(@Param("offset") Integer offset,
+                                 @Param("pageSize") Integer pageSize);
 }

@@ -1,5 +1,6 @@
 package com.starter.medicaldao.mapper;
 
+import com.starter.medicaldao.entity.Consult;
 import com.starter.medicaldao.entity.Prescription;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,5 +20,8 @@ public interface PrescriptionMapper {
     List<Prescription> selectByUserId(@Param("userId") String userId);
 
     List<Prescription> selectByDoctorId(@Param("doctorId") String doctorId);
+
+    List<Prescription> selectAll(@Param("offset") Integer offset,
+                            @Param("pageSize") Integer pageSize);
 
 }

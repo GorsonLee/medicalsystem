@@ -1,8 +1,10 @@
 package com.starter.medicaldao.mapper;
 
 import com.starter.medicaldao.entity.ServiceCenter;
+import com.starter.medicaldao.entity.filter.ServiceCenterFilter;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ServiceCenterMapper {
@@ -23,4 +25,10 @@ public interface ServiceCenterMapper {
 
     List<ServiceCenter> selectByManagerIdAndState(@Param("managerId") String managerId,
                                                   @Param("state") Integer state);
+
+    Integer selectServiceCountByFilter(@Param("filter") ServiceCenterFilter filter);
+
+    BigDecimal selectAvgStarCountByFilter(@Param("filter") ServiceCenterFilter filter);
+
+    List<ServiceCenter> selectByFilter(@Param("filter") ServiceCenterFilter filter);
 }

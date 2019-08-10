@@ -1,11 +1,11 @@
-package com.starter.medicaldao.entity;
+package com.starter.medicaldao.entity.dto;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class New {
+public class NewDto {
     private String id;
 
     private String title;
@@ -14,10 +14,7 @@ public class New {
 
     private Integer type;
 
-    private Date notifyTime;
+    private String createTimeStr;
 
-    private Date createTime;
-
-    private Date modifyTime;
 
 }

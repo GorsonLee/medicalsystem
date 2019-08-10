@@ -20,6 +20,16 @@
     from t_revisit
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByMethod" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_revisit
+    where  method= #{method,jdbcType=VARCHAR}
+    order by visit_time desc
+    limit #{offset}, #{pageSize}
+  </select>
+
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Revisit">
     insert into t_revisit (id, user_id, doctor_id, 
       method, content, visit_time, 

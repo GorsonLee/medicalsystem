@@ -1,5 +1,6 @@
 package com.starter.medicaldao.mapper;
 
+import com.starter.medicaldao.entity.Reservation;
 import com.starter.medicaldao.entity.Revisit;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,4 +18,7 @@ public interface RevisitMapper {
     int updateByPrimaryKey(Revisit record);
 
     List<Revisit> selectByDoctorId(@Param("doctorId") String doctorId);
+
+    List<Revisit>  selectByMethod(@Param("method") String method, @Param("offset") Integer offset,
+                                     @Param("pageSize") Integer pageSize);
 }

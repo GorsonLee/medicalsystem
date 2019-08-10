@@ -11,6 +11,19 @@
   <sql id="Base_Column_List">
     id, title, content, create_time, modify_time
   </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+       delete from t_care where id = #{id}
+  </delete>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_care
+    order by create_time desc
+    limit #{offset}, #{pageSize}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

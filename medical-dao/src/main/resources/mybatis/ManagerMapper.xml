@@ -10,11 +10,17 @@
     <result column="birth" jdbcType="INTEGER" property="birth" />
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="town" jdbcType="VARCHAR" property="town" />
+    <result column="community" jdbcType="VARCHAR" property="community" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, phone, pwd, identity, name, birth, sex, image, create_time, modify_time
+    id, phone, pwd, identity, name, birth, sex, image, province, city, country, town,community,address,create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -22,6 +28,15 @@
     from t_manager
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByFilter" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_manager
+    order by create_time desc
+    limit #{offset}, #{pageSize}
+  </select>
+
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Manager">
     insert into t_manager (id, phone, pwd, 
       identity, name, birth, 
@@ -59,6 +74,24 @@
       <if test="image != null">
         image,
       </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="town != null">
+        town,
+      </if>
+      <if test="community != null">
+        community,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -90,6 +123,24 @@
       </if>
       <if test="image != null">
         #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        #{community,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -123,6 +174,24 @@
       <if test="image != null">
         image = #{image,jdbcType=VARCHAR},
       </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        #{community,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -141,6 +210,12 @@
       birth = #{birth,jdbcType=INTEGER},
       sex = #{sex,jdbcType=INTEGER},
       image = #{image,jdbcType=VARCHAR},
+        province = #{province,jdbcType=VARCHAR},
+          city = #{city,jdbcType=VARCHAR},
+            country = #{country,jdbcType=VARCHAR},
+              town = #{town,jdbcType=VARCHAR},
+                community = #{community,jdbcType=VARCHAR},
+                  address = #{address,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}

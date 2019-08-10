@@ -20,4 +20,7 @@ public interface DeviceMapper {
                                      @Param("deviceId") String deviceId);
 
     List<Device> selectByUserId(@Param("userId") String userId);
+
+    List<Device> selectByType(@Param("type") String type, @Param("offset") Integer offset,
+                              @Param("pageSize") Integer pageSize);
 }

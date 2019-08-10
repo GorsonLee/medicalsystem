@@ -11,6 +11,15 @@
   <sql id="Base_Column_List">
     id, complainant, content, create_time, modify_time
   </sql>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_complaint
+    order by create_time desc
+    limit #{offset}, #{pageSize}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

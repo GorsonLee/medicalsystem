@@ -3,16 +3,12 @@ package com.starter.medicalapi.controller.manage.basic;
 import com.starter.medicalcommon.enums.MsgCodeEnum;
 import com.starter.medicalcommon.util.DateUtil;
 import com.starter.medicalcommon.vo.response.BaseResponse;
-import com.starter.medicaldao.entity.Consult;
-import com.starter.medicaldao.entity.Doctor;
-import com.starter.medicaldao.entity.Elder;
-import com.starter.medicaldao.entity.Reservation;
+import com.starter.medicaldao.entity.*;
 import com.starter.medicaldao.entity.dto.ConsultDto;
+import com.starter.medicaldao.entity.dto.PrescriptionDto;
 import com.starter.medicaldao.entity.dto.ReservationDto;
-import com.starter.medicaldao.mapper.ConsultMapper;
-import com.starter.medicaldao.mapper.DoctorMapper;
-import com.starter.medicaldao.mapper.ElderMapper;
-import com.starter.medicaldao.mapper.ReservationMapper;
+import com.starter.medicaldao.entity.dto.RevisitDto;
+import com.starter.medicaldao.mapper.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -44,6 +40,10 @@ public class MedicalController {
     private ElderMapper elderMapper;
     @Resource
     private ConsultMapper consultMapper;
+    @Resource
+    private RevisitMapper revisitMapper;
+    @Resource
+    private PrescriptionMapper prescriptionMapper;
 
     @GetMapping("/reserveList")
     @ApiOperation("挂号预约列表")
@@ -106,6 +106,78 @@ public class MedicalController {
 
                 // 医生姓名和电话
                 Doctor doctor = doctorMapper.selectByPrimaryKey(consult.getDoctorId());
+                if (doctor != null) {
+                    dto.setDoctorName(doctor.getName());
+                    dto.setDoctorPhone(doctor.getPhone());
+                }
+                resultList.add(dto);
+            });
+        }
+
+        response.setData(resultList);
+        return response;
+    }
+
+    @GetMapping("/revisitList")
+    @ApiOperation("回访管理列表")
+    public BaseResponse revisitList(String method, Integer offset,
+                                    Integer pageSize) {
+        BaseResponse<List<RevisitDto>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        List<RevisitDto> resultList= new ArrayList<>();
+
+        List<Revisit> revisitList = revisitMapper.selectByMethod(method, offset, pageSize);
+        if (!CollectionUtils.isEmpty(revisitList)) {
+            revisitList.stream().filter(revisit -> revisit != null).forEach(revisit -> {
+                RevisitDto dto = new RevisitDto();
+                BeanUtils.copyProperties(revisit, dto);
+                if (revisit.getVisitTime() != null) {
+                    dto.setVisitTimeStr(DateUtil.dateToString(revisit.getVisitTime()));
+                }
+                // 老人姓名和电话
+                Elder elder = elderMapper.selectByPrimaryKey(revisit.getUserId());
+                if (elder != null) {
+                    dto.setUserName(elder.getName());
+                    dto.setUserPhone(elder.getPhone());
+                }
+
+                // 医生姓名和电话
+                Doctor doctor = doctorMapper.selectByPrimaryKey(revisit.getDoctorId());
+                if (doctor != null) {
+                    dto.setDoctorName(doctor.getName());
+                    dto.setDoctorPhone(doctor.getPhone());
+                }
+                resultList.add(dto);
+            });
+        }
+
+        response.setData(resultList);
+        return response;
+    }
+
+    @GetMapping("/prescriptionList")
+    @ApiOperation("处方管理列表")
+    public BaseResponse prescriptionList(Integer offset,
+                                    Integer pageSize) {
+        BaseResponse<List<PrescriptionDto>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        List<PrescriptionDto> resultList= new ArrayList<>();
+
+        List<Prescription> prescriptionList = prescriptionMapper.selectAll(offset, pageSize);
+        if (!CollectionUtils.isEmpty(prescriptionList)) {
+            prescriptionList.stream().filter(prescription -> prescription != null).forEach(prescription -> {
+                PrescriptionDto dto = new PrescriptionDto();
+                BeanUtils.copyProperties(prescription, dto);
+                if (prescription.getCreateTime() != null) {
+                    dto.setCreateTimeStr(DateUtil.dateToString(prescription.getCreateTime()));
+                }
+                // 老人姓名和电话
+                Elder elder = elderMapper.selectByPrimaryKey(prescription.getUserId());
+                if (elder != null) {
+                    dto.setUserName(elder.getName());
+                    dto.setUserPhone(elder.getPhone());
+                }
+
+                // 医生姓名和电话
+                Doctor doctor = doctorMapper.selectByPrimaryKey(prescription.getDoctorId());
                 if (doctor != null) {
                     dto.setDoctorName(doctor.getName());
                     dto.setDoctorPhone(doctor.getPhone());

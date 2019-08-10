@@ -40,6 +40,15 @@
     uric_acid_min, blood_fat_max, blood_fat_min, weight_max, weight_min, waist_max, waist_min, 
     hip_max, hip_min, create_time, modify_time
   </sql>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_body_sign_alarm
+    order by create_time desc
+    limit #{offset}, #{pageSize}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

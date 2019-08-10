@@ -265,7 +265,7 @@ CREATE TABLE `t_association` (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 # 服务管家
-DROP TABLE IF EXISTS `t_manager`;
+/*DROP TABLE IF EXISTS `t_manager`;
 CREATE TABLE `t_manager` (
                            `id` varchar(100) NOT NULL COMMENT '主键 ID',
                            `phone` varchar(50) NOT NULL COMMENT '电话号码',
@@ -278,10 +278,31 @@ CREATE TABLE `t_manager` (
                            `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                            `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                            PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;*/
+
+DROP TABLE IF EXISTS `t_manager`;
+CREATE TABLE `t_manager`  (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键 ID',
+  `phone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '电话号码',
+  `pwd` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登陆密码',
+  `identity` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名字',
+  `birth` int(8) NULL DEFAULT NULL COMMENT '生日',
+  `sex` int(4) NULL DEFAULT NULL COMMENT '性别',
+  `image` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '头像 url',
+  `province` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '省份',
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '城市',
+  `country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '县',
+  `town` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '乡',
+  `community` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '社区',
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '家庭地址',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 # 贴心服务
-DROP TABLE IF EXISTS `t_service_center`;
+/*DROP TABLE IF EXISTS `t_service_center`;
 CREATE TABLE `t_service_center` (
                                   `id` varchar(100) NOT NULL COMMENT '主键 ID',
                                   `user_id` varchar(100) NOT NULL COMMENT '用户 ID',
@@ -297,6 +318,27 @@ CREATE TABLE `t_service_center` (
                                   `evaluate_star` int(4) NULL DEFAULT NULL COMMENT '评分星级',
                                   `evaluate_content` varchar(100) NOT NULL COMMENT '服务类型',
                                   `evaluate_time` datetime(0) NOT NULL COMMENT '评论时间',
+                                  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                                  `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
+                                  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;*/
+DROP TABLE IF EXISTS `t_service_center`;
+CREATE TABLE `t_service_center` (
+                                  `id` varchar(100) NOT NULL COMMENT '主键 ID',
+                                  `user_id` varchar(100) NOT NULL COMMENT '用户 ID',
+                                  `help_type` tinyint(4) UNSIGNED ZEROFILL NOT NULL DEFAULT 0000 COMMENT '0-贴心服务 1-帮扶',
+                                  `type` varchar(100) NOT NULL COMMENT '服务类型',
+                                  `state` int(4) NULL DEFAULT NULL COMMENT '状态，0表示待接收，1表示进行中，2表示已完成，3表示已取消',
+                                  `requirement` varchar(500) NOT NULL COMMENT '服务要求',
+                                  `price` varchar(50) NOT NULL COMMENT '服务报酬价格',
+                                  `service_time` datetime(0) NOT NULL COMMENT '服务时间',
+                                  `manager_id` varchar(100) NOT NULL COMMENT '服务管家 ID',
+                                  `service_star` int(4) NULL DEFAULT NULL COMMENT '服务星级',
+                                  `finish_time` datetime(0) NOT NULL COMMENT '服务完成时间',
+                                  `record_url` varchar(500) NOT NULL DEFAULT '' COMMENT '服务记录Url列表',
+                                  `evaluate_star` int(4) UNSIGNED ZEROFILL NOT NULL DEFAULT 0000 COMMENT '评分星级',
+                                  `evaluate_content` varchar(100) NOT NULL COMMENT '服务类型',
+                                  `evaluate_time` datetime(0) NULL DEFAULT NULL COMMENT '评论时间',
                                   `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                                   `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                                   PRIMARY KEY (`id`) USING BTREE
@@ -388,7 +430,8 @@ CREATE TABLE `t_new` (
                        `id` varchar(100) NOT NULL COMMENT '主键 ID',
                        `title` varchar(100) NULL DEFAULT NULL COMMENT '标题',
                        `content` varchar(5000) NULL DEFAULT NULL COMMENT '内容',
-                       `type` varchar(50) NULL DEFAULT NULL COMMENT '类型',
+                       /*`type` varchar(50) NULL DEFAULT NULL COMMENT '类型',*/
+                       `type` tinyint(4) unsigned zerofill NOT NULL DEFAULT '0000' COMMENT '类型 0-工作动态 1-全民健康 2-孝感天地',
                        `notify_time` datetime(0) NOT NULL COMMENT '推送时间',
                        `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                        `modify_time` datetime(0) NOT NULL COMMENT '修改时间',

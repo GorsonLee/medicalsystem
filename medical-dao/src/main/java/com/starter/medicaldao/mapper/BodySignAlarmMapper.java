@@ -18,4 +18,7 @@ public interface BodySignAlarmMapper {
 
     List<BodySignAlarm> selectByDoctorId(@Param("doctorId") String doctorId);
 
+    List<BodySignAlarm> selectAll(@Param("offset") Integer offset,
+                                  @Param("pageSize") Integer pageSize);
+
 }

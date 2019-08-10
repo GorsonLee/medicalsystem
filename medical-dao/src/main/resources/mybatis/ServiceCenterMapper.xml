@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.starter.medicaldao.entity.ServiceCenter">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="help_type" jdbcType="INTEGER" property="helpType" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="requirement" jdbcType="VARCHAR" property="requirement" />
@@ -12,6 +13,7 @@
     <result column="manager_id" jdbcType="VARCHAR" property="managerId" />
     <result column="service_star" jdbcType="INTEGER" property="serviceStar" />
     <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="record_url" jdbcType="VARCHAR" property="recordUrl" />
     <result column="evaluate_star" jdbcType="INTEGER" property="evaluateStar" />
     <result column="evaluate_content" jdbcType="VARCHAR" property="evaluateContent" />
     <result column="evaluate_time" jdbcType="TIMESTAMP" property="evaluateTime" />
@@ -19,8 +21,8 @@
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, type, state, requirement, price, service_time, manager_id, service_star, 
-    finish_time, evaluate_star, evaluate_content, evaluate_time, create_time, modify_time
+    id, user_id, help_type,type, state, requirement, price, service_time, manager_id, service_star,
+    finish_time, record_url, evaluate_star, evaluate_content, evaluate_time, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -29,16 +31,16 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <insert id="insert" parameterType="com.starter.medicaldao.entity.ServiceCenter">
-    insert into t_service_center (id, user_id, type, 
+    insert into t_service_center (id, user_id, help_type,type,
       state, requirement, price, 
       service_time, manager_id, service_star, 
-      finish_time, evaluate_star, evaluate_content, 
+      finish_time, record_url, evaluate_star, evaluate_content,
       evaluate_time, create_time, modify_time
       )
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{helpType,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR},
       #{state,jdbcType=INTEGER}, #{requirement,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
       #{serviceTime,jdbcType=TIMESTAMP}, #{managerId,jdbcType=VARCHAR}, #{serviceStar,jdbcType=INTEGER}, 
-      #{finishTime,jdbcType=TIMESTAMP}, #{evaluateStar,jdbcType=INTEGER}, #{evaluateContent,jdbcType=VARCHAR}, 
+      #{finishTime,jdbcType=TIMESTAMP}, #{recordUrl,jdbcType=VARCHAR}, #{evaluateStar,jdbcType=INTEGER}, #{evaluateContent,jdbcType=VARCHAR},
       #{evaluateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -50,6 +52,9 @@
       </if>
       <if test="userId != null">
         user_id,
+      </if>
+      <if test="helpType != null">
+        help_type,
       </if>
       <if test="type != null">
         type,
@@ -75,6 +80,9 @@
       <if test="finishTime != null">
         finish_time,
       </if>
+      <if test="recordUrl != null">
+        record_url,
+      </if>
       <if test="evaluateStar != null">
         evaluate_star,
       </if>
@@ -97,6 +105,9 @@
       </if>
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="helpType != null">
+        #{helpType,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
@@ -122,6 +133,9 @@
       <if test="finishTime != null">
         #{finishTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="recordUrl != null">
+        #{recordUrl,jdbcType=VARCHAR},
+      </if>
       <if test="evaluateStar != null">
         #{evaluateStar,jdbcType=INTEGER},
       </if>
@@ -144,6 +158,9 @@
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="helpType != null">
+        help_type = #{helpType,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
@@ -169,6 +186,9 @@
       <if test="finishTime != null">
         finish_time = #{finishTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="recordUrl != null">
+        record_url = #{recordUrl,jdbcType=VARCHAR},
+      </if>
       <if test="evaluateStar != null">
         evaluate_star = #{evaluateStar,jdbcType=INTEGER},
       </if>
@@ -190,6 +210,7 @@
   <update id="updateByPrimaryKey" parameterType="com.starter.medicaldao.entity.ServiceCenter">
     update t_service_center
     set user_id = #{userId,jdbcType=VARCHAR},
+        help_type = #{helpType,jdbcType=INTEGER},
       type = #{type,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       requirement = #{requirement,jdbcType=VARCHAR},
@@ -198,6 +219,7 @@
       manager_id = #{managerId,jdbcType=VARCHAR},
       service_star = #{serviceStar,jdbcType=INTEGER},
       finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      record_url = #{recordUrl,jdbcType=VARCHAR},
       evaluate_star = #{evaluateStar,jdbcType=INTEGER},
       evaluate_content = #{evaluateContent,jdbcType=VARCHAR},
       evaluate_time = #{evaluateTime,jdbcType=TIMESTAMP},
@@ -214,6 +236,64 @@
       `state` = #{state}
     </where>
     order by create_time desc
+  </select>
+
+  <select id="selectByFilter" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_service_center
+    <where>
+      <if test="filter.helpType != null">
+        and help_type = #{filter.helpType}
+      </if>
+      <if test="filter.managerId != null">
+        and manager_id = #{filter.managerId}
+      </if>
+      <if test="filter.stateList != null and filter.stateList.size() > 0">
+        and state in
+        <foreach collection="filter.stateList" index="index" item="state" open="(" separator="," close=")">
+          #{state}
+        </foreach>
+      </if>
+    </where>
+    order by create_time desc
+    limit #{offset}, #{pageSize}
+  </select>
+
+  <select id="selectAvgStarCountByFilter" resultType="java.math.BigDecimal">
+    select round(AVG(evaluate_star),2) AS starCount  from t_service_center
+    <where>
+      <if test="filter.managerId != null">
+        and manager_id = #{filter.managerId}
+      </if>
+      <if test="filter.stateList != null and filter.stateList.size() > 0">
+        and state in
+        <foreach collection="filter.stateList" index="index" item="state" open="(" separator="," close=")">
+          #{state}
+        </foreach>
+      </if>
+      and evaluate_time is not null
+    </where>
+  </select>
+
+  <select id="selectServiceCountByFilter" resultType="int">
+    select
+    count(1)
+    from t_service_center
+    <where>
+      <if test="filter.helpType != null">
+        and help_type = #{filter.helpType}
+      </if>
+      <if test="filter.managerId != null">
+        and manager_id = #{filter.managerId}
+      </if>
+      <if test="filter.stateList != null and filter.stateList.size() > 0">
+        and state in
+        <foreach collection="filter.stateList" index="index" item="state" open="(" separator="," close=")">
+          #{state}
+        </foreach>
+      </if>
+    </where>
   </select>
 
   <select id="selectByUserIdAndState" resultMap="BaseResultMap">
