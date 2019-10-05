@@ -17,6 +17,7 @@ import com.starter.medicaldao.mapper.ManagerMapper;
 import com.starter.medicaldao.mapper.ServiceCenterMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -32,9 +33,11 @@ import java.util.*;
  * @author Starter
  * @date 2019-05-19 17:03
  **/
+@Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/manage/poverty")
-@Api(tags = "帮扶订单")
+@Api(tags = "Z管理后台#######帮扶订单")
 public class PovertyController {
 
     @Resource
@@ -48,15 +51,20 @@ public class PovertyController {
     @ApiOperation("帮扶订单列表")
     public BaseResponse list(Integer state, Integer offset,
                              Integer pageSize) {
+        log.info("/manage/poverty/list state:{} offset:{} pageSize:{}", state, offset, pageSize);
         BaseResponse<List<ServiceCenterDto>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         List<ServiceCenterDto> resultList= new ArrayList<>();
 
         ServiceCenterFilter filter = new ServiceCenterFilter();
-        filter.setStateList(Arrays.asList(state));
+        if (state != null) {
+            filter.setStateList(Arrays.asList(state));
+        }
         filter.setPageSize(pageSize);
         filter.setOffset(offset);
         filter.setHelpType(1);
         List<ServiceCenter> serviceCenterList = serviceCenterMapper.selectByFilter(filter);
+
+        int count = serviceCenterMapper.selectCountByFilter(filter);
         if (!CollectionUtils.isEmpty(serviceCenterList)) {
             serviceCenterList.stream().filter(serviceCenter -> serviceCenter != null).forEach(serviceCenter -> {
                 ServiceCenterDto dto = new ServiceCenterDto();
@@ -82,6 +90,7 @@ public class PovertyController {
                 resultList.add(dto);
             });
         }
+        response.setCount(count);
         response.setData(resultList);
         return response;
     }
@@ -89,6 +98,7 @@ public class PovertyController {
     @PostMapping("/insert")
     @ApiOperation("添加帮扶订单")
     public BaseResponse create(@RequestBody HelpRequest request) {
+        log.info("/manage/poverty/insert request:{}", request);
         Date now = new Date();
 
         ServiceCenter one = new ServiceCenter();
@@ -121,6 +131,7 @@ public class PovertyController {
     @GetMapping("/detail")
     @ApiOperation("查看帮扶订单详情")
     public BaseResponse detail(String helpId) {
+        log.info("/manage/poverty/detail helpId:{}", helpId);
         BaseResponse<ServiceCenterDto> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         ServiceCenterDto dto = new ServiceCenterDto();
 

@@ -182,4 +182,9 @@
     limit #{offset}, #{pageSize}
   </select>
 
+  <select id="selectCount" resultType="int">
+    select
+    count(1)
+    from t_consult
+  </select>
 </mapper>

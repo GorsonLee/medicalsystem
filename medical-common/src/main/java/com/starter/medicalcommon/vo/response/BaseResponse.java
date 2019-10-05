@@ -36,6 +36,11 @@ public class BaseResponse<T> {
      */
     private T data;
 
+    /**
+     * 数据条数
+     */
+    private Integer count = 0;
+
     public BaseResponse() {
     }
 
@@ -65,5 +70,13 @@ public class BaseResponse<T> {
      */
     public static BaseResponse systemErrorResponse() {
         return new BaseResponse(MsgCodeEnum.SYSTEM_ERROR);
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

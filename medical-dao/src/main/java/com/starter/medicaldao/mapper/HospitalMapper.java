@@ -24,4 +24,11 @@ public interface HospitalMapper {
                           @Param("community") String community,
                           @Param("offset") Integer offset,
                           @Param("pageSize") Integer pageSize);
+
+
+    int queryCount(@Param("province") String province,
+                             @Param("city") String city,
+                             @Param("country") String country,
+                             @Param("town") String town,
+                             @Param("community") String community);
 }

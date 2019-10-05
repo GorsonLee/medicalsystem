@@ -57,6 +57,7 @@ public class AssociationService {
         association.setUserId(associationRequest.getUserId());
         association.setAssociateUserId(elder.getId());
         association.setState(0);
+        association.setAssociateRole(associationRequest.getAssociateRole());
         association.setCreateTime(now);
         association.setModifyTime(now);
         int result = associationMapper.insertSelective(association);

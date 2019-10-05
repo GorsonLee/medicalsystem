@@ -257,7 +257,29 @@
       </if>
     </where>
     order by create_time desc
-    limit #{offset}, #{pageSize}
+    <if test="filter.offset != null and filter.pageSize != null">
+      LIMIT #{filter.offset}, #{filter.pageSize}
+    </if>
+  </select>
+
+  <select id="selectCountByFilter" resultType="int">
+    select
+    count(1)
+    from t_service_center
+    <where>
+      <if test="filter.helpType != null">
+        and help_type = #{filter.helpType}
+      </if>
+      <if test="filter.managerId != null">
+        and manager_id = #{filter.managerId}
+      </if>
+      <if test="filter.stateList != null and filter.stateList.size() > 0">
+        and state in
+        <foreach collection="filter.stateList" index="index" item="state" open="(" separator="," close=")">
+          #{state}
+        </foreach>
+      </if>
+    </where>
   </select>
 
   <select id="selectAvgStarCountByFilter" resultType="java.math.BigDecimal">

@@ -37,6 +37,12 @@
     limit #{offset}, #{pageSize}
   </select>
 
+  <select id="selectCountByFilter" resultType="int">
+    select
+   Count(1)
+    from t_manager
+  </select>
+
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Manager">
     insert into t_manager (id, phone, pwd, 
       identity, name, birth, 

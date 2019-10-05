@@ -12,6 +12,15 @@
   <sql id="Base_Column_List">
     id, younger_id, elder_id, type, create_time, modify_time
   </sql>
+
+  <select id="selectByElderId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_relationship
+    where elder_id = #{elderId}
+    order by create_time desc
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

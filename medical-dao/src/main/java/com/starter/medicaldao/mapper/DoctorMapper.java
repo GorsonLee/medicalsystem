@@ -28,4 +28,6 @@ public interface DoctorMapper {
     List<Doctor> selectByHospital(@Param("hospital") String hospital);
 
     List<Doctor> selectByFilter(@Param("filter") DoctorFilter filter);
+
+    int selectCountByFilter(@Param("filter") DoctorFilter filter);
 }

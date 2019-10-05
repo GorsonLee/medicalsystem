@@ -1,6 +1,7 @@
 package com.starter.medicalapi.controller.manage.statistics;
 
 import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Starter
  * @date 2019-05-19 17:03
  **/
+@CrossOrigin
 @RestController
 @RequestMapping("/manage/area")
 @Api(tags = "用户区域统计")

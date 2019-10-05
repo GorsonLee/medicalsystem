@@ -18,4 +18,6 @@ public class AssociationRequest {
     String associateName;
     //被关联者身份证
     String associateIdentity;
+    // 关联人的角色 0-子女 1-老人
+    private Integer associateRole;
 }

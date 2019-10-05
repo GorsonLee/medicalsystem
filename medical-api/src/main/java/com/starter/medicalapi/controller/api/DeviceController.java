@@ -15,6 +15,7 @@ import javax.annotation.Resource;
  * @author Starter
  * @date 2019-05-19 17:03
  **/
+@CrossOrigin
 @RestController
 @RequestMapping("/device")
 @Api(tags = "设备管理")

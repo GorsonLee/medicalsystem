@@ -21,4 +21,6 @@ public interface RevisitMapper {
 
     List<Revisit>  selectByMethod(@Param("method") String method, @Param("offset") Integer offset,
                                      @Param("pageSize") Integer pageSize);
+
+    int selectCountByMethod(@Param("method") String method);
 }

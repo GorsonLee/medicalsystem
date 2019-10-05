@@ -67,6 +67,9 @@ public class ManagerService {
     public BaseResponse queryByPhone(String phone) {
         Manager manager = managerMapper.selectByPhone(phone);
 
+        if (manager == null) {
+            return new BaseResponse<>(MsgCodeEnum.SERVICER_NOT_EXISTS);
+        }
         if (manager != null) {
             manager.setPwd("");
         }

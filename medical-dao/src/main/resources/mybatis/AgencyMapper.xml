@@ -14,6 +14,11 @@
   <sql id="Base_Column_List">
     id, name, type, address, province, city, create_time, modify_time
   </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+       delete from t_agency where id = #{id}
+  </delete>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -139,5 +144,41 @@
     </where>
     order by create_time desc
     limit #{offset}, #{pageSize}
+  </select>
+
+  <select id="selectByParamss" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_agency
+    <where>
+      <if test="province != null">
+        and province = #{province}
+      </if>
+      <if test="city != null">
+        and city = #{city}
+      </if>
+      <if test="type != null">
+        and type = #{type}
+      </if>
+    </where>
+    order by create_time desc
+    limit #{offset}, #{pageSize}
+  </select>
+
+  <select id="selectCountByParamss" resultType="int">
+    select
+        COUNT(1)
+    from t_agency
+    <where>
+      <if test="province != null">
+        and province = #{province}
+      </if>
+      <if test="city != null">
+        and city = #{city}
+      </if>
+      <if test="type != null">
+        and type = #{type}
+      </if>
+    </where>
   </select>
 </mapper>

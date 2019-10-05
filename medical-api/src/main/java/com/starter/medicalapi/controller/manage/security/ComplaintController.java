@@ -32,6 +32,7 @@ import java.util.Objects;
  * @author Starter
  * @date 2019-05-19 17:03
  **/
+@CrossOrigin
 @RestController
 @RequestMapping("/manage/complaint")
 @Api(tags = "投诉管理")

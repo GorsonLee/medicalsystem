@@ -16,9 +16,21 @@ public interface AgencyMapper {
 
     int updateByPrimaryKey(Agency record);
 
+    int deleteByPrimaryKey(@Param("id") String id);
+
     List<Agency> selectByParams(@Param("province") String province,
                                 @Param("city") String city,
                                 @Param("name") String name,
                                 @Param("offset") Integer offset,
                                 @Param("pageSize") Integer pageSize);
+
+    List<Agency> selectByParamss(@Param("province") String province,
+                                @Param("city") String city,
+                                @Param("type") String agencyType,
+                                @Param("offset") Integer offset,
+                                @Param("pageSize") Integer pageSize);
+
+    Integer selectCountByParamss(@Param("province") String province,
+                                 @Param("city") String city,
+                                 @Param("type") String agencyType);
 }

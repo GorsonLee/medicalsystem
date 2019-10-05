@@ -20,7 +20,7 @@
     <result column="country" jdbcType="VARCHAR" property="country" />
     <result column="town" jdbcType="VARCHAR" property="town" />
     <result column="community" jdbcType="VARCHAR" property="community" />
-    <result column="organization_id" jdbcType="VARCHAR" property="organizationId" />
+    <result column="agency_id" jdbcType="VARCHAR" property="agencyId" />
     <result column="emergency_contact" jdbcType="VARCHAR" property="emergencyContact" />
     <result column="emergency_phone" jdbcType="VARCHAR" property="emergencyPhone" />
     <result column="provide_state" jdbcType="INTEGER" property="provideState" />
@@ -30,7 +30,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, phone, pwd, identity, name, birth, sex, nation, image, old_type, marital_status, 
-    live_status, address, province, city, country, town, community, organization_id, 
+    live_status, address, province, city, country, town, community, agency_id,
     emergency_contact, emergency_phone, provide_state, verify_state, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -46,7 +46,7 @@
       old_type, marital_status, live_status, 
       address, province, city, 
       country, town, community, 
-      organization_id, emergency_contact, emergency_phone, 
+      agency_id, emergency_contact, emergency_phone,
       provide_state, verify_state, create_time, 
       modify_time)
     values (#{id,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
@@ -55,7 +55,7 @@
       #{oldType,jdbcType=INTEGER}, #{maritalStatus,jdbcType=INTEGER}, #{liveStatus,jdbcType=INTEGER}, 
       #{address,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{country,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, #{community,jdbcType=VARCHAR}, 
-      #{organizationId,jdbcType=VARCHAR}, #{emergencyContact,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, 
+      #{agencyId,jdbcType=VARCHAR}, #{emergencyContact,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR},
       #{provideState,jdbcType=INTEGER}, #{verifyState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
@@ -116,8 +116,8 @@
       <if test="community != null">
         community,
       </if>
-      <if test="organizationId != null">
-        organization_id,
+      <if test="agencyId != null">
+        agency_id,
       </if>
       <if test="emergencyContact != null">
         emergency_contact,
@@ -193,8 +193,8 @@
       <if test="community != null">
         #{community,jdbcType=VARCHAR},
       </if>
-      <if test="organizationId != null">
-        #{organizationId,jdbcType=VARCHAR},
+      <if test="agencyId != null">
+        #{agencyId,jdbcType=VARCHAR},
       </if>
       <if test="emergencyContact != null">
         #{emergencyContact,jdbcType=VARCHAR},
@@ -270,8 +270,8 @@
       <if test="community != null">
         community = #{community,jdbcType=VARCHAR},
       </if>
-      <if test="organizationId != null">
-        organization_id = #{organizationId,jdbcType=VARCHAR},
+      <if test="agencyId != null">
+        agency_id = #{agencyId,jdbcType=VARCHAR},
       </if>
       <if test="emergencyContact != null">
         emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
@@ -313,7 +313,7 @@
       country = #{country,jdbcType=VARCHAR},
       town = #{town,jdbcType=VARCHAR},
       community = #{community,jdbcType=VARCHAR},
-      organization_id = #{organizationId,jdbcType=VARCHAR},
+      agency_id = #{agencyId,jdbcType=VARCHAR},
       emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
       emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
       provide_state = #{provideState,jdbcType=INTEGER},
@@ -357,7 +357,7 @@
   <select id="countByOrganizationId" resultType="int">
     select count(1)
     from t_elder
-    where organization_id = #{organizationId}
+    where agency_id = #{agencyId}
   </select>
 
   <select id="listElder" resultMap="BaseResultMap">
@@ -369,7 +369,7 @@
         and provide_state = #{provideState}
       </if>
       <if test="organizationId != null">
-        and organization_id = #{organizationId}
+        and agency_id = #{organizationId}
       </if>
       <if test="birth != null">
         and `birth` = #{birth}
@@ -382,4 +382,42 @@
     limit #{offset}, #{pageSize}
   </select>
 
+  <select id="listCountElder" resultType="int">
+    select
+    count(1)
+    from t_elder
+    <where>
+      <if test="provideState != null">
+        and provide_state = #{provideState}
+      </if>
+      <if test="organizationId != null">
+        and agency_id = #{organizationId}
+      </if>
+      <if test="birth != null">
+        and `birth` = #{birth}
+      </if>
+      <if test="verifyState != null">
+        and `verify_state` = #{verifyState}
+      </if>
+    </where>
+  </select>
+
+  <!--<select id="readByFilter" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from t_elder
+    <where>
+      <if test="filter.provideState != null">
+        and provide_state = #{filter.provideState}
+      </if>
+      <if test="filter.agencyId != null">
+        and agency_id = #{filter.agencyId}
+      </if>
+      <if test="filter.birth != null">
+        and birth = #{filter.birth}
+      </if>
+    </where>
+    order by create_time desc
+    limit #{fiter.offset}, #{filter.pageSize}
+  </select>-->
 </mapper>

@@ -281,6 +281,38 @@
       </if>
     </where>
     order by a.modify_time desc
-    limit #{offset}, #{pageSize}
+    limit #{filter.offset}, #{filter.pageSize}
+  </select>
+
+  <select id="selectCountByFilter"  resultType="int">
+    select
+        COUNT(1)
+    from t_doctor as a left join t_hospital as b on a.hospital=b.id
+    <where>
+      <if test="filter.province != null">
+        and b.province = #{filter.province}
+      </if>
+      <if test="filter.city != null">
+        and b.city = #{filter.city}
+      </if>
+      <if test="filter.country != null">
+        and b.country = #{filter.country}
+      </if>
+      <if test="filter.town != null">
+        and b.town = #{filter.town}
+      </if>
+      <if test="filter.community != null">
+        and b.community = #{filter.community}
+      </if>
+      <if test="filter.hospitalName != null">
+        and b.name = #{filter.hospitalName}
+      </if>
+      <if test="filter.department != null">
+        and a.department = #{filter.department}
+      </if>
+      <if test="filter.secondDepartment != null">
+        and a.second_department = #{filter.secondDepartment}
+      </if>
+    </where>
   </select>
 </mapper>

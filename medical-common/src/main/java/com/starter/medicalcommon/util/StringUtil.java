@@ -1,5 +1,6 @@
 package com.starter.medicalcommon.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Matcher;
@@ -11,6 +12,7 @@ import java.util.regex.Pattern;
  * @author Starter
  * @date 2019-03-16 16:32
  **/
+@Slf4j
 public class StringUtil {
     private static final Pattern ALPHABET_PATTERN = Pattern.compile("[A-Z]([a-z\\d]+)?");
 
@@ -42,27 +44,19 @@ public class StringUtil {
     }
 
 
+
+
     /**
-     * 将驼峰式转成下划线式字符串
-     *
-     * @param camelString 驼峰式字符串
-     * @return 下划线式字符串
+     * 生日日期string转int
      */
-    public static String camel2Underline(String camelString) {
-        if (StringUtils.isEmpty(camelString)) {
-            return "";
+    public static Integer stringBirth2Int(String birthString) {
+        String briths = birthString.replaceAll("-","");
+        Integer birth = 0;
+        try {
+            birth = Integer.parseInt(briths);
+        }catch (Exception e) {
+            log.error("生日日期转换异常 e:{}", e);
         }
-
-        camelString = String.valueOf(camelString.charAt(0)).toUpperCase().concat(camelString.substring(1));
-        StringBuilder sb = new StringBuilder();
-        Matcher matcher = ALPHABET_PATTERN.matcher(camelString);
-
-        while (matcher.find()) {
-            String word = matcher.group();
-            sb.append(word.toUpperCase());
-            sb.append(matcher.end() == camelString.length() ? "" : "_");
-        }
-
-        return sb.toString();
+        return birth;
     }
 }

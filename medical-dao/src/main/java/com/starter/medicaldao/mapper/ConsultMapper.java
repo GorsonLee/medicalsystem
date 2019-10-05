@@ -21,4 +21,6 @@ public interface ConsultMapper {
     List<Consult> selectByDoctorId(@Param("doctorId") String doctorId);
     List<Consult> selectAll(@Param("offset") Integer offset,
                             @Param("pageSize") Integer pageSize);
+
+    int selectCount();
 }

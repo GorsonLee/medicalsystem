@@ -196,4 +196,27 @@
     order by modify_time desc
     limit #{offset}, #{pageSize}
   </select>
+
+  <select id="queryCount" resultType="int">
+    select
+    Count(1)
+    from t_hospital
+    <where>
+      <if test="province != null">
+        and province = #{province}
+      </if>
+      <if test="city != null">
+        and city = #{city}
+      </if>
+      <if test="country != null">
+        and country = #{country}
+      </if>
+      <if test="town != null">
+        and town = #{town}
+      </if>
+      <if test="community != null">
+        and community = #{community}
+      </if>
+    </where>
+  </select>
 </mapper>

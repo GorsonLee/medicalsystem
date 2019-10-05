@@ -5,12 +5,13 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="associate_user_id" jdbcType="VARCHAR" property="associateUserId" />
+    <result column="associate_role" jdbcType="INTEGER" property="associateRole" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, associate_user_id, state, create_time, modify_time
+    id, user_id, associate_user_id, associate_role, state, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -19,10 +20,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Association">
-    insert into t_association (id, user_id, associate_user_id, 
+    insert into t_association (id, user_id, associate_user_id, associate_role,
       state, create_time, modify_time
       )
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{associateUserId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{associateUserId,jdbcType=VARCHAR}, #{associateRole,jdbcType=INTEGER},
       #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -37,6 +38,9 @@
       </if>
       <if test="associateUserId != null">
         associate_user_id,
+      </if>
+      <if test="associateRole != null">
+        associate_role,
       </if>
       <if test="state != null">
         state,
@@ -58,6 +62,9 @@
       <if test="associateUserId != null">
         #{associateUserId,jdbcType=VARCHAR},
       </if>
+      <if test="associateRole != null">
+        #{associateRole,jdbcType=INTEGER},
+      </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
       </if>
@@ -78,6 +85,9 @@
       <if test="associateUserId != null">
         associate_user_id = #{associateUserId,jdbcType=VARCHAR},
       </if>
+      <if test="associateRole != null">
+        associate_role = #{associateRole,jdbcType=INTEGER},
+      </if>
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
       </if>
@@ -94,6 +104,7 @@
     update t_association
     set user_id = #{userId,jdbcType=VARCHAR},
       associate_user_id = #{associateUserId,jdbcType=VARCHAR},
+       associate_role = #{associateRole,jdbcType=INTEGER},
       state = #{state,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}

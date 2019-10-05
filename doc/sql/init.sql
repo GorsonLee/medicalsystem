@@ -18,7 +18,7 @@ CREATE TABLE `t_younger` (
 
 # 长辈表
 DROP TABLE IF EXISTS `t_elder`;
-CREATE TABLE `t_elder` (
+/*CREATE TABLE `t_elder` (
                         `id` varchar(100) NOT NULL COMMENT '主键 ID',
                         `phone` varchar(50) NOT NULL COMMENT '电话号码',
                         `pwd` varchar(100) NOT NULL COMMENT '登陆密码',
@@ -45,7 +45,35 @@ CREATE TABLE `t_elder` (
                         `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                         `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                         PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;*/
+CREATE TABLE `t_elder` (
+  `id` varchar(100) NOT NULL COMMENT '主键 ID',
+  `phone` varchar(50) NOT NULL COMMENT '电话号码',
+  `pwd` varchar(100) NOT NULL COMMENT '登陆密码',
+  `identity` varchar(50) DEFAULT NULL COMMENT '身份证',
+  `name` varchar(100) DEFAULT NULL COMMENT '名字',
+  `birth` int(8) DEFAULT NULL COMMENT '生日 格式：19550606',
+  `sex` int(4) DEFAULT NULL COMMENT '性别 0-男 1-女',
+  `nation` varchar(50) DEFAULT NULL COMMENT '民族 0-汉族 1-回族 2-其它',
+  `image` varchar(500) DEFAULT NULL COMMENT '头像 url',
+  `old_type` int(4) DEFAULT NULL COMMENT '老人类型 0-孤寡老人 1-有子女 2-其它',
+  `marital_status` int(4) DEFAULT NULL COMMENT '婚姻状况 0-未婚 1-已婚 2-离异 3-丧偶',
+  `live_status` int(4) DEFAULT NULL COMMENT '居住状况 0-独自居住 1-子女同住 2-其它',
+  `address` varchar(500) DEFAULT NULL COMMENT '家庭地址',
+  `province` varchar(50) DEFAULT NULL COMMENT '省份',
+  `city` varchar(50) DEFAULT NULL COMMENT '城市',
+  `country` varchar(50) DEFAULT NULL COMMENT '县',
+  `town` varchar(50) DEFAULT NULL COMMENT '乡',
+  `community` varchar(50) DEFAULT NULL COMMENT '社区',
+  `agency_id` varchar(100) DEFAULT NULL COMMENT '机构组织ID',
+  `emergency_contact` varchar(100) DEFAULT NULL COMMENT '紧急联系人',
+  `emergency_phone` varchar(50) DEFAULT NULL COMMENT '紧急联系电话',
+  `provide_state` int(4) DEFAULT NULL COMMENT '养老类型：0未知；1机构养老；2以房养老',
+  `verify_state` int(4) DEFAULT NULL COMMENT '审核状态：0未知；1通过；2拒绝',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `modify_time` datetime NOT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 # 家庭关系表
 DROP TABLE IF EXISTS `t_relationship`;
@@ -254,7 +282,7 @@ CREATE TABLE `t_remind` (
 
 # 关联老人表
 DROP TABLE IF EXISTS `t_association`;
-CREATE TABLE `t_association` (
+/*CREATE TABLE `t_association` (
                                `id` varchar(100) NOT NULL COMMENT '主键 ID',
                                `user_id` varchar(100) NOT NULL COMMENT '用户 ID',
                                `associate_user_id` varchar(100) NOT NULL COMMENT '被关联的老人ID',
@@ -262,7 +290,18 @@ CREATE TABLE `t_association` (
                                `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                                `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                                PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;*/
+
+CREATE TABLE `t_association` (
+  `id` varchar(100) NOT NULL COMMENT '主键 ID',
+  `user_id` varchar(100) NOT NULL COMMENT '用户 ID',
+  `associate_user_id` varchar(100) NOT NULL COMMENT '被关联的老人ID',
+  `associate_role` tinyint(255) NOT NULL DEFAULT '0' COMMENT '关联人的角色 0-子女 1-老人',
+  `state` int(4) DEFAULT '0' COMMENT '关联状态 0-待审核 1-同意 2-拒绝',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `modify_time` datetime NOT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 # 服务管家
 /*DROP TABLE IF EXISTS `t_manager`;
@@ -432,7 +471,8 @@ CREATE TABLE `t_new` (
                        `content` varchar(5000) NULL DEFAULT NULL COMMENT '内容',
                        /*`type` varchar(50) NULL DEFAULT NULL COMMENT '类型',*/
                        `type` tinyint(4) unsigned zerofill NOT NULL DEFAULT '0000' COMMENT '类型 0-工作动态 1-全民健康 2-孝感天地',
-                       `notify_time` datetime(0) NOT NULL COMMENT '推送时间',
+                       /*`notify_time` datetime(0) NOT NULL COMMENT '推送时间',*/
+                       `notify_time` datetime DEFAULT NULL COMMENT '推送时间',
                        `create_time` datetime(0) NOT NULL COMMENT '创建时间',
                        `modify_time` datetime(0) NOT NULL COMMENT '修改时间',
                        PRIMARY KEY (`id`) USING BTREE

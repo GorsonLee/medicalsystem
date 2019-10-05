@@ -25,9 +25,24 @@
     select
     <include refid="Base_Column_List" />
     from t_reservation
-    where  state= #{state,jdbcType=VARCHAR}
+    <where>
+      <if test="state != null">
+        and state= #{state,jdbcType=VARCHAR}
+      </if>
+    </where>
     order by reserve_time desc
     limit #{offset}, #{pageSize}
+  </select>
+
+  <select id="selectCountByState" resultType="int">
+    select
+    COUNT(1)
+    from t_reservation
+    <where>
+      <if test="state != null">
+        and state= #{state,jdbcType=VARCHAR}
+      </if>
+    </where>
   </select>
 
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Reservation">

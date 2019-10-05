@@ -31,4 +31,6 @@ public interface ServiceCenterMapper {
     BigDecimal selectAvgStarCountByFilter(@Param("filter") ServiceCenterFilter filter);
 
     List<ServiceCenter> selectByFilter(@Param("filter") ServiceCenterFilter filter);
+
+    int selectCountByFilter(@Param("filter") ServiceCenterFilter filter);
 }

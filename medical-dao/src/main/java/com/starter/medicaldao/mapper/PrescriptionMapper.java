@@ -24,4 +24,6 @@ public interface PrescriptionMapper {
     List<Prescription> selectAll(@Param("offset") Integer offset,
                             @Param("pageSize") Integer pageSize);
 
+    int selectCount();
+
 }

@@ -34,7 +34,8 @@ public enum MsgCodeEnum {
     USER_REGISTER_ERROR(-1002, "用户注册失败"),
     ELDER_NOT_EXISTS(-1003, "老人账号不存在"),
     MANAGER_NOT_EXISTS(-1004, "服务人眼账号不存在"),
-    USER_NOT_FOUND_ERROR(-1005, "用户不存在");
+    SERVICER_NOT_EXISTS(-1005, "服务人员账号不存在"),
+    USER_NOT_FOUND_ERROR(-1006, "用户不存在");
 
 
     /********** 健康档案错误码，范围1100~1199 **********/

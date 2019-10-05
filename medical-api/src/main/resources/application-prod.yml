@@ -1,1 +1,34 @@
+debug: false
 
+server:
+  port: 9001
+
+spring:
+  application:
+    name: medical-api
+  datasource:
+    driver-class-name: net.sf.log4jdbc.DriverSpy
+    url: jdbc:log4jdbc:mysql://10.0.0.5:3306/medical_system?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: root1234
+    max-idle: 10
+    max-wait: 10000
+    min-idle: 5
+    initial-size: 5
+    validation-query: SELECT 1
+    test-on-borrow: false
+    test-while-idle: true
+    time-between-eviction-runs-millis: 18800
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    timeout: 0
+    pool:
+      max-active: 256
+      max-idle: 8
+      max-wait: -1
+      min-idle: 0
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml

@@ -30,6 +30,7 @@ import java.util.List;
  * @author Starter
  * @date 2019-05-19 17:03
  **/
+@CrossOrigin
 @RestController
 @RequestMapping("/manage/care")
 @Api(tags = "关怀")

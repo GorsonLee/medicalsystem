@@ -25,9 +25,24 @@
     select
     <include refid="Base_Column_List" />
     from t_revisit
-    where  method= #{method,jdbcType=VARCHAR}
+    <where>
+      <if test="method != null">
+        and method= #{method,jdbcType=VARCHAR}
+      </if>
+    </where>
     order by visit_time desc
     limit #{offset}, #{pageSize}
+  </select>
+
+  <select id="selectCountByMethod" resultType="int">
+    select
+    count(1)
+    from t_revisit
+    <where>
+      <if test="method != null">
+        and method= #{method,jdbcType=VARCHAR}
+      </if>
+    </where>
   </select>
 
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Revisit">

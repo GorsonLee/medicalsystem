@@ -27,6 +27,7 @@ import java.util.List;
  * @author Starter
  * @date 2019-05-19 17:03
  **/
+@CrossOrigin
 @RestController
 @RequestMapping("/manage/news")
 @Api(tags = "咨询")
@@ -64,6 +65,7 @@ public class NewsController {
         one.setId(UUIDUtil.getUUID());
         one.setCreateTime(now);
         one.setModifyTime(now);
+        one.setNotifyTime(now);
         int result = newMapper.insertSelective(one);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
     }
@@ -88,8 +90,8 @@ public class NewsController {
 
     @PostMapping("/delete")
     @ApiOperation("删除咨询")
-    public BaseResponse update(String careId) {
-        int result = newMapper.deleteByPrimaryKey(careId);
+    public BaseResponse update(String newsId) {
+        int result = newMapper.deleteByPrimaryKey(newsId);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
     }
 

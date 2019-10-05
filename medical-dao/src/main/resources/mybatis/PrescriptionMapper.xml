@@ -28,6 +28,13 @@
     limit #{offset}, #{pageSize}
   </select>
 
+  <select id="selectCount" resultType="int">
+    select
+    count(1)
+    from t_prescription
+  </select>
+
+
   <insert id="insert" parameterType="com.starter.medicaldao.entity.Prescription">
     insert into t_prescription (id, user_id, doctor_id, 
       title, content, create_time, 

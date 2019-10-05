@@ -68,7 +68,9 @@ public class ElderService {
     public BaseResponse queryByPhone(String phone) {
         Elder elder = elderMapper.selectByPhone(phone);
 
-        if (elder != null) {
+        if (elder == null) {
+            return new BaseResponse<>(MsgCodeEnum.ELDER_NOT_EXISTS);
+        }else {
             elder.setPwd("");
         }
 

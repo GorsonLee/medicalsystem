@@ -13,6 +13,7 @@ import com.starter.medicaldao.entity.filter.DoctorFilter;
 import com.starter.medicaldao.mapper.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
@@ -30,9 +31,11 @@ import java.util.stream.Collectors;
  * @author Starter
  * @date 2019-05-19 17:03
  **/
+@Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/manage/hospital")
-@Api(tags = "医院管理")
+@Api(tags = "Z管理后台#######医院管理")
 public class HospitalController {
 
     @Resource
@@ -43,7 +46,7 @@ public class HospitalController {
     private ContractMapper contractMapper;
 
     @GetMapping("/list")
-    @ApiOperation("医院列表")
+    @ApiOperation("管理后台#######医院列表")
     public BaseResponse listElder(String province,
                                   String city,
                                   String country,
@@ -51,8 +54,11 @@ public class HospitalController {
                                   String community,
                                   Integer offset,
                                   Integer pageSize) {
+        log.info("/manage/hospital/list province:{} city:{} country:{} town:{} community:{} offset:{} pageSize:{}",
+                province, city, country, town, community, offset, pageSize);
         BaseResponse<List<HospitalDto>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         List<Hospital> hospitalList = hospitalMapper.queryList(province, city, country,town, community, offset, pageSize);
+        Integer nCount = hospitalMapper.queryCount(province, city, country,town, community);
         List<HospitalDto> hospitalDtoList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(hospitalList)) {
             hospitalList.stream().filter(hospital -> hospital != null).forEach(hospital -> {
@@ -76,6 +82,7 @@ public class HospitalController {
                 hospitalDtoList.add(hospitalDto);
             });
         }
+        response.setCount(nCount);
         response.setData(hospitalDtoList);
         return response;
     }
@@ -83,6 +90,7 @@ public class HospitalController {
     @PostMapping("/insert")
     @ApiOperation("添加医院")
     public BaseResponse create(@RequestBody Hospital one) {
+        log.info("/manage/hospital/insert one:{}", one);
         Date now = new Date();
         one.setId(UUIDUtil.getUUID());
         one.setCreateTime(now);
@@ -94,6 +102,7 @@ public class HospitalController {
     @PostMapping("/update")
     @ApiOperation("更新医院")
     public BaseResponse update(@RequestBody Hospital one) {
+        log.info("/manage/hospital/update one:{}", one);
         Date now = new Date();
         one.setModifyTime(now);
         int result = hospitalMapper.updateByPrimaryKeySelective(one);
@@ -103,6 +112,7 @@ public class HospitalController {
     @GetMapping("/detail")
     @ApiOperation("查看医院详情")
     public BaseResponse detail(String hospitalId) {
+        log.info("/manage/hospital/detail hospitalId:{}", hospitalId);
         Hospital hospital = hospitalMapper.selectByPrimaryKey(hospitalId);
         HospitalDto hospitalDto = new HospitalDto();
         BeanUtils.copyProperties(hospital, hospitalDto);

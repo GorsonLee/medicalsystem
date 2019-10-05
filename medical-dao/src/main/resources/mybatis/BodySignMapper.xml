@@ -121,4 +121,11 @@
     limit #{offset}, #{pageSize}
   </select>
 
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_body_sign
+    where user_id = #{userId}
+  </select>
+
 </mapper>

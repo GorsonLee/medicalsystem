@@ -23,4 +23,6 @@ public interface ManagerMapper {
 
     List<Manager> selectByFilter(@Param("offset") Integer offset,
                                  @Param("pageSize") Integer pageSize);
+
+    int selectCountByFilter();
 }

@@ -23,4 +23,6 @@ public interface ReservationMapper {
     List<Reservation>  selectByState(@Param("state") Integer state, @Param("offset") Integer offset,
                                      @Param("pageSize") Integer pageSize);
 
+    int  selectCountByState(@Param("state") Integer state);
+
 }

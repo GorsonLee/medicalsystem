@@ -20,4 +20,6 @@ public interface BodySignMapper {
                                              @Param("bodySign") String bodySign,
                                              @Param("offset") Integer offset,
                                              @Param("pageSize") Integer pageSize);
+
+    List<BodySign> selectByUserId(@Param("userId") String userId);
 }

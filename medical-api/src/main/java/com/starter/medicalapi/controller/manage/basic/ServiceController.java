@@ -5,14 +5,12 @@ import com.starter.medicalcommon.util.DateUtil;
 import com.starter.medicalcommon.util.UUIDUtil;
 import com.starter.medicalcommon.vo.response.BaseResponse;
 import com.starter.medicaldao.entity.*;
-import com.starter.medicaldao.entity.dto.HospitalDto;
 import com.starter.medicaldao.entity.dto.ManagerDto;
-import com.starter.medicaldao.entity.dto.ReservationDto;
 import com.starter.medicaldao.entity.filter.ServiceCenterFilter;
 import com.starter.medicaldao.mapper.*;
-import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +28,11 @@ import java.util.List;
  * @author Starter
  * @date 2019-05-19 17:03
  **/
+@Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/manage/service")
-@Api(tags = "服务管家")
+@Api(tags = "Z管理后台#######服务管家")
 public class ServiceController {
 
     @Resource
@@ -45,10 +45,12 @@ public class ServiceController {
     @ApiOperation("服务管家列表")
     public BaseResponse list(Integer offset,
                                     Integer pageSize) {
+        log.info("/manage/service/list offset:{} pageSize:{}", offset, pageSize);
         BaseResponse<List<ManagerDto>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         List<ManagerDto> resultList= new ArrayList<>();
 
         List<Manager> managerList = managerMapper.selectByFilter(offset, pageSize);
+        int count = managerMapper.selectCountByFilter();
         if (!CollectionUtils.isEmpty(managerList)) {
             managerList.stream().filter(manager -> manager != null).forEach(manager -> {
                 ManagerDto managerDto = new ManagerDto();
@@ -81,6 +83,7 @@ public class ServiceController {
                 resultList.add(managerDto);
             });
         }
+        response.setCount(count);
         response.setData(resultList);
         return response;
     }
@@ -88,6 +91,7 @@ public class ServiceController {
     @PostMapping("/insert")
     @ApiOperation("添加服务人员")
     public BaseResponse create(@RequestBody Manager one) {
+        log.info("/manage/service/insert one:{}", one);
         Date now = new Date();
         one.setId(UUIDUtil.getUUID());
         one.setCreateTime(now);
@@ -99,6 +103,7 @@ public class ServiceController {
     @PostMapping("/update")
     @ApiOperation("更新服务人员")
     public BaseResponse update(@RequestBody Manager one) {
+        log.info("/manage/service/update one:{}", one);
         Date now = new Date();
         one.setModifyTime(now);
         int result = managerMapper.updateByPrimaryKeySelective(one);
@@ -108,6 +113,7 @@ public class ServiceController {
     @GetMapping("/detail")
     @ApiOperation("查看服务人员详情")
     public BaseResponse detail(String managerId) {
+        log.info("/manage/service/detail managerId:{}", managerId);
         BaseResponse<ManagerDto> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
 
         // 服务人员基本信息

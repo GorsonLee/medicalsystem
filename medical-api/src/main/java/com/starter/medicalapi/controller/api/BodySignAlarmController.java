@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
  * @author Starter
  * @date 2019-05-19 17:03
  **/
+@CrossOrigin
 @RestController
 @RequestMapping("/bodySignAlarm")
 @Api(tags = "体征告警")
