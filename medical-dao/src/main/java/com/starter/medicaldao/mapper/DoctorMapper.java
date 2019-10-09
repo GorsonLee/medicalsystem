@@ -16,6 +16,8 @@ public interface DoctorMapper {
 
     int updateByPrimaryKeySelective(Doctor record);
 
+    int deleteByPrimaryKey(@Param("id") String id);
+
     int updateByPrimaryKey(Doctor record);
 
     Doctor selectByPhone(@Param("phone") String phone);

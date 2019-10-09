@@ -120,4 +120,36 @@ public class AgencyController {
         int result = agencyMapper.deleteByPrimaryKey(agencyId);
         return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
     }
+
+    @GetMapping("/agencyTypeList")
+    @ApiOperation("列表")
+    public BaseResponse getAgencyTypeList() {
+        List<Agency> agencyList = agencyMapper.selectAgencyTypeList();
+        List<String> agencyTypeList = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(agencyList)) {
+            agencyList.stream().filter(agency -> agency != null).forEach(agency -> {
+                agencyTypeList.add(agency.getType());
+            });
+
+        }
+        BaseResponse<List<String>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(agencyTypeList);
+        return response;
+    }
+
+    @GetMapping("/agencyIdList")
+    @ApiOperation("列表")
+    public BaseResponse getAgencyIdList() {
+        List<Agency> agencyList = agencyMapper.selectAgencyIdList();
+        List<String> agencyIdList = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(agencyList)) {
+            agencyList.stream().filter(agency -> agency != null).forEach(agency -> {
+                agencyIdList.add(agency.getId());
+            });
+
+        }
+        BaseResponse<List<String>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
+        response.setData(agencyIdList);
+        return response;
+    }
 }

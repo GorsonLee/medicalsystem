@@ -171,6 +171,9 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+       delete from t_hospital where id = #{id}
+  </delete>
 
   <select id="queryList" resultMap="BaseResultMap">
     select

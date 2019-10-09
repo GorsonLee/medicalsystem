@@ -124,5 +124,12 @@ public class HospitalController {
         return response;
     }
 
+    @PostMapping("/delete")
+    @ApiOperation("删除医院")
+    public BaseResponse delete(String id) {
+        log.info("/manage/agency/delete id:{}", id);
+        int result = hospitalMapper.deleteByPrimaryKey(id);
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
+    }
 
 }

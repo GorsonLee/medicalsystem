@@ -15,6 +15,8 @@ public interface YoungerMapper {
 
     Younger selectByPrimaryKey(String id);
 
+    int deleteByPrimaryKey(@Param("id") String id);
+
     int updateByPrimaryKeySelective(Younger record);
 
     int updateByPrimaryKey(Younger record);
@@ -24,7 +26,9 @@ public interface YoungerMapper {
     Younger selectByPhoneAndPwd(@Param("phone") String phone,
                                 @Param("pwd") String pwd);
 
-    List<Younger> readList( @Param("offset") Integer offset,
+    List<Younger> readList(@Param("phone") String phone,
+                            @Param("name") String name,
+                           @Param("offset") Integer offset,
                             @Param("pageSize") Integer pageSize);
 
     int selectCount();

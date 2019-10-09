@@ -33,4 +33,8 @@ public interface AgencyMapper {
     Integer selectCountByParamss(@Param("province") String province,
                                  @Param("city") String city,
                                  @Param("type") String agencyType);
+
+    List<Agency> selectAgencyTypeList();
+
+    List<Agency> selectAgencyIdList();
 }

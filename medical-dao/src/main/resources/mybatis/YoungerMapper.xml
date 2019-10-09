@@ -17,10 +17,22 @@
     id, phone, pwd, identity, name, birth, sex, image, create_time, modify_time
   </sql>
 
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+       delete from t_younger where id = #{id}
+  </delete>
+
   <select id="readList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_younger
+    <where>
+      <if test="phone != null">
+        AND (phone LIKE CONCAT('%', #{phone}, '%'))
+      </if>
+      <if test="name != null">
+        AND (name LIKE CONCAT('%', #{name}, '%'))
+      </if>
+    </where>
     order by create_time desc
     limit #{offset}, #{pageSize}
   </select>
@@ -29,6 +41,14 @@
     select
     count(1)
     from t_younger
+    <where>
+      <if test="phone != null">
+        AND (phone LIKE CONCAT('%', #{phone}, '%'))
+      </if>
+      <if test="name != null">
+        AND (name LIKE CONCAT('%', #{name}, '%'))
+      </if>
+    </where>
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">

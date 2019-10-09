@@ -158,14 +158,14 @@
         and city = #{city}
       </if>
       <if test="type != null">
-        and type = #{type}
+        AND (type LIKE CONCAT('%', #{type}, '%'))
       </if>
     </where>
     order by create_time desc
     limit #{offset}, #{pageSize}
   </select>
 
-  <select id="selectCountByParamss" resultType="int">
+  <select id="selectCountByParamss" resultMap="BaseResultMap">
     select
         COUNT(1)
     from t_agency
@@ -177,8 +177,22 @@
         and city = #{city}
       </if>
       <if test="type != null">
-        and type = #{type}
+        AND (type LIKE CONCAT('%', #{type}, '%'))
       </if>
     </where>
+  </select>
+
+  <select id="selectAgencyTypeList" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from t_agency
+    GROUP BY type
+  </select>
+
+  <select id="selectAgencyIdList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_agency
+    GROUP BY id
   </select>
 </mapper>

@@ -135,4 +135,12 @@ public class DoctorManageController {
         response.setData(doctor);
         return response;
     }
+
+    @PostMapping("/delete")
+    @ApiOperation("删除医生")
+    public BaseResponse delete(String id) {
+        log.info("/manage/agency/delete id:{}", id);
+        int result = doctorMapper.deleteByPrimaryKey(id);
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
+    }
 }

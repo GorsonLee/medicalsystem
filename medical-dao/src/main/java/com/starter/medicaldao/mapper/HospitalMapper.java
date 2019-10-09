@@ -1,6 +1,5 @@
 package com.starter.medicaldao.mapper;
 
-import com.starter.medicaldao.entity.Elder;
 import com.starter.medicaldao.entity.Hospital;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,6 +15,8 @@ public interface HospitalMapper {
     int updateByPrimaryKeySelective(Hospital record);
 
     int updateByPrimaryKey(Hospital record);
+
+    int deleteByPrimaryKey(@Param("id") String id);
 
     List<Hospital> queryList(@Param("province") String province,
                           @Param("city") String city,

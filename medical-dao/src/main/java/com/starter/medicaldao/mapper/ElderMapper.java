@@ -1,7 +1,6 @@
 package com.starter.medicaldao.mapper;
 
 import com.starter.medicaldao.entity.Elder;
-import com.starter.medicaldao.entity.filter.ElderFilter;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -13,6 +12,8 @@ public interface ElderMapper {
     Elder selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Elder record);
+
+    int deleteByPrimaryKey(@Param("id") String id);
 
     int updateByPrimaryKey(Elder record);
 
@@ -38,14 +39,18 @@ public interface ElderMapper {
      * @param pageSize
      * @return 老人列表
      */
-    List<Elder> listElder(@Param("provideState") Integer provideState,
+    List<Elder> listElder(@Param("phone") String phone,
+                        @Param("name") String name,
+                        @Param("provideState") Integer provideState,
                           @Param("organizationId") String organizationId,
                           @Param("birth") Integer birth,
                           @Param("verifyState") Integer verifyState,
                           @Param("offset") Integer offset,
                           @Param("pageSize") Integer pageSize);
 
-    int listCountElder(@Param("provideState") Integer provideState,
+    int listCountElder(@Param("phone") String phone,
+                       @Param("name") String name,
+                       @Param("provideState") Integer provideState,
                           @Param("organizationId") String organizationId,
                           @Param("birth") Integer birth,
                           @Param("verifyState") Integer verifyState);

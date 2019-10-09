@@ -42,8 +42,6 @@ public class UserController {
     @Resource
     private ContractMapper contractMapper;
     @Resource
-    private RelationShipMapper relationShipMapper;
-    @Resource
     private AssociationMapper associationMapper;
     @Resource
     private BodySignMapper bodySignMapper;
@@ -52,12 +50,15 @@ public class UserController {
 
     @GetMapping("/listElder")
     @ApiOperation("列表老人")
-    public BaseResponse listElder(Integer provideState,
+    public BaseResponse listElder(String phone,
+                                  String name,
+                                  Integer provideState,
                                   String agencyId,
                                   Integer birth,
                                   Integer offset,
                                   Integer pageSize) {
-        log.info("/manage/user/listElder provideState:{} agencyId:{} birth:{} offset:{} pageSize:{}", provideState, agencyId, birth, offset, pageSize);
+        log.info("/manage/user/listElder phone:{}, name:{}, provideState:{} agencyId:{} birth:{} offset:{} pageSize:{}", phone,
+                name, provideState, agencyId, birth, offset, pageSize);
         BaseResponse<List<ElderRelationContractDto>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
         List<ElderRelationContractDto> resultList = new ArrayList<>();
 
@@ -68,8 +69,8 @@ public class UserController {
         filter.setOffset(offset);
         filter.setPageSize(pageSize);
 
-        List<Elder> elderList = elderMapper.listElder(provideState, agencyId, birth, null, offset, pageSize);
-        int count = elderMapper.listCountElder(provideState, agencyId, birth, null);
+        List<Elder> elderList = elderMapper.listElder(phone, name, provideState, agencyId, birth, null, offset, pageSize);
+        int count = elderMapper.listCountElder(phone, name, provideState, agencyId, birth, null);
 
         if (!CollectionUtils.isEmpty(elderList)) {
            elderList.stream().filter(Objects::nonNull).forEach(elder -> {
@@ -90,12 +91,14 @@ public class UserController {
 
     @GetMapping("/listYounger")
     @ApiOperation("列表子女")
-    public BaseResponse listYounger(Integer offset,
+    public BaseResponse listYounger(String phone,
+                                    String name,
+                                    Integer offset,
                                      Integer pageSize) {
         log.info("/manage/user/listYounger offset:{} pageSize:{}", offset, pageSize);
         BaseResponse<List<Younger>> response = new BaseResponse<>(MsgCodeEnum.SUCCESS);
 
-        List<Younger> youngerList = youngerMapper.readList(offset, pageSize);
+        List<Younger> youngerList = youngerMapper.readList(phone, name, offset, pageSize);
         int count = youngerMapper.selectCount();
         response.setData(youngerList);
         response.setCount(count);
@@ -263,4 +266,19 @@ public class UserController {
         return response;
     }
 
+    @PostMapping("/deleteElder")
+    @ApiOperation("删除老人")
+    public BaseResponse deleteElder(String elderId) {
+        log.info("/manage/agency/deleteElder elderId:{}", elderId);
+        int result = elderMapper.deleteByPrimaryKey(elderId);
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
+    }
+
+    @PostMapping("/deleteChild")
+    @ApiOperation("删除子女")
+    public BaseResponse deleteChild(String childId) {
+        log.info("/manage/agency/delete childId:{}", childId);
+        int result = youngerMapper.deleteByPrimaryKey(childId);
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
+    }
 }

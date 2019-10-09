@@ -12,6 +12,8 @@ public interface ServiceCenterMapper {
 
     int insertSelective(ServiceCenter record);
 
+    int deleteByPrimaryKey(@Param("id") String id);
+
     ServiceCenter selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(ServiceCenter record);

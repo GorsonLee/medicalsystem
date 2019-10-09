@@ -12,6 +12,8 @@ public interface ManagerMapper {
 
     Manager selectByPrimaryKey(String id);
 
+    int deleteByPrimaryKey(@Param("id") String id);
+
     int updateByPrimaryKeySelective(Manager record);
 
     int updateByPrimaryKey(Manager record);

@@ -146,4 +146,12 @@ public class ServiceController {
         response.setData(dto);
         return response;
     }
+
+    @PostMapping("/delete")
+    @ApiOperation("删除服务人员")
+    public BaseResponse delete(String id) {
+        log.info("/manage/agency/delete agencyId:{}", id);
+        int result = serviceCenterMapper.deleteByPrimaryKey(id);
+        return result > 0 ? BaseResponse.successResponse() : new BaseResponse(MsgCodeEnum.OPERATION_FAIL_ERROR);
+    }
 }
